@@ -1,0 +1,48 @@
+\section{Related Work}
+\label{sec:related_works}
+
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.95\textwidth]{images/CLOAK_Overall.pdf}
+\caption{Illustration of the tactile sensor design. 1) showing the sensor on the Spot Robot arm, 2) showing the inner and outer layers of the sensor along with their ridges, 3) showing the 3D structure of the taxel array, 4) showing the 2D cross-section before and during contact, 5) showing the layer structure of each taxel.} 
+\label{fig:rigid_tactile_sensor}
+\end{figure*}
+
+
+%Tactile sensing has long been recognized as a critical capability for dexterous manipulation and safe physical interaction. Most tactile systems primarily focus on sensing at the end effector, limiting the robot's ability to exploit contact across its entire body \ref{TODO}. 
+% Here we discuss recent advancements in whole-arm/body tactile sensing mechanisms and contact-aware motion planning and control along with differentiable techniques in inverse kinematics with contact-awareness. 
+
+Recent advances in whole-arm tactile sensing allow robots to perceive and interpret contact across larger surface areas, significantly improving manipulation capabilities and interaction safety. In this section, we review related work in three areas central to our contributions: a) whole-arm tactile sensing, b) contact-aware motion planning, and c) differentiable inverse kinematics (IK).
+
+\subsection{Whole-Arm Tactile Sensing}
+% Kohlbrenner et al.~\cite{kohlbrenner2025gentact} proposed a method for creating large-area tactile skins using 3D printing and conductive materials. Their design emphasizes ease of fabrication and integration, making it accessible for various robotic platforms. The Gentact skin provides high coverage and adjustable density, but low sensitivity due to its reliance on capacitive sensing. Because the system uses RC delay sensing, the total number of sensing nodes in skin is limited, which reduces the spatial resolution. In their implementation, each skin unit contains 6 nodules at most, resulting in a total of 36 sensing nodes. The capacitive sensing approach also limits the ability to detect fine-grained contact information, such as force magnitude and direction, and requires careful calibration to avoid interference from environmental factors. Capacitive sensing also limits the contact objects to be conductive, which is not always the case in many real-world scenarios. We build upon their easily fabricated snap on design, but we use a resistive sensing approach to achieve higher spatial resolution and sensitivity.
+
+% Kohlbrenner et al.~\cite{kohlbrenner2024machine} previously proposed a machine learning approach to localize contact in variable density three-dimensional tactile artificial skin. Their method uses a neural network to predict contact locations based on a mutual capacitance sensor and wires in silicone rubber on a 3D printed base. While their approach demonstrates the potential for low cost tactile sensing, it does not provide a complete solution for whole-arm tactile sensing, especially in terms of robustness to environmental factors and difficult geometry. Our work extends this by providing a more robust resistive sensing approach that can be easily integrated onto existing robotic platforms, without requiring extensive calibration or machine learning models.
+Kohlbrenner et al.~\cite{kohlbrenner2025gentact} introduced GenTact, a large-area tactile skin fabricated with 3D printing and conductive materials. The design emphasizes ease of fabrication and integration, offering high coverage and adjustable density across robotic platforms. However, its reliance on capacitive RC-delay sensing limits sensitivity and spatial resolution—each unit contains only six nodules (36 total)—and restricts detection of fine-grained contact such as force magnitude and direction. It is also susceptible to environmental interference and requires conductive objects for contact. Building on their snap-on design, we instead use a resistive sensing approach to achieve higher spatial resolution, greater sensitivity, and broader applicability. 
+
+In earlier work, Kohlbrenner et al.~\cite{kohlbrenner2024machine} proposed a machine learning method to localize contact in variable-density 3D tactile skins using mutual capacitance sensors in silicone rubber on a 3D-printed base. While this demonstrated the potential of low-cost tactile sensing, it lacked robustness to environmental factors and complex geometries. Our approach extends this direction with a resistive sensing strategy that integrates easily onto existing robotic platforms without requiring extensive calibration or learning models.
+
+Compton et al.~\cite{FSR_WTL} demonstrated a textile FSR array using Eeonyx piezoresistive fabric between knit electrodes, achieving a low-cost, flexible tactile sensor. While effective for on-body sensing, their design is less suited for robotic arms due to challenges in conforming to complex geometries and ensuring durability under repeated manipulation tasks. Our approach builds upon that by using flexible 3D-printed shells with FSR arrays adhered, providing a robust solution tailored for robotic applications.
+
+
+% https://www.tum.de/en/news-and-events/all-news/press-releases/details/35732-1
+Cheng et al.~\cite{8812712} developed an artificial whole-body skin that combines multimodal sensing with high coverage, but its fabrication is costly and complex. In contrast, our approach emphasizes ease of integration—requiring only 3D models of robot links—while providing high spatial resolution and sensitivity at lower cost. Similarly, CySkin~\cite{Cyskin} offers whole-arm tactile sensing with capacitive sensors, delivering high coverage, sensitivity, and density. Though effective, it is available only as a proprietary package, making it expensive and less customizable. Our approach offers a more affordable and customizable solution that can be tailored to specific robotic platforms and applications.
+
+Other notable efforts in large-scale tactile sensing with flexible taxel arrays include Maiolino et al.~\cite{6502183} and CushSense by Xu et al.~\cite{10610014}. While these systems demonstrate promising coverage and scalable fabrication, deploying tactile skins on real manipulation platforms typically also requires low cost, straightforward mechanical/electrical integration, and reliable performance when wrapped over complex link geometries and used repeatedly. \acro{} is designed to meet these practical constraints through a low-cost resistive taxel array and a fabrication workflow that can be adapted to existing robot link models.
+
+
+\subsection{Contact-Aware Motion Planning and Control}
+
+In motion planning and control, contact has traditionally been treated as a constraint to avoid, with planners generating trajectories that steer clear of obstacles and potential contact points~\cite{Giftthaler17112017}. More recent research has shown the benefits of embracing contact for improved stability and manipulation. In legged locomotion, planners that model contact dynamics demonstrate greater robustness to disturbances and terrain variations~\cite{8276298}. In manipulation, exploiting contact through pushing, pivoting, and environmental bracing enables execution of more complex tasks~\cite{10.7551/mitpress/9481.003.0014, 8593555}.
+
+These approaches typically handle contact at the planning layer rather than within the kinematic optimization itself. In contrast, we integrate tactile feedback directly into the IK objective, enabling real-time contact avoidance and contact-seeking behaviors without redesigning the planner.
+
+\subsection{Differentiable IK with Contact Awareness}
+Inverse kinematics (IK) is often formulated as an optimization problem to find joint configurations that achieve a desired end-effector pose while satisfying constraints~\cite{Giftthaler17112017,zhao_article}. Such constraints enable null-space optimization for secondary objectives, including \textit{minimizing joint torques}, \textit{avoiding contact}, or \textit{maintaining stability}.
+
+However, few IK systems incorporate real-time tactile measurements from distributed sensors, particularly for mobile manipulators with whole-arm coverage. Instead, they often rely on known obstacle locations or simplified contact models~\cite{10375143, 9616379, 9345975, ashkanazy2023collision}, which limits adaptability in dynamic, unstructured, or partially observable environments.
+
+Our approach formulates ContactIK as minimizing a differentiable objective that includes pose error, joint-limit barriers, and tactile contact terms. We use JAX automatic differentiation to compute gradients of this objective and apply quasi-Newton updates, enabling the IK solver to reach an $SE(3)$ end-effector target while adapting online to contact sensed by the tactile skin.
+
+

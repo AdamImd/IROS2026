@@ -1,0 +1,216 @@
+\section{Appendix}
+\subsection{Related Works}
+
+\begin{itemize}
+        \item \href{https://hiro-group.ronc.one/gentacttoolbox/}{GenTact}: This is the main work we aim to improve upon. 
+        \begin{itemize}
+                \item Strengths:
+                \begin{itemize}
+                        \item Low-cost to manufacture: This is 3D printed and uses a simple microcontroller to detect contact.
+                        \item No Moving parts: Easy to maintain and use.
+                        \item Procedurally generated: User defined density and shape. Adaptable to many use cases
+                \end{itemize}
+                \item Weaknesses:
+                \begin{itemize}
+                        \item No force measurement: Only works as a binary as they use capacitive sensing. 
+                        \item Must be a human: Non-capacitive objects will not activate the sensor. Only objects that would work with a touchscreen will create a reading for this sensor. 
+                        \item Single contact only: The sensor is calibrated to only detect a single contact. Multiple contacts are extremely difficult to model or predict. 
+                        \item Needs a multifilament 3D Printer: May take a long time to print, and requires a special filament. 
+                \end{itemize}
+        \end{itemize}
+
+        \item \href{https://ori.ox.ac.uk/media/10994/01-ral-2021.pdf}{Exploiting Distributed Tactile Sensors to Drive a Robot Arm Through Obstacles}
+        \begin{itemize}
+                \item A work similar to what we may want to do. This uses "taxels", or tactile pixels to navigate through a cluttered environment.
+                \item Strengths:
+                \begin{itemize}
+                        \item Mathematics: This work has a strong base in the analytical kinematics, with a conditioning of the null space and a rigorous exploration of the control algorithm.  
+                        \item Sensors: This has a robust custom PCB based sensor array. 
+                \end{itemize}
+                \item Weaknesses:
+                \begin{itemize}
+                        \item Lack of generalization: This focuses on a very narrow problem space, perhaps follow-up works address this. 
+                        \item Low sensor coverage: while there are many "taxels", this is still significantly lower than what we propose. 
+                        \item Cost: this is still an expensive and complicated system. 
+                \end{itemize}
+        \end{itemize}
+
+        \item \href{https://www.tum.de/en/news-and-events/all-news/press-releases/details/35732-1}{TUM Robot Skin}
+        \begin{itemize}
+                \item This uses discrete skin sensor units that has individual force, temp, acceleration, and magnetic sensors for each unit. 
+                \item Strengths:
+                \begin{itemize}
+                        \item Robustness: This design seems both strong and good for large scale coverage. 
+                        \item Multimodal: With illumination control and multisensory readings, this has a better observation space than what we propose. 
+                        \item Event driven: This uses a unique interface, that we may use. The control framework is extensive.
+                \end{itemize}
+                \item Weaknesses:
+                \begin{itemize}
+                        \item Cost: each unit is very expensive compared to our design.
+                        \item Density: This does not have the same resolution or adaptability that our design has. Each unit is the same size. 
+                        \item Complexity: This has many more features than we would want for our current application. 
+                \end{itemize}
+        \end{itemize}
+
+        \item \href{https://arxiv.org/pdf/1304.6146}{Manipulation in clutter: the plant one}
+        \begin{itemize}
+                \item This work focuses on the manipulation in dense foliage and clutter. It has a controller that we can use as a baseline for our experiments. 
+        \end{itemize}
+
+        \item \href{https://ox5bc.github.io/public_html/paper/Sonic_skin_final.pdf}{Enabling Low-Cost Full Surface Tactile Skin for Human Robot Interaction}
+        \begin{itemize}
+                \item This uses Piezo patches and a wireless sensor to detect pressure and contact. It seems interesting and dense, but not very robust or scalable. Requires substantial calibration and environmental control.
+        \end{itemize}
+
+        \item \href{https://arxiv.org/pdf/1411.6837v1}{A Flexible and Robust Large Scale Capacitive Tactile System for Robots}
+        \begin{itemize}
+                \item This work uses a flexible PCB based approach to what we are aiming for. They use capacitive elements, and several groups of cells on each PCB to make a unit. These require their own encasement to work on a robot.      
+        \end{itemize}
+
+        \item \href{https://ieeexplore.ieee.org/abstract/document/10068344}{TacSuit: A Wearable Large-Area, Bioinspired Multimodal Tactile Skin for Collaborative Robots}
+        \begin{itemize}
+                \item TODO
+        \end{itemize}
+
+        \item \href{https://ieeexplore.ieee.org/document/9561152}{Human-Like Artificial Skin Sensor for Physical Human-Robot Interaction}
+        \begin{itemize}
+                \item This work uses a high resolution capacitive array of electrodes in a grid for tactile sensing. They have a complicated hardware assembly process, but it results in a flexible sensing method. They do not have any kinematics or controller associated with this work.
+        \end{itemize}
+
+        \item \href{https://ieeexplore.ieee.org/document/10610014}{CushSense: Soft, Stretchable, and Comfortable Tactile-Sensing Skin for Physical Human-Robot Interaction}
+        \begin{itemize}
+                \item They use a layered approach to the "taxel" robot sensing method, with a high deformation sensor that can be squished. Their controller interface is questionable, but the individual cell design could be interesting. One major takeaway could be that we could sandwich a compressible layer below or above our FSRs.
+        \end{itemize}
+
+        \item \href{https://www.khoury.northeastern.edu/home/lsw/papers/icra2024-tactile.pdf}{A Hierarchical Framework for Robot Safety using Whole-body Tactile Sensors} 
+        \begin{itemize}
+                \item This work proposes a mathematical framework for creating safety for robots with tactile sensing. We may be able to implement this with our loss function. This uses the TUM sensors as a sensing method. 
+        \end{itemize}
+
+        \item \href{https://arxiv.org/pdf/2110.14516}{Self-Contained Kinematic Calibration of a Novel Whole-Body Artificial Skin for Human-Robot Collaboration}
+        \begin{itemize}
+                \item This proposes a calibration pipeline to locate where a tactile cell is on a robot. This can be very useful for us if we have issues with aligning sensors or want to verify our predicted positions. 
+        \end{itemize}
+
+        \item \href{https://ieeexplore.ieee.org/document/10341766}{AmbiSense: Acoustic Field Based Blindspot-Free Proximity Detection and Bearing Estimation}
+        \begin{itemize}
+                \item This uses some sort of single, non contact based proximity sensor to detect and avoid contact. The control algorithms used in this may be helpful. 
+        \end{itemize}
+
+        \item \href{https://arxiv.org/pdf/2111.09687}{A Low-Cost, Easy-to-Manufacture, Flexible, Multi-Taxel Tactile Sensor and its Application to In-Hand Object Recognition}
+        \begin{itemize}
+                \item TODO
+                \item Strengths:
+                \begin{itemize}
+                        \item TODO
+                \end{itemize}
+                \item Weaknesses:
+                \begin{itemize}
+                        \item TODO
+                \end{itemize}
+        \end{itemize}
+
+        \item \href{https://www.science.org/doi/10.1126/scirobotics.adn4008}{Intrinsic sense of touch for intuitive physical human-robot interaction}
+        \begin{itemize}
+                \item TODO
+                \item Strengths:
+                \begin{itemize}
+                        \item TODO
+                \end{itemize}
+                \item Weaknesses:
+                \begin{itemize}
+                        \item TODO
+                \end{itemize}
+        \end{itemize}
+
+
+        \item \href{https://link.springer.com/article/10.1007/s10853-023-09091-1}{Review: Progress on 3D printing technology in the preparation of flexible tactile sensors}
+        \begin{itemize}
+                \item TODO
+        \end{itemize}
+
+
+        \item \href{https://www.sciencedirect.com/science/article/pii/S1002007123000175}{Recent progress in high-resolution tactile sensor array: From sensor fabrication to advanced applications}
+        \begin{itemize}
+                \item TODO
+        \end{itemize}
+
+
+        \item \href{https://advanced.onlinelibrary.wiley.com/doi/full/10.1002/admt.201900147}{3D-Printed Flexible Tactile Sensor Mimicking the Texture and Sensitivity of Human Skin}
+        \begin{itemize}
+                \item TODO
+        \end{itemize}
+
+
+        \item \href{https://ieeexplore.ieee.org/document/10303764}{A Computational Design Pipeline to Fabricate Sensing Network Physicalizations}
+        \begin{itemize}
+                \item TODO
+                \item Strengths:
+                \begin{itemize}
+                        \item TODO
+                \end{itemize}
+                \item Weaknesses:
+                \begin{itemize}
+                        \item TODO
+                \end{itemize}
+        \end{itemize}
+
+        \item \href{https://ieeexplore.ieee.org/document/9592677}{Proximity Perception in Human-Centered Robotics: A Survey on Sensing Systems and Applications}
+        \begin{itemize}
+                \item TODO
+        \end{itemize}
+
+        \item \href{https://dl.acm.org/doi/10.1145/3658185}{Capacitive Touch Sensing on General 3D Surfaces}
+        \begin{itemize}
+                \item TODO
+        \end{itemize}
+
+        \item \href{https://dl.acm.org/doi/10.1145/3332165.3347895}{Multi-Touch Kit: A Do-It-Yourself Technique for Capacitive Multi-Touch Sensing Using a Commodity Microcontroller}
+        \begin{itemize}
+                \item TODO
+        \end{itemize}
+
+        \item \href{https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/00001334B.pdf}{Techniques for Robust Touch Sensing Design}
+        \begin{itemize}
+                \item TODO
+        \end{itemize}
+
+        \item \href{https://arxiv.org/pdf/2310.17274}{cuRobo:Parallelized Collision-Free Minimum-Jerk Robot Motion Generation}
+        \begin{itemize}
+                \item TODO
+        \end{itemize}
+
+        \item \href{https://spj.science.org/doi/10.34133/2019/3018568}{A Review of Printable Flexible and Stretchable Tactile Sensors}
+        \begin{itemize}
+                \item TODO
+        \end{itemize}
+
+\end{itemize}
+
+\subsection{Extras:}
+\begin{itemize}
+    \item \href{https://docs.isaacsim.omniverse.nvidia.com/latest/assets/usd_assets_robots.html}{NVIDIA Isaac Sim: USD Robot Assets}
+    \item \href{https://polytouch.alanz.info/}{Poly Touch: Multimodal sensing}
+    \item \href{https://arxiv.org/pdf/2202.02207}{Tactile-Vision Pose estimation}
+    \item \href{https://arxiv.org/pdf/2312.02711}{Humanoid motion control with tactile sensing}
+    \item \href{https://arxiv.org/pdf/1904.02111}{Dressing HRI with tactile}
+    \item \href{https://mediatum.ub.tum.de/doc/1116561/360779.pdf}{TUM's cell based approach hardware description}
+    \item \href{https://pubs.acs.org/doi/10.1021/acsnano.2c06432}{Large-Scale Integrated Flexible Tactile Sensor Array for Sensitive Smart Robotic Touch}
+    \item \href{https://journals.sagepub.com/doi/full/10.1177/02783649231168954}{Passive and active acoustic sensing for soft pneumatic actuators}
+    \item \href{https://www.nature.com/articles/s44172-025-00350-4}{Vision-based tactile sensor design using physically based rendering}
+    \item \href{https://www.researchgate.net/publication/353921862_Procedural_Dungeon_Generation_A_Survey}{Procedural Dungeon Generation: A Survey}
+    \item \href{https://ieeexplore.ieee.org/document/41470}{Geometric continuity of parametric curves: three equivalent characterizations}
+    \item \href{https://www.cs.cmu.edu/~fp/courses/graphics/asst5/catmullRom.pdf}{Catmull-Rom splines}
+    \item \href{https://programmer.ie/post/poisson/}{Fast Poisson Disk Sampling in Arbitrary Dimensions}
+\end{itemize}
+
+\subsection{Boston Dynamics Documentation}
+\begin{itemize}
+    \item \href{https://dev.bostondynamics.com/docs/concepts/arm/arm_concepts.html#collision-avoidance}{Boston Dynamics Arm Concepts: Collision Avoidance}
+    \item \href{https://support.bostondynamics.com/s/article/Spot-Arm-End-Effector-Payload-Specifications-72058}{Spot Arm End Effector Payload Specifications}
+    \item \href{https://support.bostondynamics.com/s/article/Spot-Arm-Specifications-151694}{Spot Arm Specifications}
+    \item \href{https://support.bostondynamics.com/s/article/Payload-Mount-Points-and-Dimensions-49963}{Payload Mount Points and Dimensions}
+    \item \href{https://support.bostondynamics.com/s/article/How-Spot-Arm-Moves-151690}{How Spot Arm Moves}
+    \item \href{https://support.bostondynamics.com/s/article/Manually-Operate-Spot-Arm-151692}{Manually Operate Spot Arm}
+\end{itemize}
+

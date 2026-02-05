@@ -1,0 +1,73 @@
+\section{Results}\label{sec:results}
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.95\columnwidth]{images/Samples.pdf}\\
+    \includegraphics[width=0.95\columnwidth]{images/Graph_Cycle.pdf}\\
+    \includegraphics[width=0.95\columnwidth]{images/Graph-05_resistance_lines.pdf}
+    \caption{\textbf{Top}: Illustration of the different outer layer thicknesses tested, we test thicknesses of 0.5mm, 1mm, 2mm, 3mm, and 5mm.    \textbf{Middle}: Load and unload curves for various outer layer thicknesses. The binary contact behavior of these sensors is shown with the force at $\inf \omega$ Thinner layers have higher sensitivity, but saturate at lower forces.
+    \textbf{Bottom}: Binary contact threshold forces are found at the boundary between no response ($\infty \Omega$) and measurable response. Thinner layers have lower threshold forces and higher sensitivity, while thicker layers have a larger range of detectable forces.}
+    \label{fig:thickness}
+\end{figure}
+
+
+In this section, we characterize the behavior of \acro{}, and the performance of ContactIK in both collision avoidance and contact embracing scenarios. We use our Instron testing machine, with a reference resistor of 1000$\Omega$ in a voltage devider circuit. We test the response of the skin by applying a 7.5$\times$7.5mm square applicator at the center of each taxel, and measuring the voltage response of the taxel. We perform five load unload cycles from 0 to 30N. 
+
+% and hybrid sensors, and 47$\Omega$ for the fully fabric sensors.
+% at a rate of TODO mm/s.
+
+\subsection{Sensor Characterization}
+To optimize our design, we evaluate the response of one call of the sensor across a range of outer shell thickness. We use an Instron universal tensile tester to find the response of the sensor to a known force, where we apply forces from \textit{0-30N} to a single taxel for five load-unload cycles. We then fit a curve to the loading cycle to create a model of the sensor response.
+
+
+We use a common 30$\times$30mm$\times$3mm TPU flat inner layer with 2mm ridges to characterize our outer layers. We varied the thicknesses of the outer layers across the range of $[0.5, 1, 2, 3, 5]\ $mm, and tested their response to applied forces.
+
+% We fit a second-order polynomial to the response curve of each cell and used the fit to determine trends in sensitivity and range as a function of material thickness. For the polynomial $F(x)=ax^{2}+bx+c$, we use the coefficients to understand sensor behavior. We define low-force sensitivity $S_{\text{low}} = b$ and high-force sensitivity $S_{\text{high}} = \left. (2ax + b) \right|_{x = 15\,\text{N}}$. The ridges of our TPU also provide a binary response, as the voltage across the sensor is nearly zero until contact is made between the inner and outer layers. We define the threshold force $F_{\text{thresh}} = c$ as the force at which the sensor begins to respond.
+
+We find that thinner TPU layers result in higher sensitivity and lower threshold forces, while thicker layers provide a larger range of detectable forces. We find that a 3mm outer shell provides a good sensitivity and range based on our application.
+
+% \subsection{Full Matrix Characterization}
+% To evaluate the performance of the full force sensing skin, we created a skin for the midsection of the fourth link of Spot's arm. We create a 6$\times$5 matrix with 35$\times$35mm taxels as shown in Fig.~\ref{fig:skin}. We apply the skin to a 3D printed version of the link.
+
+% The 3D printed skin consists of a 3mm TPU inner layer, a 2mm ridge height, and a 3mm TPU outer layer. We collect five load-unload cycles per taxel and fit a curve to the response of each taxel. \todo{Analysis}
+
+\subsection{Full Skin Characterization}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.95\columnwidth]{images/TPU_threshold_heatmap.pdf}
+    \caption{Heatmap of the threshold forces across all taxels of the \acro{}. Many taxels have threshold forces between 2-4 N, with some outliers likely due to the complex geometry and non-uniform pressure distribution during testing.}
+    \label{fig:heatmap}
+\end{figure}
+
+We then characterize the \acro{} skin applied to a 3D printed version of the fourth link of Spot's arm. The skin consists of a 6$\times$5 matrix with 20$\times$20mm taxels, with a 3mm TPU inner layer, 2mm ridge height, and 3mm TPU outer layer. We collect four load-unload cycles per taxel and fit a curve to the loading responses of each taxel. 
+
+We find that while the threshold forces vary significantly across taxels as seen in Figure~\ref{fig:heatmap}, most likely due to the non-uniform geometries of the link. We find that the mean threshold force across all taxels is 2.78 N, with a standard deviation of 1.29 N. This indicates that the ideal conditions of the single taxel characterization do not fully translate to the more complex geometry and smaller taxel size of the full skin. However, the overall performance is sufficient for our application, and we can use the fitted curves to estimate contact forces during manipulation tasks.
+
+% Mean: 2.78 N
+% Std Dev: 1.29 N
+% Min: -0.07 N
+% Max: 5.03 N
+% Median: 2.86 N
+
+
+\subsection{Contact Avoidance}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.95\columnwidth]{images/Fig_Avoid.pdf}
+    \caption{The contact avoidance objective loss term is a sum of the penetration distances between the that the avoidance points on the robot and a sphere with a radius of the contact threshold distance. This causes the robot to move away from any contacts. }
+    \label{fig:avoid}
+\end{figure}
+
+Using ContactIK, we are able to optimize the joint configuration of the robot to react to collisions in real-time, avoiding obstacles while maintaining the origional end-effector objective. In figure \ref{fig:avoid}, we show an example of the robot reacting to contact with a human, while keeping the end-effector in the same pose. We find that even with a high number of surface contact points (eg. 10000) per link, ContactIK maintains a real-time performance of 30 Hz at 1000 iterations per inverse kinematics computation.
+
+
+
+\subsection{Contact Embracing}
+\begin{figure*}
+    \centering
+    \includegraphics[width=0.95\linewidth]{images/FIg_Embrace.pdf}
+    \caption{The contact embracing task aims to balance a dustpan in the gripper, and open a door while preventing large forces. To open the door, we create a new end effector on the arm of the robot and move along its normal until a force above a threshold is achieved. We also optimize the rotation angle of the gripper to prevent it from tipping over.}
+    \label{fig:embrace}
+ \end{figure*}
+ To evaluate the performance of ContactIK in contact embracing scenarios, we use a door that requires tactile feedback to safely open. We place the robot arm inside the doorway, and use ContactIK to gently slide the door open while keeping the gripper level with the ground. Using the tactile feedback from the \acro  sensor, we are able to detect when the door reaches its fully open position, and maintain a final contact force. This method effectively demonstrates the ability of ContactIK to utilize tactile feedback whole-body, contact-aware control for multiple objectives simultaneously.

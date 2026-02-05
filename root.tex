@@ -1,0 +1,74 @@
+% \documentclass[]{ieeeconf} 
+\documentclass[letterpaper, 10 pt, conference]{ieeeconf} 
+\IEEEoverridecommandlockouts
+\overrideIEEEmargins
+%\pdfobjcompresslevel=0
+%\pdfminorversion=4
+
+% \PassOptionsToPackage{draft}{graphicx} 
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+% \usepackage[shortlabels]{enumitem} 
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{xcolor}
+
+\usepackage{cite}
+% Using BibTeX with IEEEtran style
+
+\newcommand{\acro}{{CLOAK}}
+\newcommand{\todo}[1]{{\color{red} TODO:#1}}
+% \newcommand{\ktxt}[1]{{\color{blue} #1}}
+\newcommand{\ktxt}[1]{}
+
+\title{\LARGE \bf \acro: Contact Sensing with Low-Cost Force-Sensing Skin and Contact-Aware Inverse Kinematics
+% (LoFiSkin)
+}
+% \author{Anonymous authors}
+\author{Adam Imdieke, Heidi Woelfle, Minghao Zou, Brad Holschuh and Karthik Desingh}
+
+
+\let\oldtwocolumn\twocolumn
+\renewcommand\twocolumn[1][]{%
+    \oldtwocolumn[{#1}{
+        \centering
+        % \includegraphics[width=0.340\textwidth]{images/Teaser.png}
+        % \includegraphics[width=0.60\textwidth]{images/Spot.png}
+        \includegraphics[width=0.95\textwidth]{images/Teaser.pdf}
+        \captionof{figure}{\acro{} enables whole-arm tactile sensing by utilizing 3D printed TPU shells with embedded force-sensitive resistor arrays. Contact-aware inverse kinematics allows the robot to both embrace and avoid contact during manipulation.}\label{fig:intro}}]
+}
+
+
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
+
+
+\begin{abstract}
+Robotic manipulation in human-centered and cluttered environments requires not only dexterous control, but also the ability to sense and regulate contact forces across the entire arm. Fingertip and hand sensing alone are insufficient; whole-arm tactile sensing is needed to avoid or  embrace or avoid contact during manipulation. However, building effective tactile skins remains challenging due to multiple design trade-offs, including fabrication and assembly cost, surface coverage on existing manipulators in the market, taxel density, sensing capabilities beyond binary contact detection, and long-term durability and repeatability. 
+In this work, we present \acro{}, a low-cost, 3D-printed whole-arm skin with fabric surface layers and a high-density force-sensitive resistor array. We describe key design choices that balance cost, coverage, and sensitivity. Complementing the hardware, we introduce Contact-IK, a custom inverse kinematics algorithm that integrates tactile feedback to enable manipulation strategies where contact can be both embraced and avoided. We demonstrate \acro{} and Contact-IK on the Boston Dynamics Spot, highlighting the advantages of whole-arm tactile sensing in manipulation tasks. For more details and results, refer to the project website: \url{https://rpm-lab-umn.github.io/CLOAK_Webpage/}
+\end{abstract} 
+
+
+\input{sections/introduction}
+\input{sections/related_works}
+\input{sections/methods.tex}
+\input{sections/results.tex}
+\input{sections/conclusion.tex}
+
+% Extras
+% \include{sections/appendix.tex}
+% \input{sections/formulation.tex}
+
+% Bibliography
+\bibliographystyle{IEEEtran}
+\bibliography{references.bib}
+
+\end{document}
