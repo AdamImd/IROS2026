@@ -2,6 +2,9 @@
 *.log
 *.synctex.gz
 *.out
+*.blg
+*.fls
+*.fdb_latexmk
 root.pdf
 
 *.sh
