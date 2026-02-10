@@ -48,7 +48,20 @@ The materials and assembly for this sensor are optimized to be low-cost, where w
 
 
 \subsection{Fabric Sensor}
-We 
+The fabric sensor is designed to be a more flexible and sensitive option, where we adhere rows and columns of conductive fabric to the inner and outer fabric layers respectively, with a piezoresistive layer in between. We get similar taxel coverage to the TPU sensor, where boundaries of the taxels use the same spacing as the TPU sensor. We use velcro to create a cylindrical shape that can be easily attached to the robot, and allow for easy removal and maintenance. To interface with the microcontroller, we use snap buttons to connect wires to the rows and columns of the sensor, and a bias resistor of 47$\Omega$ for the voltage divider circuit. The materials and assembly of this sensor are also optimized for low cost and flexibility, where we achieve an approximate material cost of \textit{less than \$\ktxt{TODO}} and \textit{\ktxt{less than TODO hours}} of human effort per link.
+
+\begin{enumerate}
+    \item \textbf{Inner layer:} The template for the inner layer is a 2D projection of the robot link geometry, which is then cut from \ktxt{TODO}, which provides a flexible layer with high friction to prevent slipping against the robot. Rows of conductive fabric are adhered to the inner layer, and excess fabric is removed along the sensor ridges to create isolated rows.
+    \item \textbf{Outer layer:} The outer layer is made from the same template as the inner layer, but with \ktxt{TODO} for a softer and more sensitive contact surface. Columns of conductive fabric are adhered to the outer layer, and excess fabric is removed along the sensor ridges to create isolated columns.
+    \item \textbf{Assembly:} The inner and outer layers are stacked together with a piezoresistive layer (Velostat) in between, and then wrapped around the robot link and secured with velcro. Wires are connected to the rows and columns using snap buttons, and then routed to a microcontroller.
+\end{enumerate}
+
+\ktxt{ADD MORE INFORMAITON HERE}
+
+\ktxt{VERIFY COST AND TIME}
+
+\ktxt{VERIFY PROCESS STEPS}
+
 
 % \begin{figure}
 %     \centering
