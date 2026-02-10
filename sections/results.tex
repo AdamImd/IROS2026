@@ -51,23 +51,23 @@ We find that while the threshold forces vary significantly across taxels as seen
 % Median: 2.86 N
 
 
-\subsection{Contact Avoidance}
-\begin{figure}
-    \centering
-    \includegraphics[width=0.95\columnwidth]{images/Fig_Avoid.pdf}
-    \caption{The contact avoidance objective loss term is a sum of the penetration distances between the that the avoidance points on the robot and a sphere with a radius of the contact threshold distance. This causes the robot to move away from any contacts. }
-    \label{fig:avoid}
-\end{figure}
+% \subsection{Contact Avoidance}
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=0.95\columnwidth]{images/Fig_Avoid.pdf}
+%     \caption{The contact avoidance objective loss term is a sum of the penetration distances between the that the avoidance points on the robot and a sphere with a radius of the contact threshold distance. This causes the robot to move away from any contacts. }
+%     \label{fig:avoid}
+% \end{figure}
 
-Using ContactIK, we are able to optimize the joint configuration of the robot to react to collisions in real-time, avoiding obstacles while maintaining the origional end-effector objective. In figure \ref{fig:avoid}, we show an example of the robot reacting to contact with a human, while keeping the end-effector in the same pose. We find that even with a high number of surface contact points (eg. 10000) per link, ContactIK maintains a real-time performance of 30 Hz at 1000 iterations per inverse kinematics computation.
+% Using ContactIK, we are able to optimize the joint configuration of the robot to react to collisions in real-time, avoiding obstacles while maintaining the origional end-effector objective. In figure \ref{fig:avoid}, we show an example of the robot reacting to contact with a human, while keeping the end-effector in the same pose. We find that even with a high number of surface contact points (eg. 10000) per link, ContactIK maintains a real-time performance of 30 Hz at 1000 iterations per inverse kinematics computation.
 
 
 
-\subsection{Contact Embracing}
-\begin{figure*}
-    \centering
-    \includegraphics[width=0.95\linewidth]{images/FIg_Embrace.pdf}
-    \caption{The contact embracing task aims to balance a dustpan in the gripper, and open a door while preventing large forces. To open the door, we create a new end effector on the arm of the robot and move along its normal until a force above a threshold is achieved. We also optimize the rotation angle of the gripper to prevent it from tipping over.}
-    \label{fig:embrace}
- \end{figure*}
- To evaluate the performance of ContactIK in contact embracing scenarios, we use a door that requires tactile feedback to safely open. We place the robot arm inside the doorway, and use ContactIK to gently slide the door open while keeping the gripper level with the ground. Using the tactile feedback from the \acro  sensor, we are able to detect when the door reaches its fully open position, and maintain a final contact force. This method effectively demonstrates the ability of ContactIK to utilize tactile feedback whole-body, contact-aware control for multiple objectives simultaneously.
+% \subsection{Contact Embracing}
+% \begin{figure*}
+%     \centering
+%     \includegraphics[width=0.95\linewidth]{images/FIg_Embrace.pdf}
+%     \caption{The contact embracing task aims to balance a dustpan in the gripper, and open a door while preventing large forces. To open the door, we create a new end effector on the arm of the robot and move along its normal until a force above a threshold is achieved. We also optimize the rotation angle of the gripper to prevent it from tipping over.}
+%     \label{fig:embrace}
+%  \end{figure*}
+%  To evaluate the performance of ContactIK in contact embracing scenarios, we use a door that requires tactile feedback to safely open. We place the robot arm inside the doorway, and use ContactIK to gently slide the door open while keeping the gripper level with the ground. Using the tactile feedback from the \acro  sensor, we are able to detect when the door reaches its fully open position, and maintain a final contact force. This method effectively demonstrates the ability of ContactIK to utilize tactile feedback whole-body, contact-aware control for multiple objectives simultaneously.

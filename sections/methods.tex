@@ -9,10 +9,12 @@
 We propose a whole arm tactile sensor optimized for 1) maximal coverage, 2) analog taxel readings and 3) low-cost and ease of fabrication. 
 
 Each sensor is composed of a Force Sensitive Resistor (FSR) matrix, where rows and columns of conductive material are separated by a piezoresistive layer (Velostat). 
-When contact is made within a taxel, the piezoresistive layer compresses, creating a change in resistance ($\infty \Omega$ - $600\Omega$) that is read by a microcontroller using a voltage divider circuit. While our sensor design is adaptable to most robot geometries, we target the Boston Dynamics Spot robot, where we design and evaluate our sensor for the arm of the robot.
+When contact is made within a taxel, the piezoresistive layer compresses, creating a change in resistance that is read by a microcontroller using a voltage divider circuit. While our sensor design is adaptable to most robot geometries, we target the Boston Dynamics Spot robot, where we design and evaluate our sensor for the arm of the robot.
+
+We expore two variations of the sensor: 1) a 3D printed TPU shell with adhered FSR arrays, and 2) a fabric-based sensor using conductive fabric. Both sensors are designed to be easily fabricated and integrated onto existing robot platforms. The 3D printed sensor provides a more robust and durable solution, while the fabric sensor offers a more sensitive and flexible option. We describe the design and fabrication of each sensor in the following sections. An overview of the sensor designs is shown in Fig~\ref{tactile_sensors_both}.
 
 
-\subsection{Tactile Sensor Design}
+\subsection{TPU Sensor}
 To design the 3D printed inner and outer layers of the skin, we use the mesh files provided by Boston Dynamics' URDF Files, and then apply the following sequence of CAD operations on the link geometry of interest:
 
 % \begin{figure*}
@@ -22,12 +24,12 @@ To design the 3D printed inner and outer layers of the skin, we use the mesh fil
 %     \label{fig:hardware}
 % \end{figure*}
 
-To design the 3D-printed skin, we start from the link-level mesh files provided by Boston Dynamics (Fig \ref{fig:rigid_tactile_sensor}-2 Yellow) as part of their URDF models. For each link, we apply the following sequence of CAD operations:
+To design the 3D-printed skin, we start from the link-level mesh files provided by Boston Dynamics (Fig \ref{fig:tactile_sensors_both}-2 Yellow) as part of their URDF models. For each link, we apply the following sequence of CAD operations:
 \begin{enumerate}
-\item \textbf{Inner layer:} Generate a conformal shell with a uniform thickness of \textit{3 mm} offset outward from the robot’s base geometry  (Fig~\ref{fig:rigid_tactile_sensor}-2 Green).
-\item \textbf{Outer layer:} Generate a second shell with a wall thickness of \textit{3 mm}, whose inner surface is offset by \textit{5 mm} from the robot’s base geometry, resulting in a gap between the two layers (Fig~\ref{fig:rigid_tactile_sensor}-2 Orange).
-\item \textbf{Ridges:} Within the inter-shell region, add horizontal ridges on the inner shell and vertical ridges on the outer shell. The ridges are 2 mm thick, and the spacing between adjacent ridges determines the resulting taxel density (Fig~\ref{fig:rigid_tactile_sensor}-2 Cutout).
-\item \textbf{Clearance Cuts:} Material is removed near kinematic joints to prevent interference during motion, and a cut is added to facilitate installation of the skin(Fig~\ref{fig:rigid_tactile_sensor}-1).
+\item \textbf{Inner layer:} Generate a conformal shell with a uniform thickness of \textit{3 mm} offset outward from the robot’s base geometry  (Fig~\ref{fig:tactile_sensors_both}-2 Green).
+\item \textbf{Outer layer:} Generate a second shell with a wall thickness of \textit{3 mm}, whose inner surface is offset by \textit{5 mm} from the robot’s base geometry, resulting in a gap between the two layers (Fig~\ref{fig:tactile_sensors_both}-2 Orange).
+\item \textbf{Ridges:} Within the inter-shell region, add horizontal ridges on the inner shell and vertical ridges on the outer shell. The ridges are 2 mm thick, and the spacing between adjacent ridges determines the resulting taxel density (Fig~\ref{fig:tactile_sensors_both}-2 Cutout).
+\item \textbf{Clearance Cuts:} Material is removed near kinematic joints to prevent interference during motion, and a cut is added to facilitate installation of the skin(Fig~\ref{fig:tactile_sensors_both}-1).
 \end{enumerate}
 
 % We then 3D print both shells with a flexible material (Thermoplastic Polyurethane - TPU) as it allows for easy snap on assembly, along with deformable contact surfaces. We use a outer thickness of \textit{3 mm}, and a ridge spacing of approximately \textit{20 mm}. 
@@ -35,7 +37,7 @@ To design the 3D-printed skin, we start from the link-level mesh files provided 
 
 Both shells are 3D printed using 95A TPU with an outer shell thickness of \textit{3\,mm}, with ridge spacing of approximately \textit{20\,mm}.
 
-For the inner shell, copper tape is laminated onto one side of a Velostat sheet via its conductive adhesive, followed by a double-sided adhesive layer on the copper layer. The resulting laminate stack is attached to the shell. For the outer shell, copper tape is directly applied. This structure is shown in Fig~\ref{fig:rigid_tactile_sensor}-5
+For the inner shell, copper tape is laminated onto one side of a Velostat sheet via its conductive adhesive, followed by a double-sided adhesive layer on the copper layer. The resulting laminate stack is attached to the shell. For the outer shell, copper tape is directly applied. This structure is shown in Fig~\ref{fig:tactile_sensors_both}-5
 
 Wires are connected to each row and column, which are then routed to a microcontroller. The assembly is completed by snapping the outer shell onto the inner shell and securing it to the robot.
 
@@ -44,140 +46,144 @@ If binary contact detection is sufficient for the application, the Velostat laye
 The materials and assembly for this sensor are optimized to be low-cost, where we achieve an average material cost of \textit{less than \$10} and \textit{less than 2 hours} of human effort per link.
 
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.95\columnwidth]{images/Sensor_WTL.pdf}
-    \caption{1) Instron universal testing machine used for sensor characterization. 2) 7.5mm square applicator above a 0.5 mm thick outer layer taxel. 3) We characterize the sensor response of each taxel of the \acro{} sensor.}
-    \label{fig:sensor_wtl}
-\end{figure}
+
+\subsection{Fabric Sensor}
+We 
+
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=0.95\columnwidth]{images/Sensor_WTL.pdf}
+%     \caption{1) Instron universal testing machine used for sensor characterization. 2) 7.5mm square applicator above a 0.5 mm thick outer layer taxel. 3) We characterize the sensor response of each taxel of the \acro{} sensor.}
+%     \label{fig:sensor_wtl}
+% \end{figure}
 
 
 
-\section{ContactIK: Contact-Aware Inverse Kinematics}
-Using our proposed sensor, we introduce ContactIK: a contact-aware inverse kinematics method that serves as a drop-in replacement for conventional IK routines. 
+% \section{ContactIK: Contact-Aware Inverse Kinematics}
+% Using our proposed sensor, we introduce ContactIK: a contact-aware inverse kinematics method that serves as a drop-in replacement for conventional IK routines. 
 
 
-When contact is not desired, ContactIK operates transparently and independently of the higher level end effector position controller, where given a cartesian space target, the joint space of the robot is optimized to reach the goal configuration while maintaining a secondary contact objective. 
+% When contact is not desired, ContactIK operates transparently and independently of the higher level end effector position controller, where given a cartesian space target, the joint space of the robot is optimized to reach the goal configuration while maintaining a secondary contact objective. 
 
 
-When contact is desired, ContactIK enables the operator to specify a desired contact location on the surface of the robot to act as a new end effector, along with a desired contact location in the environment. ContactIK then optimizes the joint space of the robot to reach the desired end-effector pose, utilizing the contact sensor to detect the magnitude of contact force, and regulate movements to prevent excessive forces. We also optimize for the original end-effector pose to be maintained as closely as possible. This allows the robot to embrace contact while still maintaining its original task objective.
+% When contact is desired, ContactIK enables the operator to specify a desired contact location on the surface of the robot to act as a new end effector, along with a desired contact location in the environment. ContactIK then optimizes the joint space of the robot to reach the desired end-effector pose, utilizing the contact sensor to detect the magnitude of contact force, and regulate movements to prevent excessive forces. We also optimize for the original end-effector pose to be maintained as closely as possible. This allows the robot to embrace contact while still maintaining its original task objective.
 
-% \subsection{Gradient Descent IK}
-% Given a desired end-effector pose \( \mathbf{T} \in SE(3) \), ContactIK performs gradient descent of the current joint state \( \mathbf{J} \in \mathbb{R}^n \) and a set of contact constraints 
+% % \subsection{Gradient Descent IK}
+% % Given a desired end-effector pose \( \mathbf{T} \in SE(3) \), ContactIK performs gradient descent of the current joint state \( \mathbf{J} \in \mathbb{R}^n \) and a set of contact constraints 
+% % \[
+% % \mathcal{C} = \{ (\mathbf{P}, \mathbf{R}, \mathbf{F}) \},
+% % \]
+% % where \( \mathbf{P} \in \mathbb{R}^3 \) is the contact position, \( \mathbf{R} \in SO(3) \) is the contact orientation, and \( \mathbf{F} \in \mathbb{R}^1 \) is the contact force value.
+
+% % The gradient descent algorithm returns a joint configuration \( \mathbf{J}^* \) that minimizes positional error along with any additional contact objectives. 
+% % % However, in some cases, a valid solution may not be found due to kinematic infeasibility, singularities, local minima in the gradient space. 
+
+% % ContactIK runs at \textit{60- Hz} on the CPU for inverse kinematics only, and \textit{200 Hz} with 2 contact points. 
+
+
+% \subsection{Collision Avoidance IK}
+% For a robot arm with $M$ joints and joint angles $\omega_{1:M}$, we define the forward kinematics function as $FK(\omega_{1:M}): \mathbb{R}^M \rightarrow SE(3)$, that maps joint angles to an end-effector pose in $SE(3)$. 
+% % The robot is underactuated if $M < 6$, and overactuated if $M > 6$. An underactuated is not guaranteed to reach every position and orientation in SE(3), while an overactuated robot has infinite solutions to reach a given position and orientation. We focus on the overactuated case, as the Boston Dynamics Spot arm has 6 revolute joints and we add two prismatic joints to control the base of the arm, leading to a total of 8 joints. Because the arm is overactuated, we can condition the inverse kinematics to optimize for other objectives, such as avoiding obstacles or embracing contact. This can be refferred to as conditioning the null space of the inverse kinematics. A null space is the set of all joint angles that do not affect the end effector position and orientation, so in our case of $M=8$ joints, the null space has a dimension of $M-6=2$.
+% It can be decomposed into a series of transformations from each joint as shown in equation~\ref{eq:fk}. 
+% % We define the forward kinematics function as $FK(\omega_{1:M}): \mathbb{R}^M \rightarrow SE(3)$, which can be decomposed into a series of transformations from each joint as shown in equation~\ref{eq:fk}. 
+% % Our approach is agnostic to the specific forward kinematics implementation, as long as it is differentiable, allowing compatibility with most robot representations. Generally, the forward kinematics can be expressed as a series of matrix multiplications of the individual joint transformations. 
+% The forward kinematics can be expressed as:
+% \begin{equation}
+% \label{eq:fk}
+% FK(\omega_{1:M}) = \prod_{i=1}^{M} {}^{i-1}\!T_{i}(\omega_i) = T_{1}(\omega_1) T_{2}(\omega_2) \ldots T_{M}(\omega_M)
+% \end{equation}
+
+% where $T_i(\omega_i)$ is the transformation from the coordinate frame of joint $i$ given its joint angle $\omega_i$ to its next frame.
+
+% Given the desired end-effector pose $X_d \in SE(3)$, we use a quasi-Newton method to iteratively solve for the joint angles $\omega^*_{1:M}$ that minimize the total loss function:
+% \begin{equation}
+% \label{eq:ik}
+% \omega^*_{1:M} = \arg\min_{\omega} L_{\text{pos}} + L_{\text{rot}} + L_{\text{limits}} + L_{\text{tactile}}
+% \end{equation}
+% where each loss term is defined as follows:
+
+% \subsubsection{Positional loss}
+% The positional loss uses the L2 norm:
+% \begin{equation}
+% L_{\text{pos}} = \| p_c - p_d \|_2^2
+% \end{equation}
+% where $p_c$ and $p_d$ are the current and desired positions extracted from $X_c = FK(\omega)$ and $X_d$ respectively.
+
+% \subsubsection{Rotational loss}
+% The rotational loss uses the geodesic distance on $SO(3)$:
+% \begin{equation}
+% L_{\text{rot}} = \arccos\left(\frac{\text{trace}(R_c^T R_d) - 1}{2}\right)
+% \end{equation}
+% where $R_c$ and $R_d$ are the current and desired rotation matrices.
+
+% \subsubsection{Joint Limits}
+% The joint limit constraints use a logarithmic barrier function:
+% \begin{equation}
+% L_{\text{limits}} = \mu_{\text{barrier}} \sum_{i=1}^{M} \left(-\log(\omega_i - \omega_i^{\min}) - \log(\omega_i^{\max} - \omega_i)\right)
+% \end{equation}
+% where $\omega_i^{\min}$ and $\omega_i^{\max}$ are the lower and upper joint limits, and $\mu_{\text{barrier}}$ is a barrier weight parameter.
+
+% \subsubsection{Tactile loss}
+% The tactile loss $L_{\text{tactile}}$ encodes contact avoidance behavior. We store the most recently detected 3D contact point and reuse it for subsequent IK solves until a new contact is detected, at which point the stored point is overwritten. We represent tactile contact points as $\mathbf{c}_j \in \mathbb{R}^3$ for $j = 1, \ldots, N_{\text{tactile}}$ in the world frame (in our implementation, $N_{\text{tactile}}=1$). Robot surface geometry points $\mathbf{m}_i \in \mathbb{R}^3$ for $i = 1, \ldots, N_{\text{robot}}$ are the corresponding surface samples expressed in the world frame under the current joint configuration (i.e., obtained by transforming link-frame surface samples through forward kinematics). We compute:
+% \begin{equation}
+% L_{\text{tactile}} = \sum_{i=1}^{N_{\text{robot}}} \sum_{j=1}^{N_{\text{tactile}}} \left[\max(0, r_{\text{tact}} - \|\mathbf{m}_i - \mathbf{c}_j\|_2)\right]^2
+% \end{equation}
+% where $r_{\text{tact}}$ is a distance cutoff, and the distance violation is clipped to zero for separations exceeding this cutoff. This quadratic penalty encourages the robot to move geometry away from detected contact regions.
+% % TODO: Optimizer, Iterations Rot distance
+
+% % The optimization is performed continuously, updating the joint angles at each iteration. Our approach does not require an explicit Jacobian matrix or a hessian, as we use automatic differentiation to compute the gradients needed for the quasi-Newton updates. Using the automatic differentiation allows us to easily incorporate complex conditioning terms and constraints into the optimization, as long as they are differentiable.
+
+% % \subsection{Implementation Details}
+% % We implement the forward kinematics function $FK(\omega)$ using MuJoco's XML format, specifying the joint types, link lengths, and other relevant parameters. We use the \texttt{mujoco-py} library to load the model and compute the forward kinematics using PyTorch tensors to enable automatic differentiation. We define the optimization loop using PyTorch's autograd functionality to compute the gradients of the loss function with respect to the joint angles. We use the TODO optimizer from PyTorch to perform the quasi-Newton updates, as it is well-suited for problems with a moderate number of parameters and can handle non-linear objectives. Our gradient descent loop is shown in Algorithm \ref{alg:ik}.
+
+% % \begin{algorithm}
+% % \caption{Inverse Kinematics with Contact-Aware Conditioning}\label{alg:ik}
+% % \begin{algorithmic}[1]
+% % \Require Desired end effector pose $X_d$, initial joint angles $\omega_0$, gradient update scalar $\alpha$
+% % \While {True}
+% %     \State $\omega \gets \omega_0$
+% %     \State $X_c \gets FK(\omega)$ \Comment{Compute current end effector pose}
+% %     \State $L \gets \| X_c - X_d \|^2 + \lambda C(\omega)$ \Comment{Compute loss}
+% %     \State $g \gets \nabla_\omega L$ \Comment{Compute gradient of loss}
+% %     \State $\omega \gets \omega - \alpha g$ \Comment{Update joint angles}
+% %     % \State \Return $\omega$ \Comment{Return optimized joint angles}
+% %     % \State \textbf{wait} until next control cycle
+% % \EndWhile
+% % \end{algorithmic}
+% % \end{algorithm}
+
+% % The contact term $C(\omega)$ can be defined to the create desired behavior of the robot. For simple collision avoidance, upon detecting contact with the environment, we create a contact location $\mathbf{P}$ and define our loss as the proximity of the contact location on the robot to $\mathbf{P}$, pushing the robot away from the contact. 
+
+% \subsection{Contact Embracing IK}
+% When intentional contact is required, the operator specifies:
+% \begin{itemize}
+%     \item Robot surface pose: contact point $\mathbf{P}_r$ (on link $k$ local frame) and orientation $\mathbf{R}_r$ (relative to link $k$)
+%     \item Environment contact pose: point $\mathbf{P}_e$ and orientation $\mathbf{R}_e$ (both in world frame)
+% \end{itemize}
+
+% ContactIK defines the desired contact pose using the chosen orientation and environment contact point:
+% \[\mathbf{T}_{target} = \begin{bmatrix}
+% \mathbf{R}_e & \mathbf{P}_e \\
+% 0 & 1
+% \end{bmatrix}\] 
+
+% and a new end-effector frame is defined at the contact point on the robot:
 % \[
-% \mathcal{C} = \{ (\mathbf{P}, \mathbf{R}, \mathbf{F}) \},
-% \]
-% where \( \mathbf{P} \in \mathbb{R}^3 \) is the contact position, \( \mathbf{R} \in SO(3) \) is the contact orientation, and \( \mathbf{F} \in \mathbb{R}^1 \) is the contact force value.
+% \mathbf{T}_{robot} =
+% \underbrace{{}^{0}\!T_{1}(\omega_1)\,
+% {}^{1}\!T_{2}(\omega_2)\,\cdots\,
+% {}^{k-1}\!T_{k}(\omega_k)}_{\mathbf{T}_{link}}
+% \cdot
+% \begin{bmatrix}
+% \mathbf{R}_r & \mathbf{P}_r \\
+% 0 & 1
+% \end{bmatrix}\]
 
-% The gradient descent algorithm returns a joint configuration \( \mathbf{J}^* \) that minimizes positional error along with any additional contact objectives. 
-% % However, in some cases, a valid solution may not be found due to kinematic infeasibility, singularities, local minima in the gradient space. 
+%  The IK target moves the arm towards the target along the contact surface normal, while the original end-effector pose is also optimized to remain as close as possible to its original target. The loss function is modified as follows:
+% \begin{equation}
+% \label{eq:ik_contact}
+% \omega^*_{1:M} = \arg\min_{\omega} L_{\text{contact}} + L_{\text{original}} + L_{\text{limits}}
+% \end{equation}
+% where $L_{\text{contact}}$ is the positional and rotational loss between $\mathbf{T}_{robot}$ and $\mathbf{T}_{target}$, and $L_{\text{original}}$ is the positional and rotational loss between the original end-effector pose $FK(\omega)$ and its desired target.
 
-% ContactIK runs at \textit{60- Hz} on the CPU for inverse kinematics only, and \textit{200 Hz} with 2 contact points. 
-
-
-\subsection{Collision Avoidance IK}
-For a robot arm with $M$ joints and joint angles $\omega_{1:M}$, we define the forward kinematics function as $FK(\omega_{1:M}): \mathbb{R}^M \rightarrow SE(3)$, that maps joint angles to an end-effector pose in $SE(3)$. 
-% The robot is underactuated if $M < 6$, and overactuated if $M > 6$. An underactuated is not guaranteed to reach every position and orientation in SE(3), while an overactuated robot has infinite solutions to reach a given position and orientation. We focus on the overactuated case, as the Boston Dynamics Spot arm has 6 revolute joints and we add two prismatic joints to control the base of the arm, leading to a total of 8 joints. Because the arm is overactuated, we can condition the inverse kinematics to optimize for other objectives, such as avoiding obstacles or embracing contact. This can be refferred to as conditioning the null space of the inverse kinematics. A null space is the set of all joint angles that do not affect the end effector position and orientation, so in our case of $M=8$ joints, the null space has a dimension of $M-6=2$.
-It can be decomposed into a series of transformations from each joint as shown in equation~\ref{eq:fk}. 
-% We define the forward kinematics function as $FK(\omega_{1:M}): \mathbb{R}^M \rightarrow SE(3)$, which can be decomposed into a series of transformations from each joint as shown in equation~\ref{eq:fk}. 
-% Our approach is agnostic to the specific forward kinematics implementation, as long as it is differentiable, allowing compatibility with most robot representations. Generally, the forward kinematics can be expressed as a series of matrix multiplications of the individual joint transformations. 
-The forward kinematics can be expressed as:
-\begin{equation}
-\label{eq:fk}
-FK(\omega_{1:M}) = \prod_{i=1}^{M} {}^{i-1}\!T_{i}(\omega_i) = T_{1}(\omega_1) T_{2}(\omega_2) \ldots T_{M}(\omega_M)
-\end{equation}
-
-where $T_i(\omega_i)$ is the transformation from the coordinate frame of joint $i$ given its joint angle $\omega_i$ to its next frame.
-
-Given the desired end-effector pose $X_d \in SE(3)$, we use a quasi-Newton method to iteratively solve for the joint angles $\omega^*_{1:M}$ that minimize the total loss function:
-\begin{equation}
-\label{eq:ik}
-\omega^*_{1:M} = \arg\min_{\omega} L_{\text{pos}} + L_{\text{rot}} + L_{\text{limits}} + L_{\text{tactile}}
-\end{equation}
-where each loss term is defined as follows:
-
-\subsubsection{Positional loss}
-The positional loss uses the L2 norm:
-\begin{equation}
-L_{\text{pos}} = \| p_c - p_d \|_2^2
-\end{equation}
-where $p_c$ and $p_d$ are the current and desired positions extracted from $X_c = FK(\omega)$ and $X_d$ respectively.
-
-\subsubsection{Rotational loss}
-The rotational loss uses the geodesic distance on $SO(3)$:
-\begin{equation}
-L_{\text{rot}} = \arccos\left(\frac{\text{trace}(R_c^T R_d) - 1}{2}\right)
-\end{equation}
-where $R_c$ and $R_d$ are the current and desired rotation matrices.
-
-\subsubsection{Joint Limits}
-The joint limit constraints use a logarithmic barrier function:
-\begin{equation}
-L_{\text{limits}} = \mu_{\text{barrier}} \sum_{i=1}^{M} \left(-\log(\omega_i - \omega_i^{\min}) - \log(\omega_i^{\max} - \omega_i)\right)
-\end{equation}
-where $\omega_i^{\min}$ and $\omega_i^{\max}$ are the lower and upper joint limits, and $\mu_{\text{barrier}}$ is a barrier weight parameter.
-
-\subsubsection{Tactile loss}
-The tactile loss $L_{\text{tactile}}$ encodes contact avoidance behavior. We store the most recently detected 3D contact point and reuse it for subsequent IK solves until a new contact is detected, at which point the stored point is overwritten. We represent tactile contact points as $\mathbf{c}_j \in \mathbb{R}^3$ for $j = 1, \ldots, N_{\text{tactile}}$ in the world frame (in our implementation, $N_{\text{tactile}}=1$). Robot surface geometry points $\mathbf{m}_i \in \mathbb{R}^3$ for $i = 1, \ldots, N_{\text{robot}}$ are the corresponding surface samples expressed in the world frame under the current joint configuration (i.e., obtained by transforming link-frame surface samples through forward kinematics). We compute:
-\begin{equation}
-L_{\text{tactile}} = \sum_{i=1}^{N_{\text{robot}}} \sum_{j=1}^{N_{\text{tactile}}} \left[\max(0, r_{\text{tact}} - \|\mathbf{m}_i - \mathbf{c}_j\|_2)\right]^2
-\end{equation}
-where $r_{\text{tact}}$ is a distance cutoff, and the distance violation is clipped to zero for separations exceeding this cutoff. This quadratic penalty encourages the robot to move geometry away from detected contact regions.
-% TODO: Optimizer, Iterations Rot distance
-
-% The optimization is performed continuously, updating the joint angles at each iteration. Our approach does not require an explicit Jacobian matrix or a hessian, as we use automatic differentiation to compute the gradients needed for the quasi-Newton updates. Using the automatic differentiation allows us to easily incorporate complex conditioning terms and constraints into the optimization, as long as they are differentiable.
-
-% \subsection{Implementation Details}
-% We implement the forward kinematics function $FK(\omega)$ using MuJoco's XML format, specifying the joint types, link lengths, and other relevant parameters. We use the \texttt{mujoco-py} library to load the model and compute the forward kinematics using PyTorch tensors to enable automatic differentiation. We define the optimization loop using PyTorch's autograd functionality to compute the gradients of the loss function with respect to the joint angles. We use the TODO optimizer from PyTorch to perform the quasi-Newton updates, as it is well-suited for problems with a moderate number of parameters and can handle non-linear objectives. Our gradient descent loop is shown in Algorithm \ref{alg:ik}.
-
-% \begin{algorithm}
-% \caption{Inverse Kinematics with Contact-Aware Conditioning}\label{alg:ik}
-% \begin{algorithmic}[1]
-% \Require Desired end effector pose $X_d$, initial joint angles $\omega_0$, gradient update scalar $\alpha$
-% \While {True}
-%     \State $\omega \gets \omega_0$
-%     \State $X_c \gets FK(\omega)$ \Comment{Compute current end effector pose}
-%     \State $L \gets \| X_c - X_d \|^2 + \lambda C(\omega)$ \Comment{Compute loss}
-%     \State $g \gets \nabla_\omega L$ \Comment{Compute gradient of loss}
-%     \State $\omega \gets \omega - \alpha g$ \Comment{Update joint angles}
-%     % \State \Return $\omega$ \Comment{Return optimized joint angles}
-%     % \State \textbf{wait} until next control cycle
-% \EndWhile
-% \end{algorithmic}
-% \end{algorithm}
-
-% The contact term $C(\omega)$ can be defined to the create desired behavior of the robot. For simple collision avoidance, upon detecting contact with the environment, we create a contact location $\mathbf{P}$ and define our loss as the proximity of the contact location on the robot to $\mathbf{P}$, pushing the robot away from the contact. 
-
-\subsection{Contact Embracing IK}
-When intentional contact is required, the operator specifies:
-\begin{itemize}
-    \item Robot surface pose: contact point $\mathbf{P}_r$ (on link $k$ local frame) and orientation $\mathbf{R}_r$ (relative to link $k$)
-    \item Environment contact pose: point $\mathbf{P}_e$ and orientation $\mathbf{R}_e$ (both in world frame)
-\end{itemize}
-
-ContactIK defines the desired contact pose using the chosen orientation and environment contact point:
-\[\mathbf{T}_{target} = \begin{bmatrix}
-\mathbf{R}_e & \mathbf{P}_e \\
-0 & 1
-\end{bmatrix}\] 
-
-and a new end-effector frame is defined at the contact point on the robot:
-\[
-\mathbf{T}_{robot} =
-\underbrace{{}^{0}\!T_{1}(\omega_1)\,
-{}^{1}\!T_{2}(\omega_2)\,\cdots\,
-{}^{k-1}\!T_{k}(\omega_k)}_{\mathbf{T}_{link}}
-\cdot
-\begin{bmatrix}
-\mathbf{R}_r & \mathbf{P}_r \\
-0 & 1
-\end{bmatrix}\]
-
- The IK target moves the arm towards the target along the contact surface normal, while the original end-effector pose is also optimized to remain as close as possible to its original target. The loss function is modified as follows:
-\begin{equation}
-\label{eq:ik_contact}
-\omega^*_{1:M} = \arg\min_{\omega} L_{\text{contact}} + L_{\text{original}} + L_{\text{limits}}
-\end{equation}
-where $L_{\text{contact}}$ is the positional and rotational loss between $\mathbf{T}_{robot}$ and $\mathbf{T}_{target}$, and $L_{\text{original}}$ is the positional and rotational loss between the original end-effector pose $FK(\omega)$ and its desired target.
-
-Once contact is detected above a threshold force, the task is considered successful and the arm backs off slightly to maintain light contact.
+% Once contact is detected above a threshold force, the task is considered successful and the arm backs off slightly to maintain light contact.
