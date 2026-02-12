@@ -12,20 +12,20 @@
 \end{figure}
 
 
-In this section, we characterize the behavior of \acro{}, and the performance of ContactIK in both collision avoidance and contact embracing scenarios. We use our Instron testing machine, with a reference resistor of 1000$\Omega$ in a voltage devider circuit. We test the response of the skin by applying a 7.5$\times$7.5mm square applicator at the center of each taxel, and measuring the voltage response of the taxel. We perform five load unload cycles from 0 to 30N. 
+In this section, we characterize the behavior of \acro{} with the use of our Instron testing machine. We use a reference resistor of 1000$\Omega$ for the TPU sensors, and 47$\Omega$ for the fabric sensors in a voltage devider circuit. We test the response of the skin by applying a 7.5$\times$7.5mm square applicator at the center of each taxel, and measuring the voltage response of the taxel. We perform five load unload cycles from 0 to 30N. 
 
 % and hybrid sensors, and 47$\Omega$ for the fully fabric sensors.
 % at a rate of TODO mm/s.
 
 \subsection{Sensor Characterization}
-To optimize our design, we evaluate the response of one call of the sensor across a range of outer shell thickness. We use an Instron universal tensile tester to find the response of the sensor to a known force, where we apply forces from \textit{0-30N} to a single taxel for five load-unload cycles. We then fit a curve to the loading cycle to create a model of the sensor response.
+To optimize and evaluate our design, we measure the response of an isolated cell of the sensor across a range of configurations. We use an Instron universal tensile tester to find the resistance of the sensor to a known force, where we apply forces from \textit{0-35N} to a single taxel for five load-unload cycles \ktxt{TODO: UPDATE}. We then fit a \ktxt{MODEL INFO}
 
 
-We use a common 30$\times$30mm$\times$3mm TPU flat inner layer with 2mm ridges to characterize our outer layers. We varied the thicknesses of the outer layers across the range of $[0.5, 1, 2, 3, 5]\ $mm, and tested their response to applied forces.
+\ktxt{Update for new methods: }We use a common 30$\times$30mm$\times$3mm TPU flat inner layer with 2mm ridges to characterize our outer layers. We varied the thicknesses of the outer layers across the range of $[0.5, 1, 2, 3, 5]\ $mm, and tested their response to applied forces.
 
 % We fit a second-order polynomial to the response curve of each cell and used the fit to determine trends in sensitivity and range as a function of material thickness. For the polynomial $F(x)=ax^{2}+bx+c$, we use the coefficients to understand sensor behavior. We define low-force sensitivity $S_{\text{low}} = b$ and high-force sensitivity $S_{\text{high}} = \left. (2ax + b) \right|_{x = 15\,\text{N}}$. The ridges of our TPU also provide a binary response, as the voltage across the sensor is nearly zero until contact is made between the inner and outer layers. We define the threshold force $F_{\text{thresh}} = c$ as the force at which the sensor begins to respond.
 
-We find that thinner TPU layers result in higher sensitivity and lower threshold forces, while thicker layers provide a larger range of detectable forces. We find that a 3mm outer shell provides a good sensitivity and range based on our application.
+% We find that thinner TPU layers result in higher sensitivity and lower threshold forces, while thicker layers provide a larger range of detectable forces. We find that a 3mm outer shell provides a good sensitivity and range based on our application.
 
 % \subsection{Full Matrix Characterization}
 % To evaluate the performance of the full force sensing skin, we created a skin for the midsection of the fourth link of Spot's arm. We create a 6$\times$5 matrix with 35$\times$35mm taxels as shown in Fig.~\ref{fig:skin}. We apply the skin to a 3D printed version of the link.
@@ -43,6 +43,23 @@ We find that thinner TPU layers result in higher sensitivity and lower threshold
 We then characterize the \acro{} skin applied to a 3D printed version of the fourth link of Spot's arm. The skin consists of a 6$\times$5 matrix with 20$\times$20mm taxels, with a 3mm TPU inner layer, 2mm ridge height, and 3mm TPU outer layer. We collect four load-unload cycles per taxel and fit a curve to the loading responses of each taxel. 
 
 We find that while the threshold forces vary significantly across taxels as seen in Figure~\ref{fig:heatmap}, most likely due to the non-uniform geometries of the link. We find that the mean threshold force across all taxels is 2.78 N, with a standard deviation of 1.29 N. This indicates that the ideal conditions of the single taxel characterization do not fully translate to the more complex geometry and smaller taxel size of the full skin. However, the overall performance is sufficient for our application, and we can use the fitted curves to estimate contact forces during manipulation tasks.
+
+
+
+\subsection{Full Skin Power Law}
+We observe that once sufficent contact is made betweeen the inner and outer layers, the response of the sensor follows a power law relationship between force and resistance. We fit a power law curve to the loading responses of each taxel, and find that the exponent of the power law is generally \ktxt{TODO}. 
+
+% \begin{figure*}
+%     \centering
+%     \includegraphics[width=0.95\columnwidth]{images/power_law/TPU_loading_by_cell_with_threshold.pdf}\\
+%     \includegraphics[width=0.95\columnwidth]{images/power_law/Soft_loading_by_cell_with_threshold.pdf}
+%     \caption{TOP: The response of the fabric sensor from 1-35 N. BOTTOM: The response of the TPU sensor from 8-35N. We find that the response of the sensor follows a power law relationship between force and resistance. We fit the model to $F=AR^B$ (R=Resistance) The exponent B of the power law represents the sensitivity of the sensor, with larger magnitude indicating higher sensitivity.}
+% \end{figure*}
+
+
+
+
+
 
 % Mean: 2.78 N
 % Std Dev: 1.29 N
