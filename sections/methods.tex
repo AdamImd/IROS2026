@@ -6,12 +6,12 @@
 
 
 
-We propose a whole arm tactile sensor optimized for 1) maximal coverage, 2) analog taxel readings and 3) low-cost and ease of fabrication. 
+We propose a whole arm, soft force sensing matrix  optimized for 1) maximal coverage, 2) analog taxel readings and 3) low-cost and ease of fabrication. 
 
-Each sensor is composed of a Force Sensitive Resistor (FSR) matrix, where rows and columns of conductive material are separated by a piezoresistive layer (Velostat). 
+Each sensor matrix is composed of rows and columns of conductive material separated by a piezoresistive layer (Velostat). 
 When contact is made within a taxel, the piezoresistive layer compresses, creating a change in resistance that is read by a microcontroller using a voltage divider circuit. While our sensor design is adaptable to most robot geometries, we target the Boston Dynamics Spot robot, where we design and evaluate our sensor for the arm of the robot.
 
-We expore two variations of the sensor: 1) a 3D printed TPU shell with adhered FSR arrays, and 2) a fabric-based sensor using conductive fabric. Both sensors are designed to be easily fabricated and integrated onto existing robot platforms. The 3D printed sensor provides a more robust and durable solution, while the fabric sensor offers a more sensitive and flexible option. We describe the design and fabrication of each sensor in the following sections. An overview of the sensor designs is shown in Fig~\ref{tactile_sensors_both}.
+We expore two variations of the sensor: 1) a 3D printed TPU shell with ????, and 2) a fabric-based sensor using conductive fabric. Both sensors are designed to be easily fabricated using commerially available materials and integrated onto existing robot platforms. The 3D printed sensor provides a more robust and durable solution, while the fabric sensor offers a more sensitive and flexible option. We describe the design and fabrication of each sensor in the following sections. An overview of the sensor designs is shown in Fig~\ref{tactile_sensors_both}.
 
 
 \subsection{TPU Sensor}
@@ -43,24 +43,23 @@ Wires are connected to each row and column, which are then routed to a microcont
 
 If binary contact detection is sufficient for the application, the Velostat layer can be omitted, where copper tape is adhered directly to both layers. This creates a binary contact sensor, significantly reducing the cost and complexity of the sensor.
 
-The materials and assembly for this sensor are optimized to be low-cost, where we achieve an average material cost of \textit{less than \$10} and \textit{less than 2 hours} of human effort per link.
+
+% and \textit{less than 2 hours} of human effort per link.
 
 
 
-\subsection{Fabric Sensor}
-The fabric sensor is designed to be a more flexible and sensitive option, where we adhere rows and columns of conductive fabric to the inner and outer fabric layers respectively, with a piezoresistive layer in between. We get similar taxel coverage to the TPU sensor, where boundaries of the taxels use the same spacing as the TPU sensor. We use velcro to create a cylindrical shape that can be easily attached to the robot, and allow for easy removal and maintenance. To interface with the microcontroller, we use snap buttons to connect wires to the rows and columns of the sensor, and a bias resistor of 47$\Omega$ for the voltage divider circuit. The materials and assembly of this sensor are also optimized for low cost and flexibility, where we achieve an approximate material cost of \textit{less than \$\ktxt{TODO}} and \textit{\ktxt{less than TODO hours}} of human effort per link.
+\subsection{Textile Sensor Array}
+The textile sensor array is designed to be a more flexible and sensitive option made entirely from off-the-shelf materials. The sensor array consists of two outer fabric layers, two layers of woven conductive fabric (Silver-coated Nylon, Less EMF) and a piesoresitive layer (3M Velostat). The bottom outer layer is made from a non-slip backing cloth with high friction to prevent slipping against the robot while the top is made from a lightweight woven cotton to allow for a thinner and more sensitive surface. A woven conductive nylon fabric is cut into strips and adhered to the outer layers using a heat-activated adhesive web (Pellon 805 Wonder-Under).  Finally, the piezoresistive layer is cut into individual squares and placed at each intersection of the rows and columns, creating an array of 30 sensors. The outer layers are joined together by applying a fabric adhesive (E6000 Fabri-Fuse) in between the conductive rows and columns and joining them together. A hook and loop fastener is used to wrap the sensor array around the robot. We get similar taxel coverage to the TPU sensor, where boundaries of the taxels use the same spacing as the TPU sensor. To interface with the microcontroller, we use snap buttons to connect wires to the rows and columns of the sensor, and a bias resistor of 47$\Omega$ for the voltage divider circuit.
 
-\begin{enumerate}
-    \item \textbf{Inner layer:} The template for the inner layer is a 2D projection of the robot link geometry, which is then cut from \ktxt{TODO}, which provides a flexible layer with high friction to prevent slipping against the robot. Rows of conductive fabric are adhered to the inner layer, and excess fabric is removed along the sensor ridges to create isolated rows.
-    \item \textbf{Outer layer:} The outer layer is made from the same template as the inner layer, but with \ktxt{TODO} for a softer and more sensitive contact surface. Columns of conductive fabric are adhered to the outer layer, and excess fabric is removed along the sensor ridges to create isolated columns.
-    \item \textbf{Assembly:} The inner and outer layers are stacked together with a piezoresistive layer (Velostat) in between, and then wrapped around the robot link and secured with velcro. Wires are connected to the rows and columns using snap buttons, and then routed to a microcontroller.
-\end{enumerate}
+% \begin{enumerate}
 
-\ktxt{ADD MORE INFORMAITON HERE}
+% \end{enumerate}
 
-\ktxt{VERIFY COST AND TIME}
+% \ktxt{ADD MORE INFORMAITON HERE}
 
-\ktxt{VERIFY PROCESS STEPS}
+% \ktxt{VERIFY COST AND TIME}
+
+% \ktxt{VERIFY PROCESS STEPS}
 
 
 % \begin{figure}

@@ -1,15 +1,15 @@
 \section{Results}\label{sec:results}
 
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.95\columnwidth]{images/Samples.pdf}\\
-    \includegraphics[width=0.95\columnwidth]{images/Graph_Cycle.pdf}\\
-    \includegraphics[width=0.95\columnwidth]{images/Graph-05_resistance_lines.pdf}
-    \caption{\textbf{Top}: Illustration of the different outer layer thicknesses tested, we test thicknesses of 0.5mm, 1mm, 2mm, 3mm, and 5mm.    \textbf{Middle}: Load and unload curves for various outer layer thicknesses. The binary contact behavior of these sensors is shown with the force at $\inf \omega$ Thinner layers have higher sensitivity, but saturate at lower forces.
-    \textbf{Bottom}: Binary contact threshold forces are found at the boundary between no response ($\infty \Omega$) and measurable response. Thinner layers have lower threshold forces and higher sensitivity, while thicker layers have a larger range of detectable forces.}
-    \label{fig:thickness}
-\end{figure}
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=0.95\columnwidth]{images/Samples.pdf}\\
+%     \includegraphics[width=0.95\columnwidth]{images/Graph_Cycle.pdf}\\
+%     \includegraphics[width=0.95\columnwidth]{images/Graph-05_resistance_lines.pdf}
+%     \caption{\textbf{Top}: Illustration of the different outer layer thicknesses tested, we test thicknesses of 0.5mm, 1mm, 2mm, 3mm, and 5mm.    \textbf{Middle}: Load and unload curves for various outer layer thicknesses. The binary contact behavior of these sensors is shown with the force at $\inf \omega$ Thinner layers have higher sensitivity, but saturate at lower forces.
+%     \textbf{Bottom}: Binary contact threshold forces are found at the boundary between no response ($\infty \Omega$) and measurable response. Thinner layers have lower threshold forces and higher sensitivity, while thicker layers have a larger range of detectable forces.}
+%     \label{fig:thickness}
+% \end{figure}
 
 
 In this section, we characterize the behavior of \acro{} with the use of our Instron testing machine. We use a reference resistor of 1000$\Omega$ for the TPU sensors, and 47$\Omega$ for the fabric sensors in a voltage devider circuit. We test the response of the skin by applying a 7.5$\times$7.5mm square applicator at the center of each taxel, and measuring the voltage response of the taxel. We perform five load unload cycles from 0 to 30N. 
@@ -18,10 +18,11 @@ In this section, we characterize the behavior of \acro{} with the use of our Ins
 % at a rate of TODO mm/s.
 
 \subsection{Sensor Characterization}
-To optimize and evaluate our design, we measure the response of an isolated cell of the sensor across a range of configurations. We use an Instron universal tensile tester to find the resistance of the sensor to a known force, where we apply forces from \textit{0-35N} to a single taxel for five load-unload cycles \ktxt{TODO: UPDATE}. We then fit a \ktxt{MODEL INFO}
+To optimize and evaluate our design, we measure the response of an isolated cell of the sensor across a range of configurations. We use an Instron universal tensile tester to find the resistance of the sensor to a known force, where we apply forces from \textit{0-\ktxt{TODO}} to a single taxel for five load-unload cycles \ktxt{TODO: UPDATE}. We then fit a \ktxt{MODEL INFO}
 
 
-\ktxt{Update for new methods: }We use a common 30$\times$30mm$\times$3mm TPU flat inner layer with 2mm ridges to characterize our outer layers. We varied the thicknesses of the outer layers across the range of $[0.5, 1, 2, 3, 5]\ $mm, and tested their response to applied forces.
+\ktxt{Update for new methods: }We use a common 30$\times$30mm$\times$3mm TPU flat inner layer with 2mm ridges to characterize our outer layers. 
+We varied the thicknesses of the outer layers across the range of \ktxt{UPDTATE:$[0.5, 1, 2, 3, 5]\ $mm,} and tested their response to applied forces.
 
 % We fit a second-order polynomial to the response curve of each cell and used the fit to determine trends in sensitivity and range as a function of material thickness. For the polynomial $F(x)=ax^{2}+bx+c$, we use the coefficients to understand sensor behavior. We define low-force sensitivity $S_{\text{low}} = b$ and high-force sensitivity $S_{\text{high}} = \left. (2ax + b) \right|_{x = 15\,\text{N}}$. The ridges of our TPU also provide a binary response, as the voltage across the sensor is nearly zero until contact is made between the inner and outer layers. We define the threshold force $F_{\text{thresh}} = c$ as the force at which the sensor begins to respond.
 
@@ -32,13 +33,13 @@ To optimize and evaluate our design, we measure the response of an isolated cell
 
 % The 3D printed skin consists of a 3mm TPU inner layer, a 2mm ridge height, and a 3mm TPU outer layer. We collect five load-unload cycles per taxel and fit a curve to the response of each taxel. \todo{Analysis}
 
-\subsection{Full Skin Characterization}
-\begin{figure}
-    \centering
-    \includegraphics[width=0.95\columnwidth]{images/TPU_threshold_heatmap.pdf}
-    \caption{Heatmap of the threshold forces across all taxels of the \acro{}. Many taxels have threshold forces between 2-4 N, with some outliers likely due to the complex geometry and non-uniform pressure distribution during testing.}
-    \label{fig:heatmap}
-\end{figure}
+% \subsection{Full Skin Characterization}
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=0.95\columnwidth]{images/TPU_threshold_heatmap.pdf}
+%     \caption{Heatmap of the threshold forces across all taxels of the \acro{}. Many taxels have threshold forces between 2-4 N, with some outliers likely due to the complex geometry and non-uniform pressure distribution during testing.}
+%     \label{fig:heatmap}
+% \end{figure}
 
 We then characterize the \acro{} skin applied to a 3D printed version of the fourth link of Spot's arm. The skin consists of a 6$\times$5 matrix with 20$\times$20mm taxels, with a 3mm TPU inner layer, 2mm ridge height, and 3mm TPU outer layer. We collect four load-unload cycles per taxel and fit a curve to the loading responses of each taxel. 
 
