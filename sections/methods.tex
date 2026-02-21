@@ -17,12 +17,6 @@ We expore two variations of the sensor: 1) a 3D printed TPU shell with adhered F
 \subsection{TPU Sensor}
 To design the 3D printed inner and outer layers of the skin, we use the mesh files provided by Boston Dynamics' URDF Files, and then apply the following sequence of CAD operations on the link geometry of interest:
 
-\begin{figure*}
-    \centering
-    \includegraphics[width=0.95\textwidth]{images/CLOAK_Overall_Both.pdf}
-    \caption{TODO}
-    \label{fig:hardware}
-\end{figure*}
 
 To design the 3D-printed skin, we start from the link-level mesh files provided by Boston Dynamics (Fig \ref{fig:tactile_sensors_both}-2 Yellow) as part of their URDF models. For each link, we apply the following sequence of CAD operations:
 \begin{enumerate}
@@ -90,19 +84,19 @@ where $A$, $B$, and $R_\text{base}$ are the parameters of the power law, which a
 \subsection{Evaluation Metrics}
 To evaluate the performance of our sensor, we use the following metrics:
 
-\subsubsection{Sensitivity:} 
+\subsubsection{Sensitivity} 
 The sensitivity of the sensor is measured as the change in sensor reading per unit change in applied force. We evaluate the sensitivity of each taxel by taking the $B$ parameter from the power law fit, where a higher $B$ value indicates higher sensitivity.
 
-\subsubsection{Single-Taxel Repeatability:}
+\subsubsection{Single-Taxel Repeatability}
 We evaluate the repeatability of the sensor by applying a known force to a single taxel multiple times and recording the sensor readings. We compute the standard deviation \ktxt{TODO?} of the sensor readings for each taxel, where a lower standard deviation indicates higher repeatability.
 
-\subsubsection{Taxel-Taxel Repeatability:}
+\subsubsection{Taxel-Taxel Repeatability}
 For the sensor arrays, we evaluate the taxel-taxel repeatability by looking at the variance of the sensor readings across taxels for a given applied force. We compute the coefficient of variation (CV) across taxels, which is defined as the standard deviation of the sensor readings across all taxels divided by the mean sensor reading across all taxels for a given applied force. A lower CV indicates higher taxel-taxel repeatability.
 
-\subsubsection{Minimum Detectable Force:}
+\subsubsection{Minimum Detectable Force}
 The minimum detectable force (break force) is the smallest force that will bring the sensor below a \ktxt{TODO}$\Omega$ threshold. This indicates the binary contact detection capability of the sensor, which is a unique behavior in the TPU sensor. 
 
-\subsubsection{Hysteresis:} 
+\subsubsection{Hysteresis} 
 Hysteresis quantifies the path-dependent behavior of the sensor during loading and unloading cycles, manifesting as a discrepancy between force readings obtained during force application (loading) and force removal (unloading). We characterize hysteresis using the following metrics:
 \begin{equation}
 H_{\text{max}} = \max_{i} |F_{\text{load}}(R_i) - F_{\text{unload}}(R_i)|

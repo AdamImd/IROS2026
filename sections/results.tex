@@ -18,6 +18,31 @@ In this section, we characterize the behavior of \acro{} with the use of our Ins
 % at a rate of TODO mm/s.
 
 \subsection{Sensor Characterization}
+\ktxt{TODO}
+
+
+\subsubsection{Sensitivity} 
+\ktxt{TODO}
+
+
+\subsubsection{Single-Taxel Repeatability}
+\ktxt{TODO}
+
+
+\subsubsection{Taxel-Taxel Repeatability}
+\ktxt{TODO}
+
+
+\subsubsection{Minimum Detectable Force}
+The TPU sensor is the only sensor that exhibits a high threshold force, which is the force at which the sensor begins to respond. This is due to the large gap between the inner and outer layers of the TPU sensor, which creates a binary contact response. As the force increases, the outer layer bends and eventually makes contact with the inner layer, causing a sudden change in resistance. 
+
+The fabric sensor in the flat configuration has ...
+
+
+\subsubsection{Hysteresis} 
+\ktxt{TODO}
+
+
 To optimize and evaluate our design, we measure the response of an isolated cell of the sensor across a range of configurations. We use an Instron universal tensile tester to find the resistance of the sensor to a known force, where we apply forces from \textit{0-\ktxt{TODO}} to a single taxel for five load-unload cycles \ktxt{TODO: UPDATE}. We then fit a \ktxt{MODEL INFO}
 
 
@@ -43,12 +68,39 @@ We varied the thicknesses of the outer layers across the range of \ktxt{UPDTATE:
 
 We then characterize the \acro{} skin applied to a 3D printed version of the fourth link of Spot's arm. The skin consists of a 6$\times$5 matrix with 20$\times$20mm taxels, with a 3mm TPU inner layer, 2mm ridge height, and 3mm TPU outer layer. We collect four load-unload cycles per taxel and fit a curve to the loading responses of each taxel. 
 
-We find that while the threshold forces vary significantly across taxels as seen in Figure~\ref{fig:heatmap}, most likely due to the non-uniform geometries of the link. We find that the mean threshold force across all taxels is 2.78 N, with a standard deviation of 1.29 N. This indicates that the ideal conditions of the single taxel characterization do not fully translate to the more complex geometry and smaller taxel size of the full skin. However, the overall performance is sufficient for our application, and we can use the fitted curves to estimate contact forces during manipulation tasks.
+% We find that while the threshold forces vary significantly across taxels as seen in Figure~\ref{fig:heatmap}, most likely due to the non-uniform geometries of the link. We find that the mean threshold force across all taxels is 2.78 N, with a standard deviation of 1.29 N. This indicates that the ideal conditions of the single taxel characterization do not fully translate to the more complex geometry and smaller taxel size of the full skin. However, the overall performance is sufficient for our application, and we can use the fitted curves to estimate contact forces during manipulation tasks.
 
 
 
-\subsection{Full Skin Power Law}
-We observe that once sufficent contact is made betweeen the inner and outer layers, the response of the sensor follows a power law relationship between force and resistance. We fit a power law curve to the loading responses of each taxel, and find that the exponent of the power law is generally \ktxt{TODO}. 
+\subsection{Real World Use Cases}
+Given the characterization results, the TPU sensor is more suitable for contact embracing tasks that require higher forces and highly durable materials, while the fabric sensor is more suitable for contact avoidance tasks that require higher sensitivity and lower threshold forces. 
+
+% Pros and cons table. The left hand column is the area of application, the middle column is the pros of the TPU sensor, and the right hand column is the pros of the fabric sensor.
+\begin{table}[]
+\centering
+\large
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Application} & \textbf{TPU} & \textbf{Fabric} \\ \hline
+Durability & High & Medium \\ \hline
+Sensitivity & Medium & High \\ \hline
+Repeatability & Medium & High \\ \hline
+Multiple Contacts & Yes & Yes \\ \hline
+Low Forces & Worse & Better \\ \hline
+High Forces & Better & Worse \\ \hline
+Fits Geometry & High & Medium \\ \hline
+Cost & Low & Low \\ \hline
+Coverage & High & High \\ \hline
+Integration & Easy & Easy \\ \hline
+Accuracy & Medium & High \\ \hline
+Hysteresis & Significant & Minimal \\ \hline
+Flexibility & Low & High \\ \hline
+Binary Contact & Yes & No \\ \hline
+\end{tabular}
+\caption{Comparison of the TPU and fabric sensors across various criteria relevant to robotic manipulation tasks. The TPU sensor offers higher durability and better performance at high forces, making it suitable for contact embracing tasks. The fabric sensor provides higher sensitivity and better performance at low forces, making it ideal for contact avoidance tasks. }
+\label{tab:comparison}
+\end{table}
+
 
 % \begin{figure*}
 %     \centering
@@ -69,23 +121,29 @@ We observe that once sufficent contact is made betweeen the inner and outer laye
 % Median: 2.86 N
 
 
-% \subsection{Contact Avoidance}
-% \begin{figure}
-%     \centering
-%     \includegraphics[width=0.95\columnwidth]{images/Fig_Avoid.pdf}
-%     \caption{The contact avoidance objective loss term is a sum of the penetration distances between the that the avoidance points on the robot and a sphere with a radius of the contact threshold distance. This causes the robot to move away from any contacts. }
-%     \label{fig:avoid}
-% \end{figure}
+\subsection{Real World Manipulation Tasks}
+We use \acro{} to perform a variety of whole body contact manipulation tasks on the Boston Dynamics Spot platform. We developed a custom contact-aware inverse kinematics algorithm, ContactIK, that incorporates tactile feedback from \acro{} to enable both contact avoidance and contact embracing behaviors during manipulation.
 
-% Using ContactIK, we are able to optimize the joint configuration of the robot to react to collisions in real-time, avoiding obstacles while maintaining the origional end-effector objective. In figure \ref{fig:avoid}, we show an example of the robot reacting to contact with a human, while keeping the end-effector in the same pose. We find that even with a high number of surface contact points (eg. 10000) per link, ContactIK maintains a real-time performance of 30 Hz at 1000 iterations per inverse kinematics computation.
+We demonstrate the ability of the TPU sensor to enable contact with rigid objects in the environment through a contact embracing task, where the robot uses tactile feedback to gently open a door while balancing a dustpan in the gripper. This task has a higher force range and requires the robot to actively seek contact with the door, while sensing when the door is fully open and maintaining a desired contact force. While the fabric sensor is more sensitive, it is less robust to the higher forces and high pressure points that occur during this task, and thus we use the TPU sensor for this demonstration.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.95\columnwidth]{images/Fig_Avoid.pdf}
+    \caption{The contact avoidance objective loss term is a sum of the penetration distances between the that the avoidance points on the robot and a sphere with a radius of the contact threshold distance. This causes the robot to move away from any contacts. }
+    \label{fig:avoid}
+\end{figure}
 
 
 
-% \subsection{Contact Embracing}
-% \begin{figure*}
-%     \centering
-%     \includegraphics[width=0.95\linewidth]{images/FIg_Embrace.pdf}
-%     \caption{The contact embracing task aims to balance a dustpan in the gripper, and open a door while preventing large forces. To open the door, we create a new end effector on the arm of the robot and move along its normal until a force above a threshold is achieved. We also optimize the rotation angle of the gripper to prevent it from tipping over.}
-%     \label{fig:embrace}
-%  \end{figure*}
+\subsection{Contact Embracing}
+The fabric sensor is more sensitive and has virtually no minimum detectable force, making it ideal for contact avoidance tasks where the robot needs to react to light contacts and avoid collisions. We demonstrate this in a contact avoidance task, where the robot reacts to unexpected contacts while maintaining its primary end-effector goal. In this task, the robot uses tactile feedback from the fabric sensor to detect contact and generate repulsive forces in the null space of the IK optimization, allowing it use redundant degrees of freedom to move away from contact while still achieving its end-effector target. 
+
+This task is possible with the TPU sensor as well, but the higher threshold forces and non-uniform geometry of the TPU sensor make it more difficult to reliably detect light contacts across the surface, which is important for effective contact avoidance. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.95\columnwidth]{images/FIg_Embrace.pdf}
+    \caption{The contact embracing task aims to balance a dustpan in the gripper, and open a door while preventing large forces. To open the door, we create a new end effector on the arm of the robot and move along its normal until a force above a threshold is achieved. We also optimize the rotation angle of the gripper to prevent it from tipping over.}
+    \label{fig:embrace}
+ \end{figure}
 %  To evaluate the performance of ContactIK in contact embracing scenarios, we use a door that requires tactile feedback to safely open. We place the robot arm inside the doorway, and use ContactIK to gently slide the door open while keeping the gripper level with the ground. Using the tactile feedback from the \acro  sensor, we are able to detect when the door reaches its fully open position, and maintain a final contact force. This method effectively demonstrates the ability of ContactIK to utilize tactile feedback whole-body, contact-aware control for multiple objectives simultaneously.
