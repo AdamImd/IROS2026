@@ -75,30 +75,47 @@ We then characterize the \acro{} skin applied to a 3D printed version of the fou
 \subsection{Real World Use Cases}
 Given the characterization results, the TPU sensor is more suitable for contact embracing tasks that require higher forces and highly durable materials, while the fabric sensor is more suitable for contact avoidance tasks that require higher sensitivity and lower threshold forces. 
 
-% Pros and cons table. The left hand column is the area of application, the middle column is the pros of the TPU sensor, and the right hand column is the pros of the fabric sensor.
-\begin{table}[]
+\begin{table}[t]
 \centering
-\large
-\begin{tabular}{|c|c|c|}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.10}
+\newcommand{\pos}{\textcolor{green!60!black}{\textbf{\ensuremath{+}}}}
+\newcommand{\neu}{\textcolor{black!45}{\textbf{\ensuremath{\cdot}}}}
+\newcommand{\negmark}{\textcolor{red!70!black}{\textbf{\ensuremath{-}}}}
+\begin{tabular}{|p{2.0cm}|c|c|p{3.2cm}|}
 \hline
-\textbf{Application} & \textbf{TPU} & \textbf{Fabric} \\ \hline
-Durability & High & Medium \\ \hline
-Sensitivity & Medium & High \\ \hline
-Repeatability & Medium & High \\ \hline
-Multiple Contacts & Yes & Yes \\ \hline
-Low Forces & Worse & Better \\ \hline
-High Forces & Better & Worse \\ \hline
-Fits Geometry & High & Medium \\ \hline
-Cost & Low & Low \\ \hline
-Coverage & High & High \\ \hline
-Integration & Easy & Easy \\ \hline
-Accuracy & Medium & High \\ \hline
-Hysteresis & Significant & Minimal \\ \hline
-Flexibility & Low & High \\ \hline
-Binary Contact & Yes & No \\ \hline
+\textbf{Criterion} & \textbf{Fabric} & \textbf{TPU} & \textbf{Practical note} \\
+\hline
+
+\multicolumn{4}{|l|}{\textbf{Integration}} \\
+\hline
+Mounting method & \neu & \pos & Fabric requires manual alignment, TPU uses snap-on assembly \\
+\hline
+Electrical wiring & \neu & \pos & Both require wiring, but TPU can hide wires within the shell structure \\
+\hline
+
+\multicolumn{4}{|l|}{\textbf{Durability}} \\
+\hline
+Cut / abrasion resistance & \neu & \pos & TPU shell is more cut-resistant \\
+\hline
+Bending / flexibility & \pos & \negmark & Fabric is more flexible; TPU may fatigue with repeated bending \\
+\hline
+
+
+\multicolumn{4}{|l|}{\textbf{Design Limitations}} \\
+\hline
+Concave geometry coverage & \pos & \neu & Fabric wrapping better accommodates concave regions \\
+\hline
+Contact between cells & \pos & \negmark & TPU ridges can create non-uniform contact sensitivity \\
+\hline
+Heat dissipation & \neu & \negmark & TPU's thicker material and air gaps may prevent efficient heat dissipation \\
+\hline
+
 \end{tabular}
-\caption{Comparison of the TPU and fabric sensors across various criteria relevant to robotic manipulation tasks. The TPU sensor offers higher durability and better performance at high forces, making it suitable for contact embracing tasks. The fabric sensor provides higher sensitivity and better performance at low forces, making it ideal for contact avoidance tasks. }
-\label{tab:comparison}
+\caption{Practical comparison of the Fabric and TPU sensor variants.
+Symbols indicate relative practicality: \pos advantage, \neu neutral/mixed, \negmark disadvantage.}
+\label{tab:comparison_practical}
 \end{table}
 
 
