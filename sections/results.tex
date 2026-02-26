@@ -16,13 +16,31 @@ In this section, we characterize the behavior of \acro{} with the use of our Ins
 
 
 \subsection{Sensitive Range}
-\ktxt{TODO}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.95\columnwidth]{images/Results/overall_best_rref_comparison.pdf}
+    \caption{\textbf{Criteria 1: Sensitive Range.} Comparison of the force range over which each sensor provides informative measurements, from the detection threshold (minimum detectable force) to saturation (maximum sensitive force). Larger ranges indicate broader coverage of contact forces relevant to manipulation.}
+    \label{fig:overall_comparison}
+\end{figure}
+
+
 The TPU sensor is the only sensor that exhibits a high threshold force, which is the force at which the sensor begins to respond. This is due to the large gap between the inner and outer layers of the TPU sensor, which creates a binary contact response. As the force increases, the outer layer bends and eventually makes contact with the inner layer, causing a sudden change in resistance. 
 
 
 
 
 \subsubsection{Consistency}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.95\columnwidth]{images/Results/overall_repeatability_multi_force_bar.pdf}\\
+    \includegraphics[width=0.95\columnwidth]{images/Results/overall_hysteresis_area_bar.pdf}
+    \caption{\textbf{Criteria 2: Consistency.} Repeatability and hysteresis metrics across sensor types. \textbf{Top:} repeatability score (deviation across repeated trials) evaluated at multiple force levels; lower is better. \textbf{Bottom:} hysteresis quantified by the area between loading and unloading curves; lower is better.}
+    \label{fig:overall_consistency}
+\end{figure}
+
+
 \ktxt{TODO}
 
 
@@ -105,4 +123,3 @@ This task is possible with the TPU sensor as well, but the higher threshold forc
     \label{fig:embrace}
  \end{figure}
 
- 
