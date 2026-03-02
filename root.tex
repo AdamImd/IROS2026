@@ -19,12 +19,12 @@
 \usepackage{algpseudocode}
 \usepackage{xcolor}
 \usepackage{svg}
+\let\labelindent\relax
 \usepackage{enumitem}
 
 \usepackage{cite}
 % Using BibTeX with IEEEtran style
 
-\newcommand{\acro}{{TODO}}
 \newcommand{\todo}[1]{{\color{red} TODO:#1}}
 \newcommand{\ktxt}[1]{{\color{blue} #1}}
 % \newcommand{\ktxt}[1]{}
@@ -37,19 +37,6 @@
 % }
 \author{Anonymous authors}
 % \author{Adam Imdieke, Heidi Woelfle, Brad Holschuh and Karthik Desingh}
-
-
-% \let\oldtwocolumn\twocolumn
-% \renewcommand\twocolumn[1][]{%
-%     \oldtwocolumn[{#1}{
-%         \centering
-%         % \includegraphics[width=0.340\textwidth]{images/Teaser.png}
-%         % \includegraphics[width=0.60\textwidth]{images/Spot.png}
-%         \includegraphics[width=0.95\textwidth]{images/Teaser_both_v2.pdf}
-%         \captionof{figure}{\ktxt{TODO}. \acro{} enables...}\label{fig:intro}}]
-% }
-
-
 
 \begin{document}
 \maketitle
@@ -66,17 +53,11 @@ For more details and results, refer to the project website: \ktxt{WEBSITE}
 
 
 \input{sections/introduction}
-% TODO Update
 \input{sections/related_works} 
 \input{sections/methods.tex}
 \input{sections/results.tex}
 \input{sections/conclusion.tex}
 
-% Extras
-% \include{sections/appendix.tex}
-% \input{sections/formulation.tex}
-
-% Bibliography
 \bibliographystyle{IEEEtran}
 \bibliography{references.bib}
 
