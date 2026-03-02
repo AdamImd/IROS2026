@@ -1,0 +1,10 @@
+profiles:
+  - id: fabric
+    label: Fabric
+    best_r_ref_ohms: 50
+  - id: fabric_flat
+    label: Fabric Flat
+    best_r_ref_ohms: 70
+  - id: tpu
+    label: TPU
+    best_r_ref_ohms: 500

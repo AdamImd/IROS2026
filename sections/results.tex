@@ -17,12 +17,20 @@ In this section, we characterize the behavior of \acro{} with the use of our Ins
 
 \subsection{Sensitive Range}
 
-\begin{figure}
+\begin{figure*}
     \centering
-    \includegraphics[width=0.95\columnwidth]{images/Results/overall_best_rref_comparison.pdf}
-    \caption{\textbf{Criteria 1: Sensitive Range.} Comparison of the force range over which each sensor provides informative measurements, from the detection threshold (minimum detectable force) to saturation (maximum sensitive force). Larger ranges indicate broader coverage of contact forces relevant to manipulation.}
+    \includegraphics[width=0.95\linewidth]{images/Results.pdf}
+    \caption{\textbf{TODO}}\label{fig:results}
+\end{figure*}
+
+
+\begin{figure*}
+    \centering
+    \includegraphics[width=0.95\linewidth]{images/Results/overall_range_repeatability_hysteresis.pdf}
+    \label{fig:overall_consistency}
+    \caption{\textbf{Criteria 1:} Sensitive Range. Comparison of the force range over which each sensor provides informative measurements, from the detection threshold (minimum detectable force) to saturation (maximum sensitive force). Larger ranges indicate broader coverage of contact forces relevant to manipulation. Criteria 2: \textbf{Consistency.} Repeatability and hysteresis metrics across sensor types. \textbf{Top:} repeatability score (deviation across repeated trials) evaluated at multiple force levels; lower is better. \textbf{Bottom:} hysteresis quantified by the area between loading and unloading curves; lower is better.  \ktxt{TODO: Update for new plots}}
     \label{fig:overall_comparison}
-\end{figure}
+\end{figure*}
 
 We define the sensitive range of each sensor as the force interval from its detection threshold (minimum detectable force) to saturation (maximum force for which changes in resistance remain informative). Fig.~\ref{fig:overall_comparison} summarizes the resulting coverage across sensor variants.
 
@@ -35,19 +43,18 @@ When the sensor is wrapped around the arm and tightened using the velcro, we fin
 
 \subsection{Consistency}
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.95\columnwidth]{images/Results/overall_repeatability_multi_force_bar.pdf}\\
-    \includegraphics[width=0.95\columnwidth]{images/Results/overall_hysteresis_area_bar.pdf}
-    \caption{\textbf{Criteria 2: Consistency.} Repeatability and hysteresis metrics across sensor types. \textbf{Top:} repeatability score (deviation across repeated trials) evaluated at multiple force levels; lower is better. \textbf{Bottom:} hysteresis quantified by the area between loading and unloading curves; lower is better.}
-    \label{fig:overall_consistency}
-\end{figure}
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=0.95\columnwidth]{images/Results/overall_repeatability_multi_force_bar.pdf}\\
+%     \includegraphics[width=0.95\columnwidth]{images/Results/overall_hysteresis_area_bar.pdf}
+
+% \end{figure}
 
 We evaluate consistency using a repeatability metric that measures deviation across repeated load-unload cycles at fixed force levels, and a hysteresis metric that captures the discrepancy between loading and unloading responses (Fig.~\ref{fig:overall_consistency}).
 
-Across the tested configurations, the fabric and TPU sensors achieve reasonably similar repeatability scores (Fig.~\ref{fig:overall_consistency}, top), indicating that both designs can provide stable measurements under repeated loading when calibrated under matched conditions (\ktxt{TODO: specify repeatability definition, e.g., std/mean at each force}).
+Across the tested configurations, the fabric and TPU sensors achieve reasonably similar repeatability scores (Fig.~\ref{fig:overall_consistency}, top), indicating that both designs can provide stable measurements under repeated loading when calibrated under matched conditions.
 
-However, the TPU sensor exhibits substantially higher hysteresis than the fabric sensor (Fig.~\ref{fig:overall_consistency}, bottom). We attribute this primarily to viscoelastic effects in the TPU shell, which cause the mechanical state of the shell to depend on the recent deformation history. In contrast, the fabric-based sensor produces more consistent loading and unloading curves, likely due to the fabric material's lower viscoelasticity and more stable contact mechanics. This suggests that while the TPU sensor can provide precise measurements, addressing hysteresis is key to collecting accurate force estimates during dynamic manipulation tasks. \ktxt{TODO: Cite WTL RNN paper}
+However, the TPU sensor exhibits substantially higher hysteresis than the fabric sensor (Fig.~\ref{fig:overall_consistency}, bottom). We attribute this primarily to viscoelastic effects in the TPU shell, which cause the mechanical state of the shell to depend on the recent deformation history. In contrast, the fabric-based sensor produces more consistent loading and unloading curves, likely due to the fabric material's lower viscoelasticity and more stable contact mechanics. This suggests that while the TPU sensor can provide precise measurements, addressing hysteresis is key to collecting accurate force estimates during dynamic manipulation tasks. 
 
 
 
@@ -57,15 +64,15 @@ However, the TPU sensor exhibits substantially higher hysteresis than the fabric
 \subsection{Real World Use Cases}
 Given the characterization results, the TPU sensor is more suitable for contact embracing tasks that require higher forces and highly durable materials, while the fabric sensor is more suitable for contact avoidance tasks that require higher sensitivity and lower threshold forces. 
 
-\begin{table}[t]
+\begin{table*}[t]
 \centering
 \scriptsize
 \setlength{\tabcolsep}{3pt}
 \renewcommand{\arraystretch}{1.10}
 \newcommand{\pos}{\textcolor{green!60!black}{\textbf{\ensuremath{+}}}}
-\newcommand{\neu}{\textcolor{black!45}{\textbf{\ensuremath{\cdot}}}}
+\newcommand{\neu}{\textcolor{black!45}{\textbf{\ensuremath{=}}}}
 \newcommand{\negmark}{\textcolor{red!70!black}{\textbf{\ensuremath{-}}}}
-\begin{tabular}{|p{2.0cm}|c|c|p{3.2cm}|}
+\begin{tabular}{|p{3cm}|c|c|p{9cm}|}
 \hline
 \textbf{Criterion} & \textbf{Fabric} & \textbf{TPU} & \textbf{Practical note} \\
 \hline
@@ -98,7 +105,7 @@ Heat dissipation & \neu & \negmark & TPU's thicker material and air gaps may pre
 \caption{Practical comparison of the Fabric and TPU sensor variants.
 Symbols indicate relative practicality: \pos advantage, \neu neutral/mixed, \negmark disadvantage.}
 \label{tab:comparison_practical}
-\end{table}
+\end{table*}
 
 
 
@@ -110,7 +117,7 @@ We demonstrate the ability of the TPU sensor to enable contact with rigid object
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.95\columnwidth]{images/Fig_Avoid.pdf}
+    \includegraphics[width=0.95\columnwidth]{images/Fig_Avoid_v1.pdf}
     \caption{The contact avoidance objective loss term is a sum of the penetration distances between the that the avoidance points on the robot and a sphere with a radius of the contact threshold distance. This causes the robot to move away from any contacts. }
     \label{fig:avoid}
 \end{figure}

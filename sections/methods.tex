@@ -3,53 +3,57 @@
 
 
 \section{Sensor Design}
+We propose two whole-arm tactile skin sensors optimized for maximal surface coverage, analog force readings across individual taxels, and low-cost, accessible fabrication. \ktxt{(After this is there a way to tie in our points of - operating force range, sensing repeatability, deployability? Maybe it comes after design details are revealed.)} Both sensors share a common operating principle: a matrix of rows and columns of conductive material separated by a piezoresistive layer (Velostat). When contact is made at a taxel, the piezoresistive layer compresses, producing a change in resistance that is read by a microcontroller via a voltage divider circuit. While the designs are adaptable to most robot geometries, we target the Boston Dynamics Spot arm as our primary platform for design and evaluation.
 
+We explore two variations: 1) a fabric-based sensor using conductive fabric layers, and 2) a TPU-based sensor with 3D-printed shells and adhered FSR arrays. The two designs are complementary: the fabric sensor offers greater flexibility and sensitivity at lower force ranges, while the TPU sensor provides a more robust and durable solution suited to higher force ranges. Together they tile the force sensing range needed for diverse mobile manipulation tasks. We describe the design and fabrication of each in the following sections, with an overview shown in Fig~\ref{fig:tactile_sensors_both}.
 
+\subsection{Fabric Sensor}
+\ktxt{Refer the  text to Fig 2}
+The fabric sensor is designed as a flexible and sensitive alternative to the TPU sensor, conforming naturally to the robot arm without rigid shells. Like the TPU sensor, it uses a matrix of conductive rows and columns separated by a piezoresistive Velostat layer, with the same taxel pitch of approximately \textit{20mm}. The sensor is formed into a cylindrical sleeve using velcro, allowing it to be easily wrapped around and removed from the robot link for maintenance. Rows and columns are interfaced with the microcontroller via snap buttons, with a~\textit{47$\Omega$} bias resistor used in the voltage divider circuit.
 
-We propose a whole arm tactile sensor optimized for 1) maximal coverage, 2) analog taxel readings and 3) low-cost and ease of fabrication. 
-
-Each sensor is composed of a matrix, where rows and columns of conductive material are separated by a piezoresistive layer (Velostat). When contact is made within a taxel, the piezoresistive layer compresses, creating a change in resistance that is read by a microcontroller using a voltage divider circuit. While our sensor design is adaptable to most robot geometries, we target the Boston Dynamics Spot robot, where we design and evaluate our sensor for the arm of the robot.
-
-We expore two variations of the sensor: 1) a 3D printed TPU shell with adhered FSR arrays, and 2) a fabric-based sensor using conductive fabric. Both sensors are designed to be easily fabricated and integrated onto existing robot platforms. The 3D printed sensor provides a more robust and durable solution, while the fabric sensor offers a more sensitive and flexible option. We describe the design and fabrication of each sensor in the following ections. An overview of the sensor designs is shown in Fig~\ref{tactile_sensors_both}.
-
+\begin{enumerate}[leftmargin=*]
+\item \textbf{Inner layer:} The inner layer template is derived from a 2D projection of the robot link geometry and cut from \ktxt{TODO}, chosen for its flexibility and high friction to prevent slipping against the robot surface. Rows of conductive fabric are adhered to the inner layer, with excess fabric removed at taxel boundaries to electrically isolate adjacent rows.
+\item \textbf{Outer layer:} The outer layer uses the same template but is cut from \ktxt{TODO}, providing a softer contact surface for improved sensitivity. Columns of conductive fabric are adhered to the outer layer, with excess fabric removed at taxel boundaries to isolate adjacent columns.
+\item \textbf{Force Sensitive Layer:} Velostat squares are cut such that they are slightly wider than the conductive rows and colums to prevent short-circuiting. 
+\item \textbf{Assembly:} The inner layer, Velostat squares, and outer layer are stacked in order and a fabric adhesive is used around each Velostat square to secure it. The sensor is then wrapped around the robot link, then secured with hook-and-loop tape. Snap buttons connect wires to each row and column, which are routed to a microcontroller.
+\end{enumerate}
+The average material cost for this sensor is approximately \textit{less than \$\ktxt{TODO}} per link, making it a highly accessible option for large-area deployment.
 
 \subsection{TPU Sensor}
-To design the 3D printed inner and outer layers of the skin, we use the mesh files provided by Boston Dynamics' URDF Files, and then apply the following sequence of CAD operations on the link geometry of interest:
+To design the 3D-printed skin, we start from the link-level mesh files provided by Boston Dynamics (Fig~\ref{fig:tactile_sensors_both}-2, yellow) as part of their URDF models. For each link, we apply the following sequence of CAD operations:
 
-
-To design the 3D-printed skin, we start from the link-level mesh files provided by Boston Dynamics (Fig \ref{fig:tactile_sensors_both}-2 Yellow) as part of their URDF models. For each link, we apply the following sequence of CAD operations:
-\begin{enumerate}
-\item \textbf{Inner layer:} Generate a conformal shell with a uniform thickness of \textit{3 mm} offset outward from the robot’s base geometry  (Fig~\ref{fig:tactile_sensors_both}-2 Green).
-\item \textbf{Outer layer:} Generate a second shell with a wall thickness of \textit{3 mm}, whose inner surface is offset by \textit{5 mm} from the robot’s base geometry, resulting in a gap between the two layers (Fig~\ref{fig:tactile_sensors_both}-2 Orange).
-\item \textbf{Ridges:} Within the inter-shell region, add horizontal ridges on the inner shell and vertical ridges on the outer shell. The ridges are 2 mm thick, and the spacing between adjacent ridges determines the resulting taxel density (Fig~\ref{fig:tactile_sensors_both}-2 Cutout).
-\item \textbf{Clearance Cuts:} Material is removed near kinematic joints to prevent interference during motion, and a cut is added to facilitate installation of the skin(Fig~\ref{fig:tactile_sensors_both}-1).
+\begin{enumerate}[leftmargin=*]
+\item \textbf{Inner layer:} Generate a conformal shell with a uniform thickness of \textit{3mm} offset outward from the robot's base geometry (Fig~\ref{fig:tactile_sensors_both}-2, green).
+\item \textbf{Outer layer:} Generate a second shell with a wall thickness of \textit{3mm}, whose inner surface is offset by \textit{5mm} from the robot's base geometry, leaving a gap between the two layers to accommodate the sensing stack (Fig~\ref{fig:tactile_sensors_both}-2, orange).
+\item \textbf{Ridges:} Within the inter-shell region, add horizontal ridges on the inner shell and vertical ridges on the outer shell, each \textit{2mm} thick. The spacing between adjacent ridges determines the taxel density (Fig~\ref{fig:tactile_sensors_both}-2, cutout).
+\item \textbf{Clearance cuts:} Material is removed near kinematic joints to prevent interference during motion, and a longitudinal cut is added along each shell to facilitate installation on the robot arm (Fig~\ref{fig:tactile_sensors_both}-1).
 \end{enumerate}
+
+
+% \begin{enumerate}
+% \item \textbf{Inner layer:} Generate a conformal shell with a uniform thickness of \textit{3 mm} offset outward from the robot’s base geometry  (Fig~\ref{fig:tactile_sensors_both}-2 Green).
+% \item \textbf{Outer layer:} Generate a second shell with a wall thickness of \textit{3 mm}, whose inner surface is offset by \textit{5 mm} from the robot’s base geometry, resulting in a gap between the two layers (Fig~\ref{fig:tactile_sensors_both}-2 Orange).
+% \item \textbf{Ridges:} Within the inter-shell region, add horizontal ridges on the inner shell and vertical ridges on the outer shell. The ridges are 2 mm thick, and the spacing between adjacent ridges determines the resulting taxel density (Fig~\ref{fig:tactile_sensors_both}-2 Cutout).
+% \item \textbf{Clearance Cuts:} Material is removed near kinematic joints to prevent interference during motion, and a cut is added to facilitate installation of the skin(Fig~\ref{fig:tactile_sensors_both}-1).
+% \end{enumerate}
 
 % We then 3D print both shells with a flexible material (Thermoplastic Polyurethane - TPU) as it allows for easy snap on assembly, along with deformable contact surfaces. We use a outer thickness of \textit{3 mm}, and a ridge spacing of approximately \textit{20 mm}. 
 % For the inner shell, we adhere copper tape to a Velostat sheet using it's conductive adhesive, and then add a layer of 0.15mm thick double sided adhesive tape to the copper side. The resulting Copper-Velostat sheet is then adhered to the inner shell, using a knife along the sensor ridges to remove excess Velostat, electrically isolating each row/column. The outer shell is prepared in a similar manner, where we directly adhere the copper tape to the inner surface of the shell, and then remove excess copper along the sensor ridges. Wires are connected to each row and column using copper tape, and then routed to a microcontroller. The outer shell is then snapped onto the inner shell, and secured to the robot using a layer of packing tape across the seam.
 
-Both shells are 3D printed using 95A TPU with an outer shell thickness of \textit{3\,mm}, with ridge spacing of approximately \textit{20\,mm}.
+Both shells are printed in 95A TPU with a ridge spacing of approximately \textit{20mm}. To assemble the sensing stack, a Velostat sheet is laminated with copper tape on one side using the tape's conductive adhesive, and a double-sided adhesive layer is applied to attach the laminate to the inner shell. Copper tape is applied directly to the outer shell to form the opposing electrodes. This layered structure is shown in Fig~\ref{fig:tactile_sensors_both}-5. Wires are connected to each row and column and routed to a microcontroller. The outer shell is then snapped onto the inner shell and secured to the robot arm.
 
-For the inner shell, copper tape is laminated onto one side of a Velostat sheet via its conductive adhesive, followed by a double-sided adhesive layer on the copper layer. The resulting laminate stack is attached to the shell. For the outer shell, copper tape is directly applied. This structure is shown in Fig~\ref{fig:tactile_sensors_both}-5
+If binary contact detection is sufficient for a given application, the Velostat layer can be omitted and copper tape adhered directly to both shells, significantly reducing cost and assembly complexity. In either configuration, the average material cost remains under \textit{\$10} per link, making this sensor well-suited for large-area deployment.
 
-Wires are connected to each row and column, which are then routed to a microcontroller. The assembly is completed by snapping the outer shell onto the inner shell and securing it to the robot.
+% Both shells are 3D printed using 95A TPU with an outer shell thickness of \textit{3\,mm}, with ridge spacing of approximately \textit{20\,mm}.
 
-If binary contact detection is sufficient for the application, the Velostat layer can be omitted, where copper tape is adhered directly to both layers. This creates a binary contact sensor, significantly reducing the cost and complexity of the sensor.
+% For the inner shell, copper tape is laminated onto one side of a Velostat sheet via its conductive adhesive, followed by a double-sided adhesive layer on the copper layer. The resulting laminate stack is attached to the shell. For the outer shell, copper tape is directly applied. This structure is shown in Fig~\ref{fig:tactile_sensors_both}-5
 
-The materials and assembly for this sensor are optimized to be low-cost, where we achieve an average material cost of \textit{less than \$10}. 
+% Wires are connected to each row and column, which are then routed to a microcontroller. The assembly is completed by snapping the outer shell onto the inner shell and securing it to the robot.
+
+% If binary contact detection is sufficient for the application, the Velostat layer can be omitted, where copper tape is adhered directly to both layers. This creates a binary contact sensor, significantly reducing the cost and complexity of the sensor.
+
+% The materials and assembly for this sensor are optimized to be low-cost, where we achieve an average material cost of \textit{less than \$10}. 
 %  and \textit{less than 2 hours} of human effort per link.
-
-
-
-\subsection{Fabric Sensor}
-The fabric sensor is designed to be a more flexible and sensitive option, where we adhere rows and columns of conductive fabric to the inner and outer fabric layers respectively, with a piezoresistive layer in between. We get similar taxel coverage to the TPU sensor, where boundaries of the taxels use the same spacing as the TPU sensor. We use velcro to create a cylindrical shape that can be easily attached to the robot, and allow for easy removal and maintenance. To interface with the microcontroller, we use snap buttons to connect wires to the rows and columns of the sensor, and a bias resistor of 47$\Omega$ for the voltage divider circuit. The materials and assembly of this sensor are also optimized for low cost and flexibility, where we achieve an approximate material cost of \textit{less than \$\ktxt{TODO}}.
-%  and \textit{\ktxt{less than TODO hours}} of human effort per link.
-
-\begin{enumerate}
-    \item \textbf{Inner layer:} The template for the inner layer is a 2D projection of the robot link geometry, which is then cut from \ktxt{TODO}, which provides a flexible layer with high friction to prevent slipping against the robot. Rows of conductive fabric are adhered to the inner layer, and excess fabric is removed along the sensor ridges to create isolated rows.
-    \item \textbf{Outer layer:} The outer layer is made from the same template as the inner layer, but with \ktxt{TODO} for a softer and more sensitive contact surface. Columns of conductive fabric are adhered to the outer layer, and excess fabric is removed along the sensor ridges to create isolated columns.
-    \item \textbf{Assembly:} The inner and outer layers are stacked together with a piezoresistive layer (Velostat) in between, and then wrapped around the robot link and secured with velcro. Wires are connected to the rows and columns using snap buttons, and then routed to a microcontroller.
-\end{enumerate}
 
 % \ktxt{ADD MORE INFORMAITON HERE}
 
@@ -58,11 +62,11 @@ The fabric sensor is designed to be a more flexible and sensitive option, where 
 % \ktxt{VERIFY PROCESS STEPS}
 
 
-\subsection{Sensor Modeling}
+\section{Sensor Modeling}
 \begin{figure}
     \centering
-    \includegraphics[width=0.95\columnwidth]{images/Circuit.pdf}
-    \caption{\ktxt{TODO}}
+    \includegraphics[width=0.55\columnwidth]{images/Circuit_v1.pdf}
+    \caption{\ktxt{TODO: Make the bottom a GPIO}}
     \label{fig:circuit}
 \end{figure}
 
@@ -73,6 +77,24 @@ To measure the resistance of each taxel, we use a voltage divider circuit, where
 R = \left( \frac{V_\text{in}-V_\text{out}}{V_\text{out}} \right) R_\text{bias} 
 \end{equation}
 
+
+Because the measured resistance includes a base resistance in series with the force-sensitive resistance, we write
+
+\begin{equation}
+R = R_\text{base} + R_\text{FSR}.
+\end{equation}
+
+We use a power law to model the FSR,
+
+\begin{equation}
+R = R_\text{base} + A F^{B}.
+\end{equation}
+
+
+
+
+
+
 We then fit a power law with a base resistance $R_\text{base}$ in series with the force sensitive resistance $R_\text{FSR}$, where the force $F$ is related to the taxel resistance as follows:
 
 \begin{equation}
@@ -82,12 +104,12 @@ F=\left(\frac{R-R_\text{base}}{A}\right)^{\frac{1}{B}}
 where $A$, $B$, and $R_\text{base}$ are the parameters of the power law, which are determined through calibration and curve fitting. This model allows us to estimate the contact force at each taxel based on the measured resistance, enabling the sensor to provide quantitative force information across its surface.
 
 
-\subsection{Evaluation Metrics}
+\section{Sensor Characterization}
 To evaluate the performance of our sensor, we use the following metrics:
 
 We define the sensitive range of each sensor as the force interval from its detection threshold (minimum detectable force) to saturation (maximum force for which changes in resistance remain informative). Fig.~\ref{fig:overall_comparison} summarizes the resulting coverage across sensor variants.
 
-\subsection{Sensitive Range} 
+\subsection{Operating Force Range} 
 % The sensitive range of the sensor is defined as the force interval between the minimum detectable force (detection threshold) and the maximum force for which changes in resistance remain informative (saturation). This metric captures the effective operating range of the sensor, indicating the range of forces that can be reliably differentiated based on the sensor readings. A wider sensitive range allows the sensor to measure a broader spectrum of contact forces, from light touches to heavier contacts, which is crucial for applications that require nuanced force sensing. 
 % Below the minimum detectable force, the sensor has approximately infinite resistance producing no signal, while above the saturation point, the sensor's readings plateau, causing uncertainty in force estimation. Therefore, the sensitive range provides a comprehensive measure of the sensor's capability to capture meaningful force information across its operational spectrum.
 \subsubsection{Minimum Detectable Force}
@@ -177,8 +199,8 @@ H_{\text{area}} = \int_{R_{\text{min}}}^{R_{\text{max}}} \left|F_{\text{load}}(R
  This area-based metric captures cumulative hysteretic behavior across the operating range, rather than at a single point.
 
 
- \subsection{Real World Use Cases}
- We look at the application spesific tradeoffs of the two sensor variants in the context of real world use cases, where compare the performance of the two sensors over a range of desired properties. 
+ % \subsection{Real World Use Cases}
+ % We look at the application spesific tradeoffs of the two sensor variants in the context of real world use cases, where compare the performance of the two sensors over a range of desired properties. 
 
 % \begin{figure}
 %     \centering
