@@ -25,36 +25,11 @@ To design the 3D-printed skin, we start from the link-level mesh files provided 
 \end{enumerate}
 
 
-% \begin{enumerate}
-% \item \textbf{Inner layer:} Generate a conformal shell with a uniform thickness of \textit{3 mm} offset outward from the robot’s base geometry  (Fig~\ref{fig:tactile_sensors_both}-2 Green).
-% \item \textbf{Outer layer:} Generate a second shell with a wall thickness of \textit{3 mm}, whose inner surface is offset by \textit{5 mm} from the robot’s base geometry, resulting in a gap between the two layers (Fig~\ref{fig:tactile_sensors_both}-2 Orange).
-% \item \textbf{Ridges:} Within the inter-shell region, add horizontal ridges on the inner shell and vertical ridges on the outer shell. The ridges are 2 mm thick, and the spacing between adjacent ridges determines the resulting taxel density (Fig~\ref{fig:tactile_sensors_both}-2 Cutout).
-% \item \textbf{Clearance Cuts:} Material is removed near kinematic joints to prevent interference during motion, and a cut is added to facilitate installation of the skin(Fig~\ref{fig:tactile_sensors_both}-1).
-% \end{enumerate}
-
-% We then 3D print both shells with a flexible material (Thermoplastic Polyurethane - TPU) as it allows for easy snap on assembly, along with deformable contact surfaces. We use a outer thickness of \textit{3 mm}, and a ridge spacing of approximately \textit{20 mm}. 
-% For the inner shell, we adhere copper tape to a Velostat sheet using it's conductive adhesive, and then add a layer of 0.15mm thick double sided adhesive tape to the copper side. The resulting Copper-Velostat sheet is then adhered to the inner shell, using a knife along the sensor ridges to remove excess Velostat, electrically isolating each row/column. The outer shell is prepared in a similar manner, where we directly adhere the copper tape to the inner surface of the shell, and then remove excess copper along the sensor ridges. Wires are connected to each row and column using copper tape, and then routed to a microcontroller. The outer shell is then snapped onto the inner shell, and secured to the robot using a layer of packing tape across the seam.
-
 Both shells are printed in 95A TPU with a ridge spacing of approximately \textit{20mm}. To assemble the sensing stack, a Velostat sheet is laminated with copper tape on one side using the tape's conductive adhesive, and a double-sided adhesive layer is applied to attach the laminate to the inner shell. Copper tape is applied directly to the outer shell to form the opposing electrodes. This layered structure is shown in Fig~\ref{fig:tactile_sensors_both}-5. Wires are connected to each row and column and routed to a microcontroller. The outer shell is then snapped onto the inner shell and secured to the robot arm.
 
 If binary contact detection is sufficient for a given application, the Velostat layer can be omitted and copper tape adhered directly to both shells, significantly reducing cost and assembly complexity. In either configuration, the average material cost remains under \textit{\$10} per link, making this sensor well-suited for large-area deployment.
 
-% Both shells are 3D printed using 95A TPU with an outer shell thickness of \textit{3\,mm}, with ridge spacing of approximately \textit{20\,mm}.
 
-% For the inner shell, copper tape is laminated onto one side of a Velostat sheet via its conductive adhesive, followed by a double-sided adhesive layer on the copper layer. The resulting laminate stack is attached to the shell. For the outer shell, copper tape is directly applied. This structure is shown in Fig~\ref{fig:tactile_sensors_both}-5
-
-% Wires are connected to each row and column, which are then routed to a microcontroller. The assembly is completed by snapping the outer shell onto the inner shell and securing it to the robot.
-
-% If binary contact detection is sufficient for the application, the Velostat layer can be omitted, where copper tape is adhered directly to both layers. This creates a binary contact sensor, significantly reducing the cost and complexity of the sensor.
-
-% The materials and assembly for this sensor are optimized to be low-cost, where we achieve an average material cost of \textit{less than \$10}. 
-%  and \textit{less than 2 hours} of human effort per link.
-
-% \ktxt{ADD MORE INFORMAITON HERE}
-
-% \ktxt{VERIFY COST AND TIME}
-
-% \ktxt{VERIFY PROCESS STEPS}
 
 
 \section{Sensor Modeling}
