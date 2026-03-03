@@ -1,98 +1,91 @@
-\section{Sensor Characterization}
+% \section{Sensor Characterization}
 
-In this section, we characterize the behavior of our sensors with the use of our Instron testing machine. We use a reference resistor of 1000$\Omega$ for the TPU sensors, and 47$\Omega$ for the fabric sensors in a voltage devider circuit. We test the response of the skin by applying a 7.5$\times$7.5mm square applicator at the center of each taxel, and measuring the voltage response of the taxel. We apply forces from \textit{0-30}N to a single taxel for 4 load-unload cycles. A power law with a bias term $F=AR^B + C$ is fitted to the loadingand unloading response of each cycle, where $F$ is the applied force and $R$ is the measured resistance. We use the fitted curves to analyze the performance of the sensor, and to estimate forces during manipulation tasks. 
+\begin{figure*}
+    \centering
+    \includegraphics[width=0.95\linewidth]{images/Results_V2.pdf}
+    \caption{We deploy both sensors across a range of real-world scenarios. The measurements (middle) show the sensors responses to the contacts, and we include the range of calculated forces from our calibration curves. }\label{fig:results}
+\end{figure*}
+
+In this section, we characterize the behavior of our sensors with the use of our Instron testing machine. We use a reference resistor of 1000$\Omega$ for the AM sensors, and 47$\Omega$ for the textile sensors in a voltage devider circuit. We test the response of the skin by applying a 7.5$\times$7.5mm square applicator at the center of each taxel, and measuring the voltage response of the taxel. We apply forces from \textit{0-30}N to a single taxel for 4 load-unload cycles. A power law with a bias term $F=AR^B + C$ is fitted to the loadingand unloading response of each cycle, where $F$ is the applied force and $R$ is the measured resistance. We use the fitted curves to analyze the performance of the sensor, and to estimate forces during manipulation tasks. 
 
 
 \subsection{Sensitive Range}
 
-\begin{figure*}
-    \centering
-    \includegraphics[width=0.95\linewidth]{images/Results.pdf}
-    \caption{\textbf{TODO}}\label{fig:results}
-\end{figure*}
 
-
-\begin{figure*}
-    \centering
-    \includegraphics[width=0.95\linewidth]{images/Results/overall_range_repeatability_hysteresis.pdf}
-    \label{fig:overall_consistency}
-    \caption{\textbf{Criteria 1:} Sensitive Range. Comparison of the force range over which each sensor provides informative measurements, from the detection threshold (minimum detectable force) to saturation (maximum sensitive force). Larger ranges indicate broader coverage of contact forces relevant to manipulation. Criteria 2: \textbf{Consistency.} Repeatability and hysteresis metrics across sensor types. \textbf{Top:} repeatability score (deviation across repeated trials) evaluated at multiple force levels; lower is better. \textbf{Bottom:} hysteresis quantified by the area between loading and unloading curves; lower is better.  \ktxt{TODO: Update for new plots}}
-    \label{fig:overall_comparison}
-\end{figure*}
 
 We define the sensitive range of each sensor as the force interval from its detection threshold (minimum detectable force) to saturation (maximum force for which changes in resistance remain informative). Fig.~\ref{fig:overall_comparison} summarizes the resulting coverage across sensor variants.
 
-Overall, the fabric sensor provides the best performance for low-force interactions, with a near-zero detection threshold in the flat configuration and a strong response at light contacts. In contrast, the TPU sensor exhibits an elevated detection threshold, which is the force at which the sensor begins to respond. This is due to the designed gap between the inner and outer layers, which creates a binary contact behavior: as force increases, the outer layer bends and eventually makes contact with the inner layer, causing a sudden change in resistance.
+Overall, the textile sensor provides the best performance for low-force interactions, with a near-zero detection threshold in the flat configuration and a strong response at light contacts. In contrast, the AM sensor exhibits an elevated detection threshold, which is the force at which the sensor begins to respond. This is due to the designed gap between the inner and outer layers, which creates a binary contact behavior: as force increases, the outer layer bends and eventually makes contact with the inner layer, causing a sudden change in resistance.
 
-When the sensor is wrapped around the arm and tightened using the velcro, we find the effective sensitive range of the Velostat-based sensors is reduced relative to the flat characterization (Fig.~\ref{fig:overall_comparison}). In our tests, mounting the fabric sensor on the arm primarily reduces the maximum force range. This may be due to the pre-compression of the sensor in the fabric sensor, which causes it to saturate at lower forces. Another potential factor is the non-uniform pressure distribution across the taxels when wrapped around a curved surface, which can cause the contact area to be restricted to small surface area. Velostat is also sensitive to bending, and the curvature may change the baseline resistance and response characteristics of the sensor \ktxt{TODO:CITE WTL WORK ON CURVED VELOSTAT}. 
+When the sensor is wrapped around the arm and tightened using the velcro, we find the effective sensitive range of the Velostat-based sensors is reduced relative to the flat characterization (Fig.~\ref{fig:overall_comparison}). In our tests, mounting the textile sensor on the arm primarily reduces the maximum force range. This may be due to the pre-compression of the sensor in the textile sensor, which causes it to saturate at lower forces. Another potential factor is the non-uniform pressure distribution across the taxels when wrapped around a curved surface, which can cause the contact area to be restricted to small surface area. Velostat is also sensitive to bending, and the curvature may change the baseline resistance and response characteristics of the sensor \ktxt{TODO:CITE WTL WORK ON CURVED VELOSTAT}. 
 
 
 
 
 \subsection{Consistency}
 
-We evaluate consistency using a repeatability metric that measures deviation across repeated load-unload cycles at fixed force levels, and a hysteresis metric that captures the discrepancy between loading and unloading responses (Fig.~\ref{fig:overall_consistency}).
+We evaluate consistency using a repeatability metric that measures deviation across repeated load-unload cycles at fixed force levels, and a hysteresis metric that captures the discrepancy between loading and unloading responses (Fig.~\ref{fig:overall_comparison}).
 
-Across the tested configurations, the fabric and TPU sensors achieve reasonably similar repeatability scores (Fig.~\ref{fig:overall_consistency}, top), indicating that both designs can provide stable measurements under repeated loading when calibrated under matched conditions.
+Across the tested configurations, the textile and AM sensors achieve reasonably similar repeatability scores (Fig.~\ref{fig:overall_comparison}, top), indicating that both designs can provide stable measurements under repeated loading when calibrated under matched conditions.
 
-However, the TPU sensor exhibits substantially higher hysteresis than the fabric sensor (Fig.~\ref{fig:overall_consistency}, bottom). We attribute this primarily to viscoelastic effects in the TPU shell, which cause the mechanical state of the shell to depend on the recent deformation history. In contrast, the fabric-based sensor produces more consistent loading and unloading curves, likely due to the fabric material's lower viscoelasticity and more stable contact mechanics. This suggests that while the TPU sensor can provide precise measurements, addressing hysteresis is key to collecting accurate force estimates during dynamic manipulation tasks. 
-
-
+However, the AM sensor exhibits substantially higher hysteresis than the textile sensor (Fig.~\ref{fig:overall_comparison}, bottom). We attribute this primarily to viscoelastic effects in the AM shell, which cause the mechanical state of the shell to depend on the recent deformation history. In contrast, the textile-based sensor produces more consistent loading and unloading curves, likely due to the textile material's lower viscoelasticity and more stable contact mechanics. This suggests that while the AM sensor can provide precise measurements, addressing hysteresis is key to collecting accurate force estimates during dynamic manipulation tasks. 
 
 
 
 
-\subsection{Real World Use Cases}
-Given the characterization results, the TPU sensor is more suitable for contact embracing tasks that require higher forces and highly durable materials, while the fabric sensor is more suitable for contact avoidance tasks that require higher sensitivity and lower threshold forces. 
-
-\begin{table*}[t]
-\centering
-\scriptsize
-\setlength{\tabcolsep}{3pt}
-\renewcommand{\arraystretch}{1.10}
-\newcommand{\pos}{\textcolor{green!60!black}{\textbf{\ensuremath{+}}}}
-\newcommand{\neu}{\textcolor{black!45}{\textbf{\ensuremath{=}}}}
-\newcommand{\negmark}{\textcolor{red!70!black}{\textbf{\ensuremath{-}}}}
-\begin{tabular}{|p{3cm}|c|c|p{9cm}|}
-\hline
-\textbf{Criterion} & \textbf{Fabric} & \textbf{TPU} & \textbf{Practical note} \\
-\hline
-
-\multicolumn{4}{|l|}{\textbf{Integration}} \\
-\hline
-Mounting method & \neu & \pos & Fabric requires manual alignment, TPU uses snap-on assembly \\
-\hline
-
-\multicolumn{4}{|l|}{\textbf{Durability}} \\
-\hline
-Cut / abrasion resistance & \neu & \pos & TPU shell is more cut-resistant \\
-\hline
-Bending / flexibility & \pos & \negmark & Fabric is more flexible; TPU may fatigue with repeated bending \\
-\hline
 
 
-\multicolumn{4}{|l|}{\textbf{Design Limitations}} \\
-\hline
-Concave geometry coverage & \pos & \neu & Fabric wrapping better accommodates concave regions \\
-\hline
-Contact between cells & \pos & \negmark & TPU ridges can create non-uniform contact sensitivity \\
-\hline
-Heat dissipation & \neu & \negmark & TPU's thicker material and air gaps may prevent efficient heat dissipation \\
-\hline
+\section{Real World Use Cases}
+Given the characterization results, the AM sensor is more suitable for contact embracing tasks that require higher forces and highly durable materials, while the textile sensor is more suitable for contact avoidance tasks that require higher sensitivity and lower threshold forces. 
 
-\end{tabular}
-\caption{Practical comparison of the Fabric and TPU sensor variants.
-Symbols indicate relative practicality: \pos advantage, \neu neutral/mixed, \negmark disadvantage.}
-\label{tab:comparison_practical}
-\end{table*}
+% \begin{table*}[t]
+% \centering
+% \scriptsize
+% \setlength{\tabcolsep}{3pt}
+% \renewcommand{\arraystretch}{1.10}
+% \newcommand{\pos}{\textcolor{green!60!black}{\textbf{\ensuremath{+}}}}
+% \newcommand{\neu}{\textcolor{black!45}{\textbf{\ensuremath{=}}}}
+% \newcommand{\negmark}{\textcolor{red!70!black}{\textbf{\ensuremath{-}}}}
+% \begin{tabular}{|p{3cm}|c|c|p{9cm}|}
+% \hline
+% \textbf{Criterion} & \textbf{textile} & \textbf{TPU} & \textbf{Practical note} \\
+% \hline
+
+% \multicolumn{4}{|l|}{\textbf{Integration}} \\
+% \hline
+% Mounting method & \neu & \pos & Fabric requires manual alignment, TPU uses snap-on assembly \\
+% \hline
+
+% \multicolumn{4}{|l|}{\textbf{Durability}} \\
+% \hline
+% Cut / abrasion resistance & \neu & \pos & TPU shell is more cut-resistant \\
+% \hline
+% Bending / flexibility & \pos & \negmark & Fabric is more flexible; TPU may fatigue with repeated bending \\
+% \hline
+
+
+% \multicolumn{4}{|l|}{\textbf{Design Limitations}} \\
+% \hline
+% Concave geometry coverage & \pos & \neu & Fabric wrapping better accommodates concave regions \\
+% \hline
+% Contact between cells & \pos & \negmark & TPU ridges can create non-uniform contact sensitivity \\
+% \hline
+% Heat dissipation & \neu & \negmark & TPU's thicker material and air gaps may prevent efficient heat dissipation \\
+% \hline
+
+% \end{tabular}
+% \caption{Practical comparison of the Fabric and TPU sensor variants.
+% Symbols indicate relative practicality: \pos advantage, \neu neutral/mixed, \negmark disadvantage.}
+% \label{tab:comparison_practical}
+% \end{table*}
 
 
 
 
-\subsection{Real World Manipulation Tasks}
-We use our sensors to perform a variety of whole body contact manipulation tasks on the Boston Dynamics Spot platform. We developed a custom contact-aware inverse kinematics algorithm, ContactIK, that incorporates tactile feedback from our sensors to enable both contact avoidance and contact embracing behaviors during manipulation.
+We use our sensors to perform a variety of whole body contact manipulation tasks on the Boston Dynamics Spot platform. We developed a custom contact-aware inverse kinematics algorithm that incorporates tactile feedback from our sensors to enable both contact avoidance and contact embracing behaviors during manipulation.
 
-We demonstrate the ability of the TPU sensor to enable contact with rigid objects in the environment through a contact embracing task, where the robot uses tactile feedback to gently open a door while balancing a dustpan in the gripper. This task has a higher force range and requires the robot to actively seek contact with the door, while sensing when the door is fully open and maintaining a desired contact force. While the fabric sensor is more sensitive, it is less robust to the higher forces and high pressure points that occur during this task, and thus we use the TPU sensor for this demonstration.
+\subsection{Contact Embracing}
+We demonstrate the ability of the AM sensor to enable contact with rigid objects in the environment through a contact embracing task, where the robot uses tactile feedback to gently open a door while balancing a dustpan in the gripper. This task has a higher force range and requires the robot to actively seek contact with the door, while sensing when the door is fully open and maintaining a desired contact force. While the textile sensor is more sensitive, it is less robust to the higher forces and high pressure points that occur during this task, and thus we use the AM sensor for this demonstration.
 
 \begin{figure}
     \centering
@@ -103,10 +96,10 @@ We demonstrate the ability of the TPU sensor to enable contact with rigid object
 
 
 
-\subsection{Contact Embracing}
-The fabric sensor is more sensitive and has virtually no minimum detectable force, making it ideal for contact avoidance tasks where the robot needs to react to light contacts and avoid collisions. We demonstrate this in a contact avoidance task, where the robot reacts to unexpected contacts while maintaining its primary end-effector goal. In this task, the robot uses tactile feedback from the fabric sensor to detect contact and generate repulsive forces in the null space of the IK optimization, allowing it use redundant degrees of freedom to move away from contact while still achieving its end-effector target. 
+\subsection{Contact Avoidance}
+The textile sensor is more sensitive and has virtually no minimum detectable force, making it ideal for contact avoidance tasks where the robot needs to react to light contacts and avoid collisions. We demonstrate this in a contact avoidance task, where the robot reacts to unexpected contacts while maintaining its primary end-effector goal. In this task, the robot uses tactile feedback from the textile sensor to detect contact and generate repulsive forces in the null space of the IK optimization, allowing it use redundant degrees of freedom to move away from contact while still achieving its end-effector target. 
 
-This task is possible with the TPU sensor as well, but the higher threshold forces and non-uniform geometry of the TPU sensor make it more difficult to reliably detect light contacts across the surface, which is important for effective contact avoidance. 
+This task is possible with the AM sensor as well, but the higher threshold forces and non-uniform geometry of the AM sensor make it more difficult to reliably detect light contacts across the surface, which is important for effective contact avoidance. 
 
 \begin{figure}
     \centering

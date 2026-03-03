@@ -1,24 +1,74 @@
 \section{Introduction}
 Humans naturally exploit whole-arm contact during manipulation, using surfaces to brace, stabilize, or guide movements in cluttered environments. Recent advances in robotic tactile sensing have demonstrated the value of extending sensing beyond grippers to enable safer physical human-robot interaction~\cite{10610014}, whole-body contact awareness~\cite{8812712,kohlbrenner2025gentact}, and contact-rich manipulation strategies~\cite{8593555,10.7551/mitpress/9481.003.0014}. Despite these advances, widespread adoption remains limited: most robotic systems still lack tactile coverage beyond the hands, limiting their ability to safely and effectively exploit environmental contacts as humans do~\cite{6502183,Cyskin}.
 
-Several challenges continue to hinder the broader adoption of whole-arm tactile sensing in robotics. Existing research prototypes that extend tactile sensing to the forearm or whole arm~\cite{6502183,Cyskin,kohlbrenner2024machine} often rely on hardware that is costly, fragile, or difficult to replicate, creating a gap between demonstration systems and practical deployment.
+Several challenges continue to hinder the broader adoption of whole-arm or whole-body tactile sensing in robotics. Existing research prototypes that extend tactile sensing to the forearm or whole arm~\cite{6502183,Cyskin,kohlbrenner2024machine} often rely on hardware that is costly, fragile, or difficult to replicate, creating a gap between demonstration systems and practical deployment.
 
-To bridge these gaps, we pursued the research question of \textit{what constitutes an effective tactile skin for robot mobile manipulators, and how can one be built practically?} Through iterative design, we identify three factors that constitute an effective tactile skin sensor for whole-arm or body sensing: (1) \textbf{operating force range} - the range of forces a sensor can distinctly sense, (2) \textbf{sensing repeatability} - repeatability of the sensor observations over periods of time as well as loading and unloading of forces, (3) \textbf{deployability} - ease of fabrication and deployment on commercially available robots without significant changes to existing hardware.
+To bridge these gaps, we pursued the research question of \textit{what constitutes an effective tactile skin for robot mobile manipulators, and how can one be built practically using textile and additive manufacturing methods?} Through iterative design, we identify three factors that constitute an effective tactile skin sensor for whole-arm or body sensing: (1) \textbf{operating force range} - the range of forces a sensor can distinctly sense, (2) \textbf{sensing repeatability} - repeatability of the sensor observations over periods of time as well as loading and unloading of forces, (3) \textbf{deployability} - ease of fabrication and deployment on commercially available robots without significant changes to existing hardware.
 
-We propose two complementary force-sensing skin designs that are low-cost, high-density, high-coverage, easy to fabricate, and compatible with commercially available robot platforms. They differ in their force-sensitive range and repeatability, covering a wide spectrum of forces and suitable for diverse mobile manipulation applications. The first is a fabric-based sensor using conductive fabric layers with a piezoresistive material in between; the second is a TPU (Thermoplastic Polyurethane)-based sensor constructed using~\cite{FSR_WTL} with 3D-printed or fabric inner and outer shells that define a high-coverage pressure-sensing matrix formed by conductive layers (copper tape) separated by a piezoresistive layer, generated directly from the arm's 3D mesh to conform to complex geometries.
+We propose two complementary sensor architectures for manufacturing force-sensing skins that are low-cost, high-density, high-coverage, easy to fabricate, and compatible with commercially available robot platforms. Our design instances of these two architectures differ in their force sensing range, flexibility, and repeatability, making them suitable for diverse mobile manipulation applications. The first is a textile-based sensor offering flexibility and conformability to complex arm geometries, using conductive fabric layers with a piezoresistive material in between; the second is an additive-manufacturing-based sensor constructed from 3D-printed components that conform to the robot arm's geometry, defining a high-coverage pressure-sensing matrix of conductive layers separated by a piezoresistive layer, generated directly from the arm's 3D mesh.
+
+
+% We propose two complementary force-sensing skin designs that are low-cost, high-density, high-coverage, easy to fabricate, and compatible with commercially available robot platforms. They differ in their force-sensitive range and repeatability, covering a wide spectrum of forces and suitable for diverse mobile manipulation applications. The first is a textile-based sensor using conductive fabric layers with a piezoresistive material in between; the second is a AM-based sensor constructed using~\cite{FSR_WTL} with 3D-printed or textile inner and outer shells that define a high-coverage pressure-sensing matrix formed by conductive layers (copper tape) separated by a piezoresistive layer, generated directly from the arm's 3D mesh to conform to complex geometries.
 
 
 
 \begin{figure}[!t]
     \centering
-    \includegraphics[width=1.0\columnwidth]{images/Teaser_both_v3.pdf}
-    \caption{Fabric and TPU skin sensors for a mobile manipulator robot (Boston Dynamics Spot) enabling force-sensitive manipulation across a range of task requirements and durability demands.}
+    \includegraphics[width=0.8\columnwidth]{images/Teaser_both_v5.pdf}
+    \caption{Textile and AM sensors for a mobile manipulator robot (Boston Dynamics Spot) enabling force-sensitive manipulation across a range of task requirements and durability demands.}
     \label{fig:teaser}
 \end{figure}
 
+
+\begin{table*}[t]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.10}
+\newcommand{\yes}{\textcolor{green!60!black}{\textbf{\checkmark}}}
+\newcommand{\no}{\textcolor{red!70!black}{\textbf{\texttimes}}}
+\newcommand{\partialmark}{\textcolor{black!45}{\textbf{\ensuremath{\sim}}}}
+\begin{tabular}{|p{3.5cm}|c|c|c|c|c|c|}
+\hline
+\textbf{Work} & \textbf{Low-cost} & \textbf{Construction} & \textbf{High Surface Coverage} & \textbf{Spatial Resolution} & \textbf{Force Measurement} & \textbf{Manufacturability} \\
+\hline
+\multicolumn{7}{|l|}{\textbf{Flexible / Textile Sensors}} \\
+\hline
+Maiolino et al.~\cite{6502183}                    & \partialmark & Flexible & \yes         & \yes         & Continuous & \partialmark \\
+\hline
+CushSense~\cite{10610014}                         & \yes         & Flexible & \yes         & \partialmark & Continuous & \partialmark \\
+\hline
+RobotSweater~\cite{si2023robotsweater}            & \yes         & Flexible & \yes         & \partialmark & Continuous & \partialmark \\
+\hline
+Johnson et al.~\cite{johnson2025scaling}          & \partialmark & Flexible & \yes         & \partialmark & Continuous & \partialmark \\
+\hline
+\multicolumn{7}{|l|}{\textbf{Static / AM Sensors}} \\
+\hline
+CySkin~\cite{Cyskin}                              & \no          & \partialmark & \yes         & \yes         & Continuous & \no \\
+\hline
+GenTact~\cite{kohlbrenner2025gentact}             & \yes         & Static    & \no          & \no          & Binary & \yes \\
+\hline
+Kohlbrenner et al.~\cite{kohlbrenner2024machine} & \yes         & Static    & \yes         & \yes         & Binary & \yes \\
+\hline
+Cheng et al.~\cite{8812712}                       & \no          & Static    & \yes         & \partialmark & Continuous & \no \\
+\hline
+\multicolumn{7}{|l|}{\textbf{Ours}} \\
+\hline
+Textile sensor (ours)                             & \yes         & Flexible & \yes         & \partialmark & Continuous & \yes \\
+\hline
+AM sensor (ours)                                  & \yes         & Static    & \yes         & \partialmark & Continuous & \yes \\
+\hline
+\end{tabular}
+\caption{Comparison of whole-arm tactile sensing systems.
+Symbols: \yes~satisfied, \partialmark~partially satisfied, \no~not satisfied.
+\textit{Force Measurement} indicates whether the sensor detects only contact presence (Binary) or encodes force magnitude (Continuous).}
+\label{tab:related_work_comparison}
+\end{table*}
+
+
 The contributions of this paper are as follows:
 \begin{itemize}[leftmargin=*]
-\item Two low-cost, whole-arm tactile skin sensors consisting of modules with high-coverage sensor arrays built with fabric and TPU layers, designed for easy fabrication and integration with existing robot platforms.
-\item Fabrication guidelines and sensor characterization demonstrating the practical feasibility and performance of the proposed tactile skin designs.
-\item Experimental validation on a mobile manipulator platform demonstrating real-world sensing performance and contact avoidance and contact embracing tasks.
+\item Two complementary sensor architectures for whole-arm force-sensing skins, instantiated as a textile-based and an additive-manufacturing-based design, each offering high coverage, low cost, and easy integration with commercially available robot platforms.
+\item Fabrication guidelines and sensor characterization that demonstrate the practical feasibility, force-sensing range, and repeatability of each design, along with the key design parameters that can be tuned to meet application-specific requirements.
+\item Experimental validation on a mobile manipulator platform demonstrating real-world sensing performance across contact avoidance and contact embracing scenarios.
 \end{itemize}

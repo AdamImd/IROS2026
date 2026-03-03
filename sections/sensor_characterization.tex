@@ -1,0 +1,66 @@
+\section{Sensor Characterization}
+To evaluate the performance of our sensor, we use the following metrics:
+
+We define the sensitive range of each sensor as the force interval from its detection threshold (minimum detectable force) to saturation (maximum force for which changes in resistance remain informative). Fig.~\ref{fig:overall_comparison} summarizes the resulting coverage across sensor variants.
+
+\subsection{Operating Force Range} 
+% The sensitive range of the sensor is defined as the force interval between the minimum detectable force (detection threshold) and the maximum force for which changes in resistance remain informative (saturation). This metric captures the effective operating range of the sensor, indicating the range of forces that can be reliably differentiated based on the sensor readings. A wider sensitive range allows the sensor to measure a broader spectrum of contact forces, from light touches to heavier contacts, which is crucial for applications that require nuanced force sensing. 
+% Below the minimum detectable force, the sensor has approximately infinite resistance producing no signal, while above the saturation point, the sensor's readings plateau, causing uncertainty in force estimation. Therefore, the sensitive range provides a comprehensive measure of the sensor's capability to capture meaningful force information across its operational spectrum.
+\subsubsection{Minimum Detectable Force}
+The \emph{sensitive range} is the force interval from the minimum detectable force (detection threshold) to the saturation force (largest force that still produces informative signal change). In our pipeline, the detection threshold is measured per taxel as the \emph{break force}:
+\[
+F_{\mathrm{det}}=\min\{F>0:\; R(F)\le R_{\mathrm{thr}}\},\qquad R_{\mathrm{thr}}=4000~\Omega,
+\]
+
+\subsubsection{Saturation Force}
+The saturation force is measured from the fitted response $R(F)=AF^B+C$ by mapping it through the expected voltage-divider readout
+\[
+V(F)=V_{\mathrm{in}}\frac{R(F)}{R(F)+R_{\mathrm{ref}}},\qquad V_{\mathrm{in}}=5~\mathrm{V},
+\]
+and defining
+\[
+F_{\mathrm{sat}}=\max\Bigl\{F\in[F_{\mathrm{det}},30~\mathrm{N}]:\; \bigl|dV/dF\bigr|\ge 0.03~\mathrm{V/N}\Bigr\},
+\]
+where $R_{\mathrm{ref}}$ is the reference resistor value, which is selected over a range of reference resistors to find the one that maximizes the sensitive range, and $[F_{\min},F_{\max}]$ follows the configured force limits (e.g., $F_{\max}=30~\mathrm{N}$). The sensitive range is $[F_{\mathrm{det}},F_{\mathrm{sat}}]$: below $F_{\mathrm{det}}$ the sensor behaves like an open circuit (negligible signal), while above $F_{\mathrm{sat}}$ the response flattens and force estimates become ambiguous.
+
+
+
+
+\subsection{Consistency}
+
+\subsubsection{Repeatability}
+For each taxel, we sample 10 points uniformly across $[F_{\mathrm{det}}, 30 N]$, and compute the standard deviation of the sensor readings across repeated loading cycles at each force level. We summarize single-force repeatability as the standard deviation $\sigma_R(F)$ of the sensor readings across cycles at each force level $F$:
+\begin{equation}
+\sigma_R(F) = \mathrm{std}\!\left(\{R_i(F)\}_{i=1}^{N_c}\right),
+\end{equation}
+along with the corresponding mean $\mu_R(F)$ and the number of valid cycles $N_c$.
+
+To normalize the repeatability metric across different force levels and sensor configurations, we compute the coefficient of variation (CV) across cycles at each force level $F$:
+
+\begin{equation}
+\mathrm{CV}(F_j)=\frac{\sigma_R(F_j)}{\mu_R(F_j)}
+\end{equation}
+
+We average the CV across each sampled force level to obtain a single multi-force repeatability metric for each taxel:
+
+\begin{equation}
+\overline{\mathrm{CV}} = \frac{1}{N_s} \sum_{j=1}^{N_s} \mathrm{CV}(F_j)
+\end{equation}
+
+and we then report the mean $\overline{\mathrm{CV}}$ across taxels, along with the corresponding standard deviation across taxels, to summarize the overall repeatability of the sensor. This multi-force repeatability metric captures the consistency of the sensor's response across its operating range and the variability across taxels, providing a comprehensive measure of the sensor's repeatability performance.
+
+
+% To measure repeatability over each sensor's operating region, we report a multi-force repeatability metric by sampling $N_s=10$ forces (config: \texttt{repeatability\_target\_force\_num\_samples}) uniformly over the overlap of the force ranges observed across cycles, and (optionally) enforcing a minimum-force floor above initial contact: $F \ge F_{\mathrm{det}} + 2~\mathrm{N}$ (config: \texttt{repeatability\_min\_force\_above\_break\_threshold}), where $F_{\mathrm{det}}$ is the break/detection force defined as the minimum force at which $R \le 4000~\Omega$ (config: \texttt{break\_resistance\_threshold\_ohms}). At each sampled force $F_j$, we compute the coefficient of variation
+% and summarize multi-force repeatability as the mean $\overline{\mathrm{CV}}$ across the sampled forces.
+
+\subsubsection{Hysteresis}
+We quantify hysteresis using the discrepancy between the loading and unloading curves in the resistance domain. For each taxel, we fit power-law models to the loading and unloading data,
+\begin{equation}
+R(F)=AF^B+C,
+\end{equation}
+and invert them to obtain $F_{\text{load}}(R)$ and $F_{\text{unload}}(R)$ over the region where inversion is valid. Hysteresis is then computed as the area between the two inverted curves:
+\begin{equation}
+H_{\text{area}} = \int_{R_{\text{min}}}^{R_{\text{max}}} \left|F_{\text{load}}(R) - F_{\text{unload}}(R)\right| \, dR,
+\end{equation}
+ This area-based metric captures cumulative hysteretic behavior across the operating range, rather than at a single point.
+

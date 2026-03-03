@@ -1,0 +1,130 @@
+\section{Sensor Designs}
+
+
+
+
+\begin{table*}[t]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.10}
+\begin{tabular}{|p{3cm}|p{6cm}|p{6cm}|}
+\hline
+\textbf{Goal} & \textbf{Textile-based sensor array} & \textbf{3D printed sensor array} \\
+\hline
+
+Shift force range downward (sense lower forces) &
+\tightitemize
+\item Thinner outer fabric
+\item Softer outer fabric
+\endtightitemize
+&
+\tightitemize
+\item Thinner outer material
+\item Softer outer material
+\item Decrease infill density
+\item Lower ridge height
+\endtightitemize
+\\
+\hline
+
+Shift force range upward (sense higher forces) &
+\tightitemize
+\item Thicker outer fabric
+\item Stiffer outer fabric
+\item Add spacer material (e.g., foam between outer fabric and electrodes)
+\endtightitemize
+&
+\tightitemize
+\item Thicker outer material
+\item Stiffer outer material
+\item Increase infill density
+\item Increase ridge height
+\endtightitemize
+\\
+\hline
+
+Expand force range &
+\tightitemize
+\item Add spacer material (e.g., foam between outer fabric and electrodes)
+\endtightitemize
+&
+\tightitemize
+\item Thicker outer material
+\item Add spacer material
+\endtightitemize
+\\
+\hline
+
+Narrow force range &
+\tightitemize
+\item No spacer material
+\endtightitemize
+&
+\tightitemize
+\item Thinner outer material
+\item Softer outer material
+\item Higher infill density
+\endtightitemize
+\\
+\hline
+
+Reduce hysteresis &
+\tightitemize
+\item Stiffer outer fabric
+\item Thinner spacer material or no spacer material
+\endtightitemize
+&
+\tightitemize
+\item Stiffer outer material
+\item Higher infill density
+\endtightitemize
+\\
+\hline
+
+\end{tabular}
+\caption{Design strategies for tuning force range and hysteresis in textile-based and 3D printed sensor arrays.}
+\label{tab:design_tuning_comparison}
+\end{table*}
+
+
+Here we describe the sensor designs for the two architectures, tailored to the arm links of the Spot mobile manipulation platform. We design them to balance three practical requirements: (1) operating force range, (2) sensing repeatability under repeated loading and unloading, and (3) deployability on commercial robots with minimal changes to existing hardware.
+
+Both designs share a common operating principle: a matrix of conductive rows and columns separated by a piezoresistive layer (Velostat). When contact is made at a taxel, the piezoresistive layer compresses, producing a change in resistance that is read by a microcontroller via a voltage divider circuit. Both designs are optimized for maximal surface coverage, analog force readings across individual taxels, and low-cost accessible fabrication, and are adaptable to most robot geometries.
+
+We implement two complementary variants: (1) a textile-based sensor using conductive fabric layers, and (2) an additive manufacturing (AM) based sensor with 3D-printed conformal shells and copper-tape electrodes. The textile sensor prioritizes flexibility, rapid installation, and sensitivity at lower force ranges, while the AM sensor provides a more robust and durable solution suited to higher force ranges. Together they tile the force-sensing range needed for diverse mobile manipulation tasks. We describe the design and fabrication of each in the following sections, with an overview shown in Fig~\ref{fig:tactile_sensors_both}.
+% \vspace{-5}
+\subsection{Textile Sensor Design}
+The textile sensor shown in Fig~\ref{fig:tactile_sensors_both} is designed as a flexible and sensitive alternative to the AM sensor, conforming naturally to the robot arm without rigid shells. Like the AM sensor, it uses a matrix of conductive rows and columns separated by a piezoresistive Velostat layer, with the same taxel pitch of approximately \textit{20mm}. The sensor is formed into a cylindrical sleeve using velcro, allowing it to be easily wrapped around and removed from the robot link for maintenance. Rows and columns are interfaced with the microcontroller via snap buttons, with a~\textit{47$\Omega$} bias resistor used in the voltage divider circuit during characterization.
+
+\begin{enumerate}[leftmargin=*]
+\item \textbf{Inner layer:} The inner layer template is derived from a 2D projection of the robot link geometry and cut from a textured off the shelf fabric, chosen for its flexibility and high friction with the robot surface to prevent slipping against the robot surface. Rows of conductive fabric are adhered to the inner layer, with excess fabric removed at taxel boundaries to electrically isolate adjacent rows.
+\item \textbf{Outer layer:} The outer layer uses the same template and also uses off the shelf fabric, providing a soft contact surface for improved sensitivity. Columns of conductive fabric are adhered to the outer layer, with excess fabric removed at taxel boundaries to isolate adjacent columns.
+\item \textbf{Force Sensitive Layer:} Velostat squares are cut such that they are slightly wider than the conductive rows and columns to prevent short-circuiting. 
+\item \textbf{Assembly:} The inner layer, Velostat squares, and outer layer are stacked in order and a fabric adhesive is used around each Velostat square to secure it. The sensor is then wrapped around the robot link, then secured with hook-and-loop tape. Snap buttons connect wires to each row and column, which are routed to a microcontroller.
+\end{enumerate}
+The fabrication of this sensor only requires an iron, and the average material cost for this sensor is approximately less than $\$10$ per arm link.
+
+
+
+\subsection{Additive Manufacturing (AM) Sensor Design}
+To design the 3D-printed skin, we start from the link-level mesh files provided by Boston Dynamics (Fig~\ref{fig:tactile_sensors_both}-2, yellow) as part of their URDF models. For each link, we apply the following sequence of CAD operations:
+
+\begin{enumerate}[leftmargin=*]
+\item \textbf{Inner layer:} Generate a conformal shell with a uniform thickness of \textit{3mm} offset outward from the robot's base geometry (Fig~\ref{fig:tactile_sensors_both}-2, green).
+\item \textbf{Outer layer:} Generate a second shell with a wall thickness of \textit{3mm}, whose inner surface is offset by \textit{5mm} from the robot's base geometry, leaving a gap between the two layers to accommodate the sensing stack (Fig~\ref{fig:tactile_sensors_both}-2, orange).
+\item \textbf{Ridges:} Within the inter-shell region, add horizontal ridges on the inner shell and vertical ridges on the outer shell, each \textit{2mm} thick. The spacing between adjacent ridges determines the taxel density (Fig~\ref{fig:tactile_sensors_both}-2, cutout).
+\item \textbf{Clearance cuts:} Material is removed near kinematic joints to prevent interference during motion, and a longitudinal cut is added along each shell to facilitate installation on the robot arm (Fig~\ref{fig:tactile_sensors_both}-1).
+\end{enumerate}
+
+
+Both shells are printed in 95A TPU with a ridge spacing of approximately \textit{20mm}. To assemble the sensing stack, a Velostat sheet is laminated with copper tape on one side using the tape's conductive adhesive, and a double-sided adhesive layer is applied to attach the laminate to the inner shell. Copper tape is applied directly to the outer shell to form the opposing electrodes. This layered structure is shown in Fig~\ref{fig:tactile_sensors_both}-5. Wires are connected to each row and column and routed to a microcontroller. The outer shell is then snapped onto the inner shell and secured to the robot arm.
+
+ The fabrication of this sensor requires a 3D printer capable of printing flexible filaments, and the average material cost also remains under \textit{\$10} per link.
+
+
+\subsection{\ktxt{Design Variables}}
+If binary contact detection is sufficient for a given application, the Velostat layer can be omitted and ... \ktxt{Talk about other variables / overall usage here.}
+
+
+
