@@ -1,5 +1,7 @@
 \section{Sensor Characterization}
-To evaluate the performance of our sensor, we use the following metrics:
+We characterize both sensor architectures using an Instron testing machine. We use a 1000$\Omega$ reference resistor for the AM sensor and a 47$\Omega$ reference resistor for the textile sensor in a voltage-divider circuit. For each taxel, we apply a 7.5$\times$7.5~mm square applicator at the taxel center and record the voltage response over four load--unload cycles from 0 to 30~N. We fit a power law with base resistance, $R(F)=AF^B+R_{\mathrm{base}}$, to loading and unloading responses and use the fitted curves for performance analysis and force estimation.
+
+To evaluate performance, we report operating force range and consistency metrics.
 
 We define the sensitive range of each sensor as the force interval from its detection threshold (minimum detectable force) to saturation (maximum force for which changes in resistance remain informative). Fig.~\ref{fig:overall_comparison} summarizes the resulting coverage across sensor variants.
 
@@ -13,7 +15,7 @@ F_{\mathrm{det}}=\min\{F>0:\; R(F)\le R_{\mathrm{thr}}\},\qquad R_{\mathrm{thr}}
 \]
 
 \subsubsection{Saturation Force}
-The saturation force is measured from the fitted response $R(F)=AF^B+C$ by mapping it through the expected voltage-divider readout
+The saturation force is measured from the fitted response $R(F)=AF^B+R_{\mathrm{base}}$ by mapping it through the expected voltage-divider readout
 \[
 V(F)=V_{\mathrm{in}}\frac{R(F)}{R(F)+R_{\mathrm{ref}}},\qquad V_{\mathrm{in}}=5~\mathrm{V},
 \]
@@ -23,13 +25,17 @@ F_{\mathrm{sat}}=\max\Bigl\{F\in[F_{\mathrm{det}},30~\mathrm{N}]:\; \bigl|dV/dF\
 \]
 where $R_{\mathrm{ref}}$ is the reference resistor value, which is selected over a range of reference resistors to find the one that maximizes the sensitive range, and $[F_{\min},F_{\max}]$ follows the configured force limits (e.g., $F_{\max}=30~\mathrm{N}$). The sensitive range is $[F_{\mathrm{det}},F_{\mathrm{sat}}]$: below $F_{\mathrm{det}}$ the sensor behaves like an open circuit (negligible signal), while above $F_{\mathrm{sat}}$ the response flattens and force estimates become ambiguous.
 
+Overall, the textile sensor performs better for low-force interactions, with a near-zero detection threshold in the flat configuration and strong response at light contacts. In contrast, the AM sensor has an elevated detection threshold due to the designed gap between inner and outer shells; as force increases, shell deformation closes this gap and produces a sharper resistance transition.
+
+When wrapped on the robot arm and tightened with hook-and-loop fastening, the effective sensitive range of Velostat-based sensors decreases relative to flat characterization (Fig.~\ref{fig:overall_comparison}). In our tests, mounting primarily reduced the textile sensor's maximum force range, likely due to pre-compression and non-uniform pressure distribution across curved surfaces. Velostat bending sensitivity may also shift baseline resistance and response behavior \ktxt{TODO:CITE WTL WORK ON CURVED VELOSTAT}.
+
 
 
 
 \subsection{Consistency}
 
 \subsubsection{Repeatability}
-For each taxel, we sample 10 points uniformly across $[F_{\mathrm{det}}, 30 N]$, and compute the standard deviation of the sensor readings across repeated loading cycles at each force level. We summarize single-force repeatability as the standard deviation $\sigma_R(F)$ of the sensor readings across cycles at each force level $F$:
+For each taxel, we sample 10 points uniformly across $[F_{\mathrm{det}}, 30~\mathrm{N}]$, and compute the standard deviation of the sensor readings across repeated loading cycles at each force level. We summarize single-force repeatability as the standard deviation $\sigma_R(F)$ of the sensor readings across cycles at each force level $F$:
 \begin{equation}
 \sigma_R(F) = \mathrm{std}\!\left(\{R_i(F)\}_{i=1}^{N_c}\right),
 \end{equation}
@@ -56,11 +62,13 @@ and we then report the mean $\overline{\mathrm{CV}}$ across taxels, along with t
 \subsubsection{Hysteresis}
 We quantify hysteresis using the discrepancy between the loading and unloading curves in the resistance domain. For each taxel, we fit power-law models to the loading and unloading data,
 \begin{equation}
-R(F)=AF^B+C,
+R(F)=AF^B+R_{\mathrm{base}},
 \end{equation}
 and invert them to obtain $F_{\text{load}}(R)$ and $F_{\text{unload}}(R)$ over the region where inversion is valid. Hysteresis is then computed as the area between the two inverted curves:
 \begin{equation}
 H_{\text{area}} = \int_{R_{\text{min}}}^{R_{\text{max}}} \left|F_{\text{load}}(R) - F_{\text{unload}}(R)\right| \, dR,
 \end{equation}
  This area-based metric captures cumulative hysteretic behavior across the operating range, rather than at a single point.
+
+Across tested configurations, textile and AM sensors show similar repeatability scores (Fig.~\ref{fig:overall_comparison}, top), indicating stable repeated measurements under matched calibration conditions. However, the AM sensor exhibits higher hysteresis (Fig.~\ref{fig:overall_comparison}, bottom), which we attribute primarily to viscoelastic effects in the AM shell. The textile sensor shows more consistent loading and unloading curves, suggesting lower hysteresis under these test conditions.
 

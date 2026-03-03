@@ -2,28 +2,28 @@
 \begin{figure}
     \centering
     \includegraphics[width=0.55\columnwidth]{images/Circuit_v1.pdf}
-    \caption{We model both of our sensors as a piezeoresistive element in series with a base resistance. To measure the resistance of each element, we use a voltage divider and measure the voltage across a bias resistor. $V_in$ and $GND$ are GPIO from a microcontroller, where both are set to high-impedance after sampling to reduce cross-talk.}
+    \caption{\ktxt{Modify figure to use Reference Resistor} We model both of our sensors as a piezoresistive element in series with a base resistance. To measure the resistance of each element, we use a voltage divider and measure the voltage across a reference resistor. $V_{\mathrm{in}}$ and GND are GPIO from a microcontroller, where both are set to high-impedance after sampling to reduce cross-talk.}
     \label{fig:circuit}
 \end{figure}
 
 We model our sensor as a grid of taxels, where each taxel provides an analog reading corresponding to the magnitude of contact force at that location. The taxels are arranged in a grid pattern, with rows and columns defined by the conductive materials on the inner and outer layers of the sensor. We calibrate the sensor by applying known forces at specific taxel locations and recording the corresponding sensor readings, allowing us to create a model, mapping sensor readings to contact forces. 
 
-To measure the resistance of each taxel, we use a voltage divider circuit, where the taxel is connected in series with a known bias resistor. The voltage across the bias resistor is measured, and we first use Ohm's law to calculate the resistance $R$ of the taxel based on the measured voltage $V_\text{out}$, the input voltage $V_\text{in}$, and the known bias resistor value $R_\text{bias}$:
+To measure the resistance of each taxel, we use a voltage divider circuit, where the taxel is connected in series with a known reference resistor. The voltage across the reference resistor is measured, and we first use Ohm's law to calculate the resistance $R$ of the taxel based on the measured voltage $V_{\mathrm{out}}$, the input voltage $V_{\mathrm{in}}$, and the known reference resistor value $R_{\mathrm{ref}}$:
 \begin{equation}
-R = \left( \frac{V_\text{in}-V_\text{out}}{V_\text{out}} \right) R_\text{bias} 
+R = \left( \frac{V_{\mathrm{in}}-V_{\mathrm{out}}}{V_{\mathrm{out}}} \right) R_{\mathrm{ref}} 
 \end{equation}
 
 
 Because the measured resistance includes a base resistance in series with the force-sensitive resistance, we write
 
 \begin{equation}
-R = R_\text{base} + R_\text{FSR}.
+R = R_{\mathrm{base}} + R_{\mathrm{FSR}}.
 \end{equation}
 
 We use a power law to model the FSR,
 
 \begin{equation}
-R = R_\text{base} + A F^{B}.
+R(F) = A F^{B} + R_{\mathrm{base}}.
 \end{equation}
 
 
@@ -31,13 +31,13 @@ R = R_\text{base} + A F^{B}.
 
 
 
-We then fit a power law with a base resistance $R_\text{base}$ in series with the force sensitive resistance $R_\text{FSR}$, where the force $F$ is related to the taxel resistance as follows:
+We then fit a power law with a base resistance $R_{\mathrm{base}}$ in series with the force-sensitive resistance $R_{\mathrm{FSR}}$, where force $F$ is related to measured taxel resistance as follows:
 
 \begin{equation}
-F=\left(\frac{R-R_\text{base}}{A}\right)^{\frac{1}{B}}
+F=\left(\frac{R-R_{\mathrm{base}}}{A}\right)^{\frac{1}{B}}
 \end{equation}
 
-where $A$, $B$, and $R_\text{base}$ are the parameters of the power law, which are determined through calibration and curve fitting. This model allows us to estimate the contact force at each taxel based on the measured resistance, enabling the sensor to provide quantitative force information across its surface.
+where $A$, $B$, and $R_{\mathrm{base}}$ are power-law parameters determined through calibration and curve fitting. This model allows us to estimate contact force at each taxel from measured resistance.
 
 
 
