@@ -5,6 +5,7 @@
 *.blg
 *.fls
 *.fdb_latexmk
+*.bbl
 root.pdf
 
 *.sh
