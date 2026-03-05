@@ -10,7 +10,7 @@
 \renewcommand{\arraystretch}{1.10}
 \begin{tabular}{|p{3cm}|p{6cm}|p{6cm}|}
 \hline
-\textbf{Goal} & \textbf{Textile-based sensor array} & \textbf{3D printed sensor array} \\
+\textbf{Goal} & \textbf{Textile-based Sensor } & \textbf{Additive Manufacturing-based Sensor} \\
 \hline
 
 Shift force range downward (sense lower forces) &
@@ -113,7 +113,7 @@ To design the 3D-printed skin, we start from the link-level mesh files provided 
 \begin{enumerate}[leftmargin=*]
 \item \textbf{Inner layer:} Generate a conformal shell with a uniform thickness of \textit{3mm} offset outward from the robot's base geometry (Fig~\ref{fig:tactile_sensors_both}-2, green).
 \item \textbf{Outer layer:} Generate a second shell with a wall thickness of \textit{3mm}, whose inner surface is offset by \textit{5mm} from the robot's base geometry, leaving a gap between the two layers to accommodate the sensing stack (Fig~\ref{fig:tactile_sensors_both}-2, orange).
-\item \textbf{Ridges:} Within the inter-shell region, add horizontal ridges on the inner shell and vertical ridges on the outer shell, each \textit{2mm} thick. The spacing between adjacent ridges determines the taxel density (Fig~\ref{fig:tactile_sensors_both}-2, cutout).
+\item \textbf{Ridges:} Within the inter-shell region, add horizontal ridges on the inner shell and vertical ridges on the outer shell, each \textit{2mm} high. The spacing between adjacent ridges determines the taxel density (Fig~\ref{fig:tactile_sensors_both}-2, cutout).
 \item \textbf{Clearance cuts:} Material is removed near kinematic joints to prevent interference during motion, and a longitudinal cut is added along each shell to facilitate installation on the robot arm (Fig~\ref{fig:tactile_sensors_both}-1).
 \end{enumerate}
 
