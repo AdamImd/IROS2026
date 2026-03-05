@@ -28,40 +28,39 @@ We propose two complementary sensor architectures for manufacturing force-sensin
 \newcommand{\yes}{\textcolor{green!60!black}{\textbf{\checkmark}}}
 \newcommand{\no}{\textcolor{red!70!black}{\textbf{\texttimes}}}
 \newcommand{\partialmark}{\textcolor{black!45}{\textbf{\ensuremath{\sim}}}}
-\begin{tabular}{|p{3.5cm}|c|c|c|c|c|c|}
+\begin{tabular}{|p{3.5cm}|c|c|c|c|c|}
 \hline
-\textbf{Work} & \textbf{Low-cost} & \textbf{Construction} & \textbf{High Surface Coverage} & \textbf{Spatial Resolution} & \textbf{Force Measurement} & \textbf{Manufacturability} \\
+\textit{\textbf{Whole-Arm Tactile Sensor}} &\multicolumn{2}{c|}{\textit{\textbf{Sensing Performance}}} & \textit{\textbf{Mounting}} & \multicolumn{2}{c|}{\textit{\textbf{Manufacturing Requirements}}} \\
 \hline
-\multicolumn{7}{|l|}{\textbf{Flexible / Textile Sensors}} \\
+\textbf{Related Works} & \textbf{Spatial Resolution} & \textbf{Force Measurement} & \textbf{Permanent / Removable} & \textbf{Low-cost} & \textbf{Required Manufacturing Equipment} \\
 \hline
-Maiolino et al.~\cite{6502183}                    & \partialmark & Flexible & \yes         & \yes         & Continuous & \partialmark \\
+Maiolino et al.~\cite{6502183}                    & \yes         & Continuous Magnitude & Removable & \partialmark & \partialmark \\
 \hline
-CushSense~\cite{10610014}                         & \yes         & Flexible & \yes         & \partialmark & Continuous & \partialmark \\
+CushSense~\cite{10610014}                         & \partialmark & Continuous Magnitude & Removable & \yes         & \partialmark \\
 \hline
-RobotSweater~\cite{si2023robotsweater}            & \yes         & Flexible & \yes         & \partialmark & Continuous & \partialmark \\
+RobotSweater~\cite{si2023robotsweater}            & \partialmark & Continuous Magnitude & Removable & \yes         & \partialmark \\
 \hline
-Johnson et al.~\cite{johnson2025scaling}          & \partialmark & Flexible & \yes         & \partialmark & Continuous & \partialmark \\
+Johnson et al.~\cite{johnson2025scaling}          & \partialmark & Continuous Magnitude & Removable & \partialmark & \partialmark \\
 \hline
-\multicolumn{7}{|l|}{\textbf{Static / AM Sensors}} \\
+CySkin~\cite{Cyskin}                              & \yes         & Continuous Magnitude & \partialmark & \no          & \no          \\
 \hline
-CySkin~\cite{Cyskin}                              & \no          & \partialmark & \yes         & \yes         & Continuous & \no \\
+GenTact~\cite{kohlbrenner2025gentact}             & \no          & Binary Contact & Permanent    & \yes         & \yes         \\
 \hline
-GenTact~\cite{kohlbrenner2025gentact}             & \yes         & Static    & \no          & \no          & Binary & \yes \\
+Kohlbrenner et al.~\cite{kohlbrenner2024machine} & \yes         & Binary Contact & Permanent    & \yes         & \yes         \\
 \hline
-Kohlbrenner et al.~\cite{kohlbrenner2024machine} & \yes         & Static    & \yes         & \yes         & Binary & \yes \\
+Cheng et al.~\cite{8812712}                       & \partialmark & Continuous Magnitude & Permanent    & \no          & \no          \\
 \hline
-Cheng et al.~\cite{8812712}                       & \no          & Static    & \yes         & \partialmark & Continuous & \no \\
+\multicolumn{6}{|l|}{\textbf{Ours}} \\
 \hline
-\multicolumn{7}{|l|}{\textbf{Ours}} \\
+Textile sensor (ours)                             & \partialmark & Continuous Magnitude & Removable & \yes         & \yes         \\
 \hline
-Textile sensor (ours)                             & \yes         & Flexible & \yes         & \partialmark & Continuous & \yes \\
-\hline
-AM sensor (ours)                                  & \yes         & Static    & \yes         & \partialmark & Continuous & \yes \\
+AM sensor (ours)                                  & \partialmark & Continuous Magnitude & Permanent    & \yes         & \yes         \\
 \hline
 \end{tabular}
 \caption{Comparison of whole-arm tactile sensing systems.
 Symbols: \yes~satisfied, \partialmark~partially satisfied, \no~not satisfied.
-\textit{Force Measurement} indicates whether the sensor detects only contact presence (Binary) or encodes force magnitude (Continuous).}
+\textit{Permanent / Removable} indicates whether the sensor is typically fixed to the robot structure (Permanent) or can be detached and re-mounted (Removable).
+\textit{Force Measurement} indicates whether the sensor detects only contact presence (Binary Contact) or encodes force magnitude (Continuous Magnitude).}
 \label{tab:related_work_comparison}
 \end{table*}
 
