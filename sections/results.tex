@@ -28,7 +28,7 @@ We demonstrate the ability of the AM sensor to enable contact with rigid objects
 \subsection{Contact Avoidance}
 The textile sensor is more sensitive and has virtually no minimum detectable force, making it ideal for contact avoidance tasks where the robot needs to react to light contacts and avoid collisions. We demonstrate this in a contact avoidance task, where the robot reacts to unexpected contacts while maintaining its primary end-effector goal. In this task, the robot uses tactile feedback from the textile sensor to detect contact and generate repulsive forces in the null space of the IK optimization, allowing it use redundant degrees of freedom to move away from contact while still achieving its end-effector target. 
 
-\begin{figure*}{t}
+\begin{figure*}[!ht]
     \centering
     \includegraphics[width=0.9\linewidth]{images/FIg_Embrace_V2.pdf}
     \caption{The contact embracing task aims to balance a dustpan in the gripper, and open a door while preventing large forces. To open the door, we create a new end effector on the arm of the robot and move along its normal until a force above a threshold is achieved. We also optimize the rotation angle of the gripper to prevent it from tipping over.}
