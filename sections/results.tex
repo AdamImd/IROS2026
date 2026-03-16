@@ -1,37 +1,26 @@
 % \section{Sensor Characterization}
 
-\begin{figure*}
-    \centering
-    \includegraphics[width=1.0\linewidth]{images/Results_V6.pdf}
-    \caption{Real-world deployment of the textile and AM sensors across representative manipulation scenarios. For each scenario, the middle panel visualizes tactile responses during contact, and the annotated values report the corresponding force ranges estimated from the calibrated sensor models. Together, these examples illustrate how each sensor supports contact-aware behavior under different force requirements.}\label{fig:results}
-\end{figure*}
+
 
 
 \section{Real World Use Cases}
-Given the characterization results, the AM sensor is more suitable for contact embracing     tasks that require higher forces and highly durable materials, while the textile sensor is more suitable for contact avoidance tasks that require higher sensitivity and lower threshold forces. 
+Given the characterization results, our configuration of the AM sensor is more suitable for contact embracing tasks that require higher forces and highly durable materials, while the textile sensor is more suitable for contact avoidance tasks that require higher sensitivity and lower threshold forces. 
 
-
-We use our sensors to perform a variety of whole body contact manipulation tasks on the Boston Dynamics Spot platform. We developed a custom contact-aware inverse kinematics algorithm that incorporates tactile feedback from our sensors to enable both contact avoidance and contact embracing behaviors during manipulation.
+We use our sensors to perform a variety of whole body contact manipulation tasks on the Boston Dynamics Spot platform. We developed a custom contact-aware whole body inverse kinematics algorithm that incorporates tactile feedback from our sensors to enable both contact avoidance and contact embracing behaviors during manipulation.
 
 \subsection{Contact Embracing}
-We demonstrate the ability of the AM sensor to enable contact with rigid objects in the environment through a contact embracing task, where the robot uses tactile feedback to gently open a door while balancing a dustpan in the gripper. This task has a higher force range and requires the robot to actively seek contact with the door, while sensing when the door is fully open and maintaining a desired contact force.
+We demonstrate the ability of the AM sensor to enable contact with rigid objects in the environment through a contact embracing task, where the robot uses tactile feedback to gently open a door while balancing a dustpan in the gripper. We create a new end effector on the arm of the robot, and move along its normal until a force above a threshold is achieved. We also optimize the rotation angle of the gripper to prevent the dustpan from tipping over.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.95\columnwidth]{images/Fig_Avoid_v1.pdf}
-    \caption{The contact avoidance objective loss term is a sum of the penetration distances between the that the avoidance points on the robot and a sphere with a radius of the contact threshold distance. This causes the robot to move away from any contacts. }
-    \label{fig:avoid}
-\end{figure}
-
-
-
-\subsection{Contact Avoidance}
-The textile sensor is more sensitive and has virtually no minimum detectable force, making it ideal for contact avoidance tasks where the robot needs to react to light contacts and avoid collisions. We demonstrate this in a contact avoidance task, where the robot reacts to unexpected contacts while maintaining its primary end-effector goal. In this task, the robot uses tactile feedback from the textile sensor to detect contact and generate repulsive forces in the null space of the IK optimization, allowing it use redundant degrees of freedom to move away from contact while still achieving its end-effector target. 
+This task has a higher force range and requires the robot to actively seek contact with the door, while sensing when the door is fully open and maintaining a desired contact force.
 
 \begin{figure*}[!ht]
     \centering
-    \includegraphics[width=0.95\linewidth]{images/FIg_Embrace_V4.pdf}
-    \caption{The contact embracing task aims to balance a dustpan in the gripper, and open a door while preventing large forces. To open the door, we create a new end effector on the arm of the robot and move along its normal until a force above a threshold is achieved. We also optimize the rotation angle of the gripper to prevent it from tipping over.}
-    \label{fig:embrace}
+    \includegraphics[width=0.95\linewidth]{images/Contact_Avoidance_V1.pdf}
+    \caption{Textile-based contact avoidance maneuver, the high-sensitivity textile skin detects light human contact. The robot then utilizes a contact-aware inverse kinematics algorithm to move the arm link away from the contact while maintaining its XYZ position.}
+    \label{fig:contact_avoid_v2}
  \end{figure*}
+
+
+\subsection{Contact Avoidance}
+The textile sensor is more sensitive and has virtually no minimum detectable force, making it ideal for contact avoidance tasks where the robot needs to react to light contacts and avoid collisions. We demonstrate this in a contact avoidance task, where the robot reacts to unexpected contacts while maintaining its primary end-effector goal. In this task, the robot uses tactile feedback from the textile sensor to detect contact and optimize the inverse kinematics solution to move away from the contact while still maintaining the end-effector XYZ position. 
 

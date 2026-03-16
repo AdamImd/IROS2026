@@ -1,29 +1,24 @@
+
+
 \section{Sensor Modeling}
-\begin{figure}
-    \centering
-    \includegraphics[width=0.75\columnwidth]{images/Circuit_v2.pdf}
-    \caption{We model both of our sensors as a piezoresistive element in series with a base resistance. To measure the resistance of each element, we use a voltage divider and measure the voltage across a reference resistor. $V_{\mathrm{in}}$ and GND are GPIO from a microcontroller, where both are set to high-impedance after sampling to reduce cross-talk.}
-    \label{fig:circuit}
-\end{figure}
+
 
 We model our sensor as a grid of taxels, where each taxel provides an analog reading corresponding to the magnitude of contact force at that location. The taxels are arranged in a grid pattern, with rows and columns defined by the conductive materials on the inner and outer layers of the sensor. We calibrate the sensor by applying known forces at specific taxel locations and recording the corresponding sensor readings, allowing us to create a model, mapping sensor readings to contact forces. 
 
-To measure the resistance of each taxel, we use a voltage divider circuit, where the taxel is connected in series with a known reference resistor. The voltage across the reference resistor is measured, and we first use Ohm's law to calculate the resistance $R$ of the taxel based on the measured voltage $V_{\mathrm{out}}$, the input voltage $V_{\mathrm{in}}$, and the known reference resistor value $R_{\mathrm{ref}}$:
+To measure the resistance of each taxel, we use a voltage divider circuit, where the taxel is connected in series with a known reference resistor. The voltage across the reference resistor is measured, and we first use Ohm's law to calculate the resistance $R$ of the taxel based on the measured voltage $V_{\mathrm{out}}$, the input voltage $V_{\mathrm{in}}$, and the known reference resistor value $R_{\mathrm{ref}}$
 \begin{equation}
 R = \left( \frac{V_{\mathrm{in}}-V_{\mathrm{out}}}{V_{\mathrm{out}}} \right) R_{\mathrm{ref}} 
 \end{equation}
 
-
-Because the measured resistance includes a base resistance in series with the force-sensitive resistance, we write
-
+To account for the non-force-dependent resistance of conductive traces and contact interfaces in series with the piezoresistive material, we write the total resistance as
 \begin{equation}
-R = R_{\mathrm{base}} + R_{\mathrm{FSR}}.
+R = R_{\mathrm{base}} + R_{\mathrm{FSR}}
 \end{equation}
 
-We use a power law to model the FSR,
+This model prevents the estimated force from diverging by correctly capturing the sensor's asymptotic convergence to its hardware-defined resistance floor at high loads. We use a power law to model the FSR
 
 \begin{equation}
-R(F) = A F^{B} + R_{\mathrm{base}}.
+R(F) = A F^{B} + R_{\mathrm{base}}
 \end{equation}
 
 
@@ -39,16 +34,5 @@ F=\left(\frac{R-R_{\mathrm{base}}}{A}\right)^{\frac{1}{B}}
 
 where $A$, $B$, and $R_{\mathrm{base}}$ are power-law parameters determined through calibration and curve fitting. This model allows us to estimate contact force at each taxel from measured resistance.
 
-
-
-
-
-\begin{figure*}
-    \centering
-    \includegraphics[width=0.85\linewidth]{images/Results/overall_range_repeatability_hysteresis.pdf}
-    % \label{fig:overall_consistency}
-    \caption{ \textbf{Left:} The \textit{Operating Force Range} visualizes the force interval between the minimum detectable force (detection threshold) and the saturation force, which defines the effective range of forces that can be reliably measured by the sensor. \textbf{Middle:} The \textit{Consistency} plot shows the multi-force repeatability metric, which captures the variability of sensor readings across repeated loading cycles at different force levels. \textbf{Right:} The \textit{Hysteresis} plot illustrates the difference between loading and unloading curves, indicating the degree to which the sensor's response depends on its loading history. Together, these plots provide insights into the performance characteristics of the textile and AM sensors.}
-    \label{fig:overall_comparison}
-\end{figure*}
 
 

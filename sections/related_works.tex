@@ -4,8 +4,7 @@
 
 Existing whole-arm and whole-body tactile sensing systems vary considerably in their force sensing range, sensing repeatability, and ease of fabrication and deployment on commercially available platforms. Early systems demonstrated the feasibility of extending tactile coverage beyond the gripper~\cite{6502183,Cyskin}, but often relied on custom hardware that is costly or difficult to replicate~\cite{6502183,Cyskin}. More recent work has improved coverage and sensing density~\cite{10610014,8812712,kohlbrenner2024machine,kohlbrenner2025gentact}, yet trade-offs between sensing performance and practical deployability remain. We organize our discussion of related work around these trade-offs, focusing on systems most comparable to our fabric and AM skin designs.
 
-\subsection{Flexible Whole-Arm Tactile Sensors}
-Compton et al.~\cite{FSR_WTL} demonstrated a textile FSR array using Eeonyx piezoresistive fabric between knit electrodes, achieving a low-cost, flexible tactile sensor. While effective for on-body sensing\cite{11068986}, the design used expensive Eeonyx fabric and lacked evaluation on robotic arms. We base our textile desing on this approach, replacing Eeonyx with the inexpensive Velostat explore variations in the design of these sensors. Our fabric sensor builds directly on their material approach but explores varaitions in construction and integration to create a more robust solution tailored for robotic applications.
+Compton et al.~\cite{FSR_WTL} demonstrated a textile FSR array using Eeonyx piezoresistive fabric between knit electrodes, achieving a low-cost, flexible tactile sensor. While effective for on-body sensing\cite{11068986}, the design used expensive Eeonyx fabric and lacked evaluation on robotic arms. We base our textile design on this approach, replacing Eeonyx with the inexpensive Velostat explore variations in the design of these sensors. Our fabric sensor builds directly on their material approach but explores varaitions in construction and integration to create a more robust solution tailored for robotic applications.
 
 Similarly, RobotSweater~\cite{si2023robotsweater} provides a low-cost, textile-based tactile skin for mobile manipulators with high coverage and continuous force sensing, but its inconsistent sensing performance limits applicability in precise manipulation tasks. Our fabric sensor extends this direction with a design that does not require a knitting machine and offers more options for tuning sensing performance.
 
@@ -13,11 +12,10 @@ Similarly, RobotSweater~\cite{si2023robotsweater} provides a low-cost, textile-b
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=1.0\textwidth]{images/Sensor_Overall_Both_v3.pdf}
+\includegraphics[width=1.0\textwidth]{images/Sensor_Overall_Both_v4.pdf}
 \caption{Illustration of our tactile skin sensor designs (best viewed in color). \textbf{Left}: Textile Sensor A) showing the sensor on the Spot Robot arm, B) showing the sensor on the joint, C) showing the layers of the sensor. \textbf{Right}: AM Sensor 1) showing the sensor on the Spot Robot arm, 2) showing the inner and outer layers of the sensor along with their ridges, 3) showing the 3D structure of the taxel array, 4) showing the 2D cross-section before and during contact, 5) showing the layer structure of each taxel.} 
 \label{fig:tactile_sensors_both}
 \end{figure*}
-\subsection{Static Whole-Arm Tactile Sensors}
 
 Kohlbrenner et al.~\cite{kohlbrenner2025gentact} introduced GenTact, a large-area tactile skin fabricated with 3D printing and conductive filaments, emphasizing ease of fabrication and broad coverage across robotic platforms. However, its capacitive RC-delay sensing limits sensitivity and spatial resolution, with each unit containing only six sensing nodules (36 total), which restricts force magnitude and direction estimation. We build on their snap-on design philosophy: our AM sensor uses 3D-printed shells but incorporates a resistive sensing approach to achieve higher coverage and greater sensitivity while maintaining ease of fabrication and integration.
 

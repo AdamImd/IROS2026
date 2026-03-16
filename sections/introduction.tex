@@ -3,9 +3,9 @@ Humans naturally exploit whole-arm contact during manipulation, using surfaces t
 
 Several challenges continue to hinder the broader adoption of whole-arm or whole-body tactile sensing in robotics. Existing research prototypes that extend tactile sensing to the forearm or whole arm~\cite{6502183,Cyskin,kohlbrenner2024machine} often rely on hardware that is costly, fragile, or difficult to replicate, creating a gap between demonstration systems and practical deployment.
 
-To bridge these gaps, we pursued the research question of \textit{what constitutes an effective tactile skin for robot mobile manipulators, and how can one be built practically using textile and additive manufacturing methods?} Through iterative design, we identify three factors that constitute an effective tactile skin sensor for whole-arm or body sensing: (1) \textbf{operating force range} - the range of forces a sensor can distinctly sense, (2) \textbf{sensing repeatability} - repeatability of the sensor observations over periods of time as well as loading and unloading of forces, (3) \textbf{deployability} - ease of fabrication and deployment on commercially available robots without significant changes to existing hardware.
+To bridge these gaps, we pursued the research question of \textit{what constitutes an effective tactile skin for robot mobile manipulators, and how can one be built practically using textile and additive manufacturing (AM) methods?} Through iterative design, we identify three factors that constitute an effective tactile skin sensor for whole-arm or body sensing: (1) \textbf{operating force range} - the range of forces a sensor can distinctly sense, (2) \textbf{sensing repeatability} - the consistency of sensor measurements across repeated loading and unloading cycles, (3) \textbf{deployability} - ease of fabrication and deployment on commercially available robots without significant hardware modification.
 
-We propose two complementary sensor architectures for manufacturing force-sensing skins that are low-cost, high-density, high-coverage, easy to fabricate, and compatible with commercially available robot platforms. Our design instances of these two architectures differ in their force sensing range, flexibility, and repeatability, making them suitable for diverse mobile manipulation applications. The first is a textile-based sensor offering flexibility and conformability to complex arm geometries, using conductive fabric layers with a piezoresistive material in between; the second is an additive-manufacturing-based sensor constructed from 3D-printed components that conform to the robot arm's geometry, defining a high-coverage pressure-sensing matrix of conductive layers separated by a piezoresistive layer, generated directly from the arm's 3D mesh.
+We propose two complementary sensor architectures for manufacturing force-sensing skins that are low-cost, high-density, high-coverage, easy to fabricate, and compatible with commercially available robot platforms.Our design instances of these two architectures differ in force sensing range, flexibility, and repeatability, making them suitable for diverse mobile manipulation applications. The first is a textile-based sensor that offers high flexibility and low hysteresis, constructed from conductive fabric layers with a piezoresistive material sandwiched between them. The second is an additive-manufacturing-based sensor composed of 3D-printed components shaped to match the robot arm’s geometry, forming a high-coverage pressure-sensing matrix of conductive layers separated by a piezoresistive layer and generated directly from the arm’s 3D mesh.
 
 
 % We propose two complementary force-sensing skin designs that are low-cost, high-density, high-coverage, easy to fabricate, and compatible with commercially available robot platforms. They differ in their force-sensitive range and repeatability, covering a wide spectrum of forces and suitable for diverse mobile manipulation applications. The first is a textile-based sensor using conductive fabric layers with a piezoresistive material in between; the second is a AM-based sensor constructed using~\cite{FSR_WTL} with 3D-printed or textile inner and outer shells that define a high-coverage pressure-sensing matrix formed by conductive layers (copper tape) separated by a piezoresistive layer, generated directly from the arm's 3D mesh to conform to complex geometries.
@@ -23,46 +23,40 @@ We propose two complementary sensor architectures for manufacturing force-sensin
 \begin{table*}[t]
 \centering
 \scriptsize
-\setlength{\tabcolsep}{3pt}
+\setlength{\tabcolsep}{4pt}
 \renewcommand{\arraystretch}{1.10}
-\newcommand{\yes}{\textcolor{green!60!black}{\textbf{\checkmark}}}
-\newcommand{\no}{\textcolor{red!70!black}{\textbf{\texttimes}}}
-\newcommand{\partialmark}{\textcolor{black!45}{\textbf{\ensuremath{\sim}}}}
-\begin{tabular}{|p{3.5cm}|c|c|c|c|c|}
+\begin{tabular}{|p{3.5cm}|c|c|c|c|}
 \hline
-\textit{\textbf{Whole-Arm Tactile Sensor}} &\multicolumn{2}{c|}{\textit{\textbf{Sensing Performance}}} & \textit{\textbf{Mounting}} & \multicolumn{2}{c|}{\textit{\textbf{Manufacturing Requirements}}} \\
+\textit{\textbf{Whole-Arm Tactile Sensor}} &\multicolumn{2}{c|}{\textit{\textbf{Sensing Performance}}} & \multicolumn{2}{c|}{\textit{\textbf{Manufacturing Requirements}}} \\
 \hline
-\textbf{Related Works} & \textbf{Spatial Resolution} & \textbf{Force Measurement} & \textbf{Permanent / Removable} & \textbf{Low-cost} & \textbf{Required Manufacturing Equipment} \\
+\textbf{Related Works} & \textbf{Spatial Resolution} & \textbf{Force Measurement} & \textbf{Unit Cost} & \textbf{Required Manufacturing Equipment} \\
 \hline
-Maiolino et al.~\cite{6502183}                    & \yes         & Continuous Magnitude & Removable & \partialmark & \partialmark \\
+Maiolino et al.~\cite{6502183}                    & High         & Continuous Magnitude & Medium & Custom PCBs \\
 \hline
-CushSense~\cite{10610014}                         & \partialmark & Continuous Magnitude & Removable & \yes         & \partialmark \\
+CushSense~\cite{10610014}                         & Low          & Continuous Magnitude & Low    & - \\
 \hline
-RobotSweater~\cite{si2023robotsweater}            & \partialmark & Continuous Magnitude & Removable & \yes         & \partialmark \\
+RobotSweater~\cite{si2023robotsweater}            & Medium       & Continuous Magnitude & Low    & Knitting Machine \\
 \hline
-Johnson et al.~\cite{johnson2025scaling}          & \partialmark & Continuous Magnitude & Removable & \partialmark & \partialmark \\
+Johnson et al.~\cite{johnson2025scaling}          & High         & Continuous Magnitude & Medium & - \\
 \hline
-CySkin~\cite{Cyskin}                              & \yes         & Continuous Magnitude & \partialmark & \no          & \no          \\
+CySkin~\cite{Cyskin}                              & High         & Continuous Magnitude & High   & Proprietary          \\
 \hline
-GenTact~\cite{kohlbrenner2025gentact}             & \no          & Binary Contact & Permanent    & \yes         & \yes         \\
+GenTact~\cite{kohlbrenner2025gentact}             & Low          & Binary Contact       & Very Low & 3D Printer         \\
 \hline
-Kohlbrenner et al.~\cite{kohlbrenner2024machine} & \yes         & Binary Contact & Permanent    & \yes         & \yes         \\
+Kohlbrenner et al.~\cite{kohlbrenner2024machine} & High         & Continuous Magnitude & Medium & Mutual Capacitance Board         \\
 \hline
-Cheng et al.~\cite{8812712}                       & \partialmark & Continuous Magnitude & Permanent    & \no          & \no          \\
+Cheng et al.~\cite{8812712}                       & High         & Continuous Magnitude & High   & Custom Taxel PCBA          \\
 \hline
-\multicolumn{6}{|l|}{\textbf{Ours}} \\
+\multicolumn{5}{|l|}{\textbf{Ours}} \\
 \hline
-Textile sensor (ours)                             & \partialmark & Continuous Magnitude & Removable & \yes         & \yes         \\
+Textile sensor (ours)                             & Medium       & Continuous Magnitude & Low    & Fabric Iron        \\
 \hline
-AM sensor (ours)                                  & \partialmark & Continuous Magnitude & Permanent    & \yes         & \yes         \\
+AM sensor (ours)                                  & Medium       & Continuous Magnitude & Low    & 3D Printer          \\
 \hline
 \end{tabular}
-\caption{Comparison of whole-arm tactile sensing systems across sensing performance, mounting strategy, and manufacturing requirements.
-\textit{Force Measurement} indicates whether the sensor detects only contact presence (Binary Contact) or encodes force magnitude (Continuous Magnitude).
-\textit{Permanent / Removable} indicates whether the sensor is typically fixed to the robot structure (Permanent) or can be detached and re-mounted (Removable). }
+\caption{Comparison of whole-arm tactile sensing systems across sensing performance and manufacturing requirements. \textit{Spatial Resolution} refers to the density of independent sensing points (taxels) across the arm surface. \textit{Force Measurement} distinguishes between sensors detecting only contact presence (Binary Contact) versus those encoding force magnitude (Continuous Magnitude). \textit{Unit Cost} estimates the total material expenditure required to outfit a single robot link, while \textit{Manufacturing Equipment} highlights the accessibility of the fabrication process.}
 \label{tab:related_work_comparison}
 \end{table*}
-
 
 The contributions of this paper are as follows:
 \begin{itemize}[leftmargin=*]
