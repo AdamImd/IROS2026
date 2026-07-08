@@ -23,38 +23,38 @@ We propose two complementary sensor architectures for manufacturing force-sensin
 \begin{table*}[t]
 \centering
 \scriptsize
-\setlength{\tabcolsep}{4pt}
-\renewcommand{\arraystretch}{1.10}
-\begin{tabular}{|p{3.5cm}|c|c|c|c|}
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.18}
+\begin{tabular}{|p{3.2cm}|p{3.0cm}|p{3.0cm}|p{4.2cm}|}
 \hline
-\textit{\textbf{Whole-Arm Tactile Sensor}} &\multicolumn{2}{c|}{\textit{\textbf{Sensing Performance}}} & \multicolumn{2}{c|}{\textit{\textbf{Manufacturing Requirements}}} \\
+\textit{\textbf{Whole-Arm Tactile Sensor}} &\multicolumn{2}{c|}{\textit{\textbf{Sensing Performance}}} & \textit{\textbf{Manufacturing Requirements}} \\
 \hline
-\textbf{Related Works} & \textbf{Spatial Resolution} & \textbf{Force Measurement} & \textbf{Unit Cost} & \textbf{Required Manufacturing Equipment} \\
+\textbf{Related Works} & \textbf{Spatial Density (k/m$^2$, Approx.)} & \textbf{Force Measurement} & \textbf{Required Manufacturing Equipment} \\
 \hline
-Maiolino et al.~\cite{6502183}                    & High         & Continuous Magnitude & Medium & Custom PCBs \\
+Maiolino et al.~\cite{6502183}                    & 20--30 & Continuous/proximity & Custom PCBs \\
 \hline
-CushSense~\cite{10610014}                         & Low          & Continuous Magnitude & Low    & - \\
+CushSense~\cite{10610014}                         & 1.1 & Continuous, $\sim$55 N/taxel & Sewing, CDC boards \\
 \hline
-RobotSweater~\cite{si2023robotsweater}            & Medium       & Continuous Magnitude & Low    & Knitting Machine \\
+RobotSweater~\cite{si2023robotsweater}            & 0.36--2.0 & Continuous, $\sim$2.5 N threshold & Knitting machine \\
 \hline
-Johnson et al.~\cite{johnson2025scaling}          & High         & Continuous Magnitude & Medium & - \\
+Johnson et al.~\cite{johnson2025scaling}          & $>$8 & Continuous, $>$50 FPS & Custom SPI PCB \\
 \hline
-CySkin~\cite{Cyskin}                              & High         & Continuous Magnitude & High   & Proprietary          \\
+CySkin~\cite{Cyskin}                              & 4 & Continuous snapshots & CySkin/IHB stack \\
 \hline
-GenTact~\cite{kohlbrenner2025gentact}             & Low          & Binary Contact       & Very Low & 3D Printer         \\
+GenTact~\cite{kohlbrenner2025gentact}             & $\leq$0.28 & Binary contact & Multi-material 3D print \\
 \hline
-Kohlbrenner et al.~\cite{kohlbrenner2024machine} & High         & Continuous Magnitude & Medium & Mutual Capacitance Board         \\
+Kohlbrenner et al.~\cite{kohlbrenner2024machine} & 2.7 proj. & Contact localization & Muca board, molding \\
 \hline
-Cheng et al.~\cite{8812712}                       & High         & Continuous Magnitude & High   & Custom Taxel PCBA          \\
+Cheng et al.~\cite{8812712}                       & N/R & Continuous multimodal & Custom taxel PCBA \\
 \hline
-\multicolumn{5}{|l|}{\textbf{Ours}} \\
+\multicolumn{4}{|l|}{\textbf{Ours}} \\
 \hline
-Textile sensor (ours)                             & Medium       & Continuous Magnitude & Low    & Fabric Iron        \\
+Textile sensor (ours)                             & 2.5 & Continuous force & Iron, Velostat, snap buttons \\
 \hline
-AM sensor (ours)                                  & Medium       & Continuous Magnitude & Low    & 3D Printer          \\
+AM sensor (ours)                                  & 2.5 & Continuous force & 3D printer, Velostat, copper tape \\
 \hline
 \end{tabular}
-\caption{Comparison of whole-arm tactile sensing systems across sensing performance and manufacturing requirements. \textit{Spatial Resolution} refers to the density of independent sensing points (taxels) across the arm surface. \textit{Force Measurement} distinguishes between sensors detecting only contact presence (Binary Contact) versus those encoding force magnitude (Continuous Magnitude). \textit{Unit Cost} estimates the total material expenditure required to outfit a single robot link, while \textit{Manufacturing Equipment} highlights the accessibility of the fabrication process.}
+\caption{Comparison of whole-arm tactile sensing systems across sensing performance and manufacturing requirements. \textit{Spatial Density} reports approximate independent sensing points in thousands per square meter when derivable from the cited work; otherwise, the closest public quantity is reported. \textit{Force Measurement} distinguishes contact localization or binary contact from calibrated force magnitude. Values are approximate because related works differ in covered area, robot geometry, and reporting conventions.}
 \label{tab:related_work_comparison}
 \end{table*}
 
