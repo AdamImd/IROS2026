@@ -117,7 +117,9 @@ The fabrication of this sensor requires fabric cutting, ironing, adhesive, and s
 
 
 \subsection{Additive Manufacturing (AM) Sensor Design}
-To design the 3D-printed skin, we start from the link-level mesh files provided by Boston Dynamics (Fig~\ref{fig:tactile_sensors_both}-2, yellow) as part of their URDF models. For each link, we apply the following sequence of CAD operations:
+The AM sensor is intended for tasks where direct textile wrapping is less appropriate: the skin must hold a repeatable shape on curved rigid links, avoid pre-compressing the sensing layer during installation, and respond primarily after a deliberate contact threshold is reached. A simpler taped or fabric-wrapped matrix can provide contact sensing, but its baseline response depends on wrap tension and local curvature. The printed shell instead fixes the electrode spacing and contact geometry relative to the robot link.
+
+To design the 3D-printed skin, we start from the link-level mesh files provided by Boston Dynamics (Fig~\ref{fig:tactile_sensors_both}-2, yellow) as part of their URDF models. The AM sensor uses the same 20 mm taxel pitch as the textile sensor, corresponding to approximately 2.5 k taxels/m$^2$, but places the Velostat/copper-tape matrix inside a 95A TPU shell so that contact must first close a designed gap. This geometry targets higher-threshold contacts than the textile sleeve while preserving link-level conformability. For each link, we apply the following sequence of CAD operations:
 
 \begin{enumerate}[leftmargin=*]
 \item \textbf{Inner layer:} Generate a conformal shell with a uniform thickness of \textit{3mm} offset outward from the robot's base geometry (Fig~\ref{fig:tactile_sensors_both}-2, green).
@@ -128,7 +130,7 @@ To design the 3D-printed skin, we start from the link-level mesh files provided 
 \end{enumerate}
 
 
- The fabrication of this sensor requires a 3D printer capable of printing flexible filaments, copper tape, Velostat, and wiring, and the material cost remains under \textit{\$10} per Spot arm link, excluding shared readout electronics.
+ The fabrication of this sensor requires a 3D printer capable of printing flexible filaments, copper tape, Velostat, and wiring, and the material cost remains under \textit{\$10} per Spot arm link, excluding shared readout electronics. In the characterization protocol of Sec.~\ref{sec:characterization}, both sensors are tested over repeated 0--30 N load--unload cycles to measure operating force range, repeatability, and hysteresis.
 
 
 
@@ -146,13 +148,13 @@ To design the 3D-printed skin, we start from the link-level mesh files provided 
 
 \subsection{Design Variables}
 
-Both architectures expose practical design variables that can be tuned to match task requirements for force range, repeatability, and fabrication effort.
+Both architectures expose practical design variables that can be adjusted to match task requirements for force range, repeatability, and fabrication effort.
 
 If a task only requires contact/no-contact detection, the Velostat layer can be omitted to simplify fabrication and wiring. For continuous force sensing, however, the Velostat layer is retained and the variables below are tuned to shape the sensing response.
 
 For the textile sensor, the dominant variables are outer-layer material stiffness/thickness and the inclusion of an optional spacer material. Softer or thinner outer layers shift the response toward lower contact forces. Conversely, thicker and stiffer fabrics shift the sensing range upward. To expand the dynamic range, a spacer material (e.g., foam) can be inserted between the outer fabric and the electrodes; removing it narrows the range for tasks that prioritize smaller changes around initial contact. Furthermore, hysteresis is reduced by utilizing stiffer outer fabrics and minimizing or eliminating the spacer material. A practical downside of the textile sensor is the mechanical coupling during installation: changes in sleeve tension can change the sensor’s characteristic curve across deployments.
 
-For the AM sensor, the dominant variables are shell thickness, ridge height, ridge spacing, and print infill density. To shift the sensing range downward, one can decrease the shell thickness, utilize softer TPU-like materials, decrease infill density, or lower the ridge height. To shift the range upward, these parameters are reversed: increasing ridge height, material stiffness, and infill density increases resistance to deformation. Expanding the force range is achieved by increasing outer material thickness or adding a spacer, while narrowing it involves thinner/softer materials combined with higher infill density. Hysteresis in the AM sensor is a byproduct of the material's viscoelasticity and depends on the infill density and outer shell stiffness. The AM sensor's design reduces installation variability through its rigid-conformal shell, though it remains susceptible to performance variance stemming from infill geometry and 3D-printing artifacts.
+For the AM sensor, the main geometric and print parameters are shell thickness, ridge height, ridge spacing, material stiffness, and print infill density. We do not present a full experimental sweep over these variables; instead, we validate one AM configuration and identify how these parameters are expected to affect the response. Lower shell stiffness, lower infill density, or lower ridge height should reduce the force needed to close the designed gap, while higher stiffness, higher infill density, or taller ridges should increase the contact threshold. Ridge spacing sets taxel density, and the selected 20 mm pitch gives approximately 2.5 k taxels/m$^2$. Hysteresis is expected to depend on TPU viscoelasticity and print structure, which is why the characterized AM configuration is evaluated directly in Sec.~\ref{sec:characterization}. The AM sensor's design reduces installation variability through its rigid-conformal shell, though it remains susceptible to performance variance stemming from infill geometry and 3D-printing artifacts.
 
 While textile and AM sensors share the same operating principle, the design variables differ in their physical manifestation and practical tuning. The textile sensor operates with its conductive layers in contact with the Velostat during normal operation, whereas the AM sensor utilizes a designed gap between the conductive layers and the Velostat, which is only closed upon mechanical compression. This structural difference allows for complementary behavioral profiles: the textile sensor is configured for contact avoidance and light-touch HRI, while the AM sensor is configured for contact-embracing tasks that require a higher contact threshold, such as bracing against a wall or opening heavy doors.
 
