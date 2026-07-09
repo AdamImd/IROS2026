@@ -3,7 +3,7 @@
 \section{Sensor Modeling}
 
 
-We model our sensor as a grid of taxels, where each taxel provides an analog reading corresponding to the magnitude of contact force at that location. The taxels are arranged in a grid pattern, with rows and columns defined by the conductive materials on the inner and outer layers of the sensor. We calibrate the sensor by applying known forces at specific taxel locations and recording the corresponding sensor readings, allowing us to create a model, mapping sensor readings to contact forces. 
+We model each sensor as a grid of taxels, where each taxel provides an analog reading corresponding to the magnitude of contact force at that location. The taxels are arranged in a grid pattern, with rows and columns defined by the conductive materials on the inner and outer layers of the sensor. We calibrate the sensor by applying known normal forces at taxel centers and recording the corresponding sensor readings, allowing us to map taxel resistance to contact force. 
 
 To measure the resistance of each taxel, we use a voltage divider circuit, where the taxel is connected in series with a known reference resistor. The voltage across the reference resistor is measured, and we first use Ohm's law to calculate the resistance $R$ of the taxel based on the measured voltage $V_{\mathrm{out}}$, the input voltage $V_{\mathrm{in}}$, and the known reference resistor value $R_{\mathrm{ref}}$
 \begin{equation}
@@ -15,18 +15,12 @@ To account for the non-force-dependent resistance of conductive traces and conta
 R = R_{\mathrm{base}} + R_{\mathrm{FSR}}
 \end{equation}
 
-This model prevents the estimated force from diverging by correctly capturing the sensor's asymptotic convergence to its hardware-defined resistance floor at high loads. We use a power law to model the FSR
+This model prevents the estimated force from diverging by representing the sensor's asymptotic convergence to its hardware-defined resistance floor at high loads. We use a power law to model the FSR:
 
 \begin{equation}
 R(F) = A F^{B} + R_{\mathrm{base}}
 \end{equation}
-
-
-
-
-
-
-We then fit a power law with a base resistance $R_{\mathrm{base}}$ in series with the force-sensitive resistance $R_{\mathrm{FSR}}$, where force $F$ is related to measured taxel resistance as follows:
+Solving for force gives:
 
 \begin{equation}
 F=\left(\frac{R-R_{\mathrm{base}}}{A}\right)^{\frac{1}{B}}
