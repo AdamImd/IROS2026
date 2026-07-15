@@ -3,7 +3,7 @@
 \section{Sensor Modeling}
 
 
-We model each sensor as a grid of taxels, where each taxel provides an analog reading corresponding to the magnitude of contact force at that location. The taxels are arranged in a grid pattern, with rows and columns defined by the conductive materials on the inner and outer layers of the sensor. We calibrate the sensor by applying known normal forces at taxel centers and recording the corresponding sensor readings, allowing us to map taxel resistance to contact force. 
+We model each sensor as a grid of taxels, where each taxel provides an analog reading corresponding to the magnitude of contact force at that location. The taxels are arranged in a grid pattern, with rows and columns defined by the conductive materials on the inner and outer layers of the sensor. We calibrate the sensor by applying known normal forces at taxel centers and recording the corresponding sensor readings, allowing us to map taxel resistance to contact force. The readout circuit is shown in Fig.~\ref{fig:circuit}.
 
 To measure the resistance of each taxel, we use a voltage divider circuit, where the taxel is connected in series with a known reference resistor. The voltage across the reference resistor is measured, and we first use Ohm's law to calculate the resistance $R$ of the taxel based on the measured voltage $V_{\mathrm{out}}$, the input voltage $V_{\mathrm{in}}$, and the known reference resistor value $R_{\mathrm{ref}}$
 \begin{equation}
@@ -27,6 +27,5 @@ F=\left(\frac{R-R_{\mathrm{base}}}{A}\right)^{\frac{1}{B}}
 \end{equation}
 
 where $A$, $B$, and $R_{\mathrm{base}}$ are power-law parameters determined through calibration and curve fitting. This model allows us to estimate contact force at each taxel from measured resistance.
-
 
 

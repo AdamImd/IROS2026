@@ -9,8 +9,7 @@
 
 % \PassOptionsToPackage{draft}{graphicx} 
 \usepackage{graphicx}
-\usepackage{caption}
-\usepackage{hyperref}
+\usepackage[hypertexnames=false]{hyperref}
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -60,7 +59,7 @@
 
 \begin{abstract}
 Robotic manipulation in human-centered and cluttered environments requires not only precise end-effector control but also the ability to sense and regulate contact forces across the entire arm. Restricting tactile sensing to the fingertips or gripper limits a robot's ability to detect, modulate, and safely respond to contact occurring along its links during motion. Whole-arm tactile sensing enables both contact avoidance and deliberate contact exploitation, yet practical tactile skins remain difficult to realize due to trade-offs between fabrication cost, surface coverage, sensing density, usable force range, and long-term repeatability.
-We present two complementary whole-arm tactile skin architectures that jointly address this trade-off: a textile-based design optimized for low-force sensitivity and contact avoidance, and a 3D-printed conformal shell design optimized for higher-force, durable contact embracing. Both designs use a resistive taxel matrix and cost under \$10 per link. We provide fabrication guidelines, tunable design parameters, and quantitative characterization of force range, repeatability, and hysteresis. Experiments on a mobile manipulator demonstrate both contact avoidance and controlled contact-embracing behaviors in real-world tasks.
+We present two complementary whole-arm tactile skin architectures that jointly address this trade-off: a textile-based design configured for lower-force sensitivity and contact avoidance, and a 3D-printed conformal shell configured for higher-threshold contact embracing. Both designs use a resistive taxel matrix and cost under \$10 per link. We provide fabrication guidelines, tunable design parameters, and quantitative characterization of force range, repeatability, and hysteresis. Experiments on a mobile manipulator demonstrate both contact avoidance and controlled contact-embracing behaviors in real-world tasks.
 Additional details are available at the project website: \url{https://rpm-lab-umn.github.io/TactileSkin/}
 \end{abstract} 
 
@@ -72,6 +71,7 @@ Additional details are available at the project website: \url{https://rpm-lab-um
 \input{sections/sensor_characterization}
 \input{sections/results.tex}
 \input{sections/conclusion.tex}
+\input{sections/acknowledgments.tex}
 
 \bibliographystyle{IEEEtran}
 \bibliography{references.bib}

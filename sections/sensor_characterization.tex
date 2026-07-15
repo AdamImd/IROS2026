@@ -16,13 +16,13 @@ F_{\mathrm{det}}=\min\{F>0:\; R(F)\le R_{\mathrm{thr}}\},\qquad R_{\mathrm{thr}}
 \begin{figure*}
     \centering
     \includegraphics[width=1.0\linewidth]{images/Results_V6.pdf}
-    \caption{Real-world deployment of the textile and AM sensors across representative manipulation scenarios. For each scenario, the middle panel visualizes tactile responses during contact, and the annotated values report the corresponding force ranges estimated from the calibrated sensor models. Together, these examples illustrate how each sensor supports contact-aware behavior under different force requirements.}\label{fig:results}
+    \caption{Real-world deployment of the textile and AM sensors across representative manipulation scenarios. For each scenario, the middle panel visualizes tactile responses during contact, and the annotated values report the corresponding force ranges estimated from the sensor models. Upper bounds above 30~N are extrapolations beyond the 30~N calibration maximum and are included only to indicate the observed high-force regime.}\label{fig:results}
 \end{figure*}
 
 \subsubsection{Saturation Force}
 The saturation force is measured from the fitted response $R(F)=AF^B+R_{\mathrm{base}}$ by mapping it through the expected voltage-divider readout
 \[
-V(F)=V_{\mathrm{in}}\frac{R(F)}{R(F)+R_{\mathrm{ref}}},\qquad V_{\mathrm{in}}=5~\mathrm{V},
+V(F)=V_{\mathrm{in}}\frac{R_{\mathrm{ref}}}{R(F)+R_{\mathrm{ref}}},\qquad V_{\mathrm{in}}=5~\mathrm{V},
 \]
 and defining
 \[
@@ -34,7 +34,7 @@ where $R_{\mathrm{ref}}$ is the reference resistor value, which is selected over
 
 Overall, the textile sensor is configured for low-force interactions, with a lower detection threshold in the flat configuration (Fig.~\ref{fig:overall_comparison}). In contrast, the AM sensor has an elevated detection threshold due to the designed gap between inner and outer shells; as force increases, shell deformation closes this gap and produces a more abrupt resistance transition.
 
-When wrapped on the robot arm and tightened with hook-and-loop fastening, the effective sensitive range of Velostat-based sensors decreases relative to flat characterization (Fig.~\ref{fig:overall_comparison}). In our tests, mounting primarily reduced the textile sensor's maximum force range. We attribute this reduction to pre-compression and non-uniform pressure distribution across curved surfaces; Velostat bending sensitivity may also shift baseline resistance and response behavior~\cite{11068986}.
+When wrapped on the robot arm and tightened with hook-and-loop fastening, the effective sensitive range of Velostat-based sensors decreases relative to flat characterization. In our tests, mounting primarily reduced the textile sensor's maximum force range. We attribute this reduction to pre-compression and non-uniform pressure distribution across curved surfaces; Velostat bending sensitivity may also shift baseline resistance and response behavior~\cite{11068986}.
 
 
 \begin{figure*}[!ht]
@@ -86,5 +86,4 @@ H_{\text{area}} = \int_{R_{\text{min}}}^{R_{\text{max}}} \left|F_{\text{load}}(R
 
 
 \subsubsection{Findings}
-Across tested configurations, textile and AM sensors show similar repeatability scores (Fig.~\ref{fig:overall_comparison}, top), indicating comparable cycle-to-cycle variation under matched calibration conditions. However, the AM sensor exhibits higher hysteresis than the textile sensor (Fig.~\ref{fig:overall_comparison}, bottom), which we attribute primarily to viscoelastic effects in the AM shell. The textile sensor shows a smaller separation between loading and unloading curves under these test conditions.
-
+Across tested configurations, textile and AM sensors show similar repeatability scores (Fig.~\ref{fig:overall_comparison}, middle), indicating comparable cycle-to-cycle variation under matched calibration conditions. However, the AM sensor exhibits higher hysteresis than the textile sensor (Fig.~\ref{fig:overall_comparison}, right), which we attribute primarily to viscoelastic effects in the AM shell. The textile sensor shows a smaller separation between loading and unloading curves under these test conditions.

@@ -3,14 +3,14 @@
 
 
 
-\section{Real World Use Cases}
+\section{Real-World Use Cases}
 \label{sec:results}
 Given the characterization results, we use the AM sensor for contact-embracing tasks that use its designed contact threshold and rigid-conformal shell, while we use the textile sensor for contact-avoidance tasks that use its lower measured detection threshold. 
 
-We use our sensors to perform two whole-arm contact behaviors on the Boston Dynamics Spot platform. We developed a custom contact-aware whole body inverse kinematics algorithm that incorporates tactile feedback from our sensors to enable both contact avoidance and contact embracing behaviors during manipulation.
+We use our sensors to perform two whole-arm contact behaviors on the Boston Dynamics Spot platform. Figure~\ref{fig:results} summarizes the contact-force regimes observed across representative interactions. We developed a custom contact-aware whole-body inverse kinematics algorithm that incorporates tactile feedback from our sensors to enable both contact avoidance and contact embracing behaviors during manipulation.
 
 \subsection{Contact Embracing}
-We demonstrate the ability of the AM sensor to enable contact with rigid objects in the environment through a contact embracing task, where the robot uses tactile feedback to open a door while balancing a dustpan in the gripper. We create a new end effector on the arm of the robot, and move along its normal until a force above a threshold is achieved. We also optimize the rotation angle of the gripper to prevent the dustpan from tipping over.
+We demonstrate the ability of the AM sensor to enable contact with rigid objects in the environment through a contact embracing task, where the robot uses tactile feedback to open a door while balancing a dustpan in the gripper (Fig.~\ref{fig:embrace}). We create a new end effector on the arm of the robot, and move along its normal until a force above a threshold is achieved. We also optimize the rotation angle of the gripper to prevent the dustpan from tipping over.
 
 This task requires the robot to actively seek contact with the door, sense when the door is fully open, and maintain a desired contact force during the motion.
 
@@ -23,5 +23,4 @@ This task requires the robot to actively seek contact with the door, sense when 
 
 
 \subsection{Contact Avoidance}
-The textile sensor has a lower detection threshold than the AM sensor in our characterization, so we use it for contact avoidance tasks where the robot needs to react to light contacts and avoid collisions. We demonstrate this in a contact avoidance task, where the robot reacts to unexpected contacts while maintaining its primary end-effector goal. In this task, the robot uses tactile feedback from the textile sensor to detect contact and optimize the inverse kinematics solution to move away from the contact while still maintaining the end-effector XYZ position. 
-
+The textile sensor has a lower detection threshold than the AM sensor in our characterization, so we use it for contact avoidance tasks where the robot needs to react to light contacts and avoid collisions. We demonstrate this in a contact avoidance task (Fig.~\ref{fig:contact_avoid_v2}), where the robot reacts to unexpected contacts while maintaining its primary end-effector goal. In this task, the robot uses tactile feedback from the textile sensor to detect contact and optimize the inverse kinematics solution to move away from the contact while still maintaining the end-effector XYZ position.
