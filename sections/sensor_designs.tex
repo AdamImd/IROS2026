@@ -1,3 +1,10 @@
+\begin{figure*}[!t]
+    \centering
+    \includegraphics[width=1.0\linewidth]{images/Results_V7.pdf}
+    \vspace{-0.5cm}
+    \caption{Real-world deployment of the textile and AM sensors across representative manipulation scenarios. For each scenario, the middle panel visualizes tactile responses during contact, and the annotated values report the corresponding force ranges estimated from the sensor models. Upper bounds above 30~N are extrapolations beyond the 30~N calibration maximum and are included only to indicate the observed high-force regime.}\label{fig:results}
+\end{figure*}
+
 \section{Sensor Designs}
 
 
@@ -108,14 +115,6 @@ The fabrication of this sensor requires fabric cutting, ironing, adhesive, and s
 
 
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.75\columnwidth]{images/Circuit_v2.pdf}
-    \caption{We model both of our sensors as a piezoresistive element in series with a base resistance. To measure the resistance of each element, we use a voltage divider and measure the voltage across a reference resistor. $V_{\mathrm{in}}$ and GND are GPIO from a microcontroller, where both are set to high-impedance after sampling to reduce cross-talk.}
-    \label{fig:circuit}
-\end{figure}
-
-
 \subsection{Additive Manufacturing (AM) Sensor Design}
 The AM sensor is intended for tasks where direct textile wrapping is less appropriate: the skin must hold a repeatable shape on curved rigid links, avoid pre-compressing the sensing layer during installation, and respond primarily after a deliberate contact threshold is reached. A simpler taped or fabric-wrapped matrix can provide contact sensing, but its baseline response depends on wrap tension and local curvature. The printed shell instead fixes the electrode spacing and contact geometry relative to the robot link.
 
@@ -135,25 +134,20 @@ To design the 3D-printed skin, we start from the link-level mesh files provided 
 
 
 
-\begin{figure*}
+\begin{figure}
     \centering
-    \includegraphics[width=0.85\linewidth]{images/Results/overall_range_repeatability_hysteresis.pdf}
-    % \label{fig:overall_consistency}
-    \caption{ \textbf{Left:} The \textit{Operating Force Range} visualizes the force interval between the minimum detectable force (detection threshold) and the saturation force, which defines the effective range of forces that can be reliably measured by the sensor. \textbf{Middle:} The \textit{Consistency} plot shows the multi-force repeatability metric, which captures the variability of sensor readings across repeated loading cycles at different force levels. \textbf{Right:} The \textit{Hysteresis} plot illustrates the difference between loading and unloading curves, indicating the degree to which the sensor's response depends on its loading history. Together, these plots provide insights into the performance characteristics of the textile and AM sensors.}
-    \label{fig:overall_comparison}
-\end{figure*}
+    \includegraphics[width=0.75\columnwidth]{images/Circuit_v2.pdf}
+    \caption{We model both of our sensors as a piezoresistive element in series with a base resistance. To measure the resistance of each element, we use a voltage divider and measure the voltage across a reference resistor. $V_{\mathrm{in}}$ and GND are GPIO from a microcontroller, where both are set to high-impedance after sampling to reduce cross-talk.}
+    \label{fig:circuit}
+\end{figure}
 
 
 
 
 \subsection{Design Variables}
 
-Both architectures expose practical design variables that can be adjusted to match task requirements for force range, repeatability, and fabrication effort.
+Both architectures expose practical design variables that can be adjusted to match task requirements for force range, repeatability, and fabrication effort. If only binary contact is required, the Velostat layer can be omitted; continuous force estimation requires retaining and calibrating the piezoresistive layer.
 
-If a task only requires contact/no-contact detection, the Velostat layer can be omitted to simplify fabrication and wiring. For continuous force sensing, however, the Velostat layer is retained and the variables below are tuned to shape the sensing response.
+For the textile sensor, the principal variables are outer-layer stiffness and thickness, optional spacer material, and sleeve tension. Based on the sensor structure, softer or thinner outer layers are expected to shift the response toward lower contact forces, while thicker or stiffer fabrics should shift it upward; these effects were not independently swept in this study. A spacer material such as foam may broaden the response range, while minimizing the spacer may reduce hysteresis. Installation tension can also change pre-compression and the sensor's characteristic curve across deployments. The characterized configuration is configured for lower-threshold contact avoidance.
 
-For the textile sensor, the dominant variables are outer-layer material stiffness/thickness and the inclusion of an optional spacer material. Softer or thinner outer layers shift the response toward lower contact forces. Conversely, thicker and stiffer fabrics shift the sensing range upward. To expand the dynamic range, a spacer material (e.g., foam) can be inserted between the outer fabric and the electrodes; removing it narrows the range for tasks that prioritize smaller changes around initial contact. Furthermore, hysteresis is reduced by utilizing stiffer outer fabrics and minimizing or eliminating the spacer material. A practical downside of the textile sensor is the mechanical coupling during installation: changes in sleeve tension can change the sensor’s characteristic curve across deployments.
-
-For the AM sensor, the main geometric and print parameters are shell thickness, ridge height, ridge spacing, material stiffness, and print infill density. We do not present a full experimental sweep over these variables; instead, we validate one AM configuration and identify how these parameters are expected to affect the response. Lower shell stiffness, lower infill density, or lower ridge height should reduce the force needed to close the designed gap, while higher stiffness, higher infill density, or taller ridges should increase the contact threshold. Ridge spacing sets the distance between adjacent taxels; in the characterized design, their centers are 20~mm (2~cm) apart. Hysteresis is expected to depend on TPU viscoelasticity and print structure, which is why the characterized AM configuration is evaluated directly in Sec.~\ref{sec:characterization}. The AM sensor's design reduces installation variability through its rigid-conformal shell, though it remains susceptible to performance variance stemming from infill geometry and 3D-printing artifacts.
-
-While textile and AM sensors share the same operating principle, the design variables differ in their physical manifestation and practical tuning. The textile sensor operates with its conductive layers in contact with the Velostat during normal operation, whereas the AM sensor utilizes a designed gap between the conductive layers and the Velostat, which is only closed upon mechanical compression. This structural difference allows for complementary behavioral profiles: the textile sensor is configured for contact avoidance and light-touch HRI, while the AM sensor is configured for contact-embracing tasks that require a higher contact threshold, such as bracing against a wall or opening heavy doors.
+For the AM sensor, shell thickness, ridge height and spacing, material stiffness, and infill density determine the printed contact geometry. We characterize one configuration rather than a full parameter sweep. Lower shell stiffness, lower infill, or shorter ridges are expected to reduce the force needed to close the designed gap, while the opposite changes should increase the contact threshold. Ridge spacing sets taxel pitch, which is 20~mm in our prototype. TPU viscoelasticity and print structure may affect hysteresis, while the rigid-conformal shell reduces sensitivity to installation tension. Unlike the textile sensor's normally contacting stack, the AM sensor's designed gap closes only under compression, configuring it for higher-threshold contact-embracing tasks.

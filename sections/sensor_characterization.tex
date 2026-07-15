@@ -1,7 +1,15 @@
+\begin{figure*}[!t]
+    \centering
+    \includegraphics[width=0.85\linewidth]{images/Results/overall_range_repeatability_hysteresis.pdf}
+    \caption{ \textbf{Left:} The \textit{Operating Force Range} visualizes the force interval between the minimum detectable force (detection threshold) and the saturation force, which defines the effective range of forces that can be reliably measured by the sensor. \textbf{Middle:} The \textit{Consistency} plot shows the multi-force repeatability metric, which captures the variability of sensor readings across repeated loading cycles at different force levels. \textbf{Right:} The \textit{Hysteresis} plot illustrates the difference between loading and unloading curves, indicating the degree to which the sensor's response depends on its loading history. Together, these plots provide insights into the performance characteristics of the textile and AM sensors.}
+    \label{fig:overall_comparison}
+\end{figure*}
+
 \section{Sensor Characterization}
 \label{sec:characterization}
 We characterize both sensor architectures using an Instron testing machine. We use a 1000$\Omega$ reference resistor for the AM sensor and a 47$\Omega$ reference resistor for the textile sensor in a voltage-divider circuit. For each taxel, we apply a 7.5$\times$7.5~mm square applicator at the taxel center and record the voltage response over four load--unload cycles from 0 to 30~N. We fit a power law with base resistance, $R(F)=AF^B+R_{\mathrm{base}}$, to loading and unloading responses and use the fitted curves for performance analysis and force estimation.
 To evaluate performance, we report operating force range and consistency metrics.
+The project website provides supplementary taxel-level calibration curves, load--unload traces, and quantitative summaries.
 
 
 \subsection{Operating Force Range} 
@@ -12,12 +20,6 @@ In our pipeline, the detection threshold is measured per taxel as the \emph{brea
 \[
 F_{\mathrm{det}}=\min\{F>0:\; R(F)\le R_{\mathrm{thr}}\},\qquad R_{\mathrm{thr}}=4000~\Omega,
 \]
-
-\begin{figure*}
-    \centering
-    \includegraphics[width=1.0\linewidth]{images/Results_V6.pdf}
-    \caption{Real-world deployment of the textile and AM sensors across representative manipulation scenarios. For each scenario, the middle panel visualizes tactile responses during contact, and the annotated values report the corresponding force ranges estimated from the sensor models. Upper bounds above 30~N are extrapolations beyond the 30~N calibration maximum and are included only to indicate the observed high-force regime.}\label{fig:results}
-\end{figure*}
 
 \subsubsection{Saturation Force}
 The saturation force is measured from the fitted response $R(F)=AF^B+R_{\mathrm{base}}$ by mapping it through the expected voltage-divider readout
@@ -32,7 +34,11 @@ where $R_{\mathrm{ref}}$ is the reference resistor value, which is selected over
 
 \subsubsection{Findings}
 
-Overall, the textile sensor is configured for low-force interactions, with a lower detection threshold in the flat configuration (Fig.~\ref{fig:overall_comparison}). In contrast, the AM sensor has an elevated detection threshold due to the designed gap between inner and outer shells; as force increases, shell deformation closes this gap and produces a more abrupt resistance transition.
+Across taxels, the textile sensor operated over approximately 0--6~N, whereas the AM sensor operated over approximately 4--12~N (Fig.~\ref{fig:overall_comparison}, left). Their mean multi-force CV values were approximately 0.052 and 0.066, respectively, indicating comparable cycle-to-cycle repeatability. The greater AM hysteresis is consistent with deformation of the viscoelastic TPU shell. Together, these results support using the textile configuration for early contact detection and the AM configuration for higher-threshold interactions.
+
+These intervals characterize the tested mechanical configurations and reference resistors rather than intrinsic material limits; changing the mechanical stack or readout resistor will shift the measurable range.
+
+The AM sensor's designed gap explains its elevated detection threshold: as force increases, shell deformation closes the gap and produces a more abrupt resistance transition.
 
 When wrapped on the robot arm and tightened with hook-and-loop fastening, the effective sensitive range of Velostat-based sensors decreases relative to flat characterization. In our tests, mounting primarily reduced the textile sensor's maximum force range. We attribute this reduction to pre-compression and non-uniform pressure distribution across curved surfaces; Velostat bending sensitivity may also shift baseline resistance and response behavior~\cite{11068986}.
 
@@ -86,4 +92,4 @@ H_{\text{area}} = \int_{R_{\text{min}}}^{R_{\text{max}}} \left|F_{\text{load}}(R
 
 
 \subsubsection{Findings}
-Across tested configurations, textile and AM sensors show similar repeatability scores (Fig.~\ref{fig:overall_comparison}, middle), indicating comparable cycle-to-cycle variation under matched calibration conditions. However, the AM sensor exhibits higher hysteresis than the textile sensor (Fig.~\ref{fig:overall_comparison}, right), which we attribute primarily to viscoelastic effects in the AM shell. The textile sensor shows a smaller separation between loading and unloading curves under these test conditions.
+The greater AM hysteresis (Fig.~\ref{fig:overall_comparison}, right) is attributed primarily to viscoelastic effects in the printed shell; the textile sensor shows less separation between loading and unloading curves under these test conditions.
