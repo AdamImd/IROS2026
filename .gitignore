@@ -7,7 +7,9 @@
 *.fdb_latexmk
 *.bbl
 root.pdf
+RelatedWorks/
 
 *.sh
+!compile.sh
 
 *.md

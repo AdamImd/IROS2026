@@ -5,7 +5,7 @@ Several challenges continue to hinder the broader adoption of whole-arm or whole
 
 To bridge these gaps, a tactile skin must satisfy both sensing and deployment requirements: it must detect the contact forces relevant to manipulation, produce repeatable readings under repeated loading, and be manufacturable for existing robot links without permanent modification. We therefore pursued the research question of \textit{which measurable properties make tactile skins useful for mobile manipulators, and how can those skins be fabricated using textile and additive manufacturing (AM) methods?} Through iterative design, we evaluate three factors for whole-arm or body sensing: (1) \textbf{operating force range} - the range of forces a sensor can distinctly sense, (2) \textbf{sensing repeatability} - the consistency of sensor measurements across repeated loading and unloading cycles, (3) \textbf{deployability} - fabrication and installation requirements on commercially available robots without permanent link modification.
 
-We propose two complementary sensor architectures for manufacturing force-sensing skins with 2.5 k taxels/m$^2$, material cost under \$10 per link, and fabrication paths based on ironing fabric layers or printing flexible shells. Our design instances of these two architectures differ in force sensing range, flexibility, and repeatability, so we configure them for two mobile manipulation behaviors: contact avoidance and contact embracing. The first is a textile-based sensor constructed from conductive fabric layers with a piezoresistive material sandwiched between them. The second is an additive-manufacturing-based sensor composed of 3D-printed components shaped to match the robot arm’s geometry, forming a pressure-sensing matrix of conductive layers separated by a piezoresistive layer and generated directly from the arm’s 3D mesh.
+We propose two complementary sensor architectures for manufacturing force-sensing skins with taxels arranged on a 20~mm grid, material cost under \$10 per link, and fabrication paths based on ironing fabric layers or printing flexible shells. Our design instances of these two architectures differ in force sensing range, flexibility, and repeatability, so we configure them for two mobile manipulation behaviors: contact avoidance and contact embracing. The first is a textile-based sensor constructed from conductive fabric layers with a piezoresistive material sandwiched between them. The second is an additive-manufacturing-based sensor composed of 3D-printed components shaped to match the robot arm’s geometry, forming a pressure-sensing matrix of conductive layers separated by a piezoresistive layer and generated directly from the arm’s 3D mesh.
 
 
 % We propose two complementary force-sensing skin designs that are low-cost, high-density, high-coverage, easy to fabricate, and compatible with commercially available robot platforms. They differ in their force-sensitive range and repeatability, covering a wide spectrum of forces and suitable for diverse mobile manipulation applications. The first is a textile-based sensor using conductive fabric layers with a piezoresistive material in between; the second is a AM-based sensor constructed using~\cite{FSR_WTL} with 3D-printed or textile inner and outer shells that define a high-coverage pressure-sensing matrix formed by conductive layers (copper tape) separated by a piezoresistive layer, generated directly from the arm's 3D mesh to conform to complex geometries.
@@ -25,42 +25,42 @@ We propose two complementary sensor architectures for manufacturing force-sensin
 \scriptsize
 \setlength{\tabcolsep}{3pt}
 \renewcommand{\arraystretch}{1.18}
-\begin{tabular}{|p{3.2cm}|p{3.0cm}|p{3.0cm}|p{4.2cm}|}
+\begin{tabular}{|p{3.2cm}|p{7.0cm}|p{4.0cm}|}
 \hline
-\textit{\textbf{Whole-Arm Tactile Sensor}} &\multicolumn{2}{c|}{\textit{\textbf{Sensing Performance}}} & \textit{\textbf{Manufacturing Requirements}} \\
+\textit{\textbf{Whole-Arm Tactile Sensor}} &\multicolumn{1}{c|}{\textit{\textbf{Sensing Performance}}} & \textit{\textbf{Manufacturing Requirements}} \\
 \hline
-\textbf{Related Works} & \textbf{Spatial Density (k/m$^2$, Approx.)} & \textbf{Force Measurement} & \textbf{Required Manufacturing Equipment} \\
+\textbf{Related Works} & \textbf{Reported Sensing Layout and Measurement} & \textbf{Required Manufacturing Equipment} \\
 \hline
-Maiolino et al.~\cite{6502183}                    & 20--30 & Continuous/proximity & Custom PCBs \\
+Maiolino et al.~\cite{6502183}                    & 10 pressure taxels per module; calibrated pressure. & Custom FPCB, thermoformed fabric \\
 \hline
-CushSense~\cite{10610014}                         & 1.1 & Continuous, $\sim$55 N/taxel & Sewing, CDC boards \\
+CushSense~\cite{10610014}                         & 3 cm $\times$ 3 cm taxels; calibrated normal force over 0--55 N. & Cutting/sewing, CDC boards \\
 \hline
-RobotSweater~\cite{si2023robotsweater}            & 0.36--2.0 & Continuous, $\sim$2.5 N threshold & Knitting machine \\
+RobotSweater~\cite{si2023robotsweater}            & 16--64 taxels per prototype; relative force signal with a $\sim$2.5 N threshold. & Industrial knitting machine \\
 \hline
-Johnson et al.~\cite{johnson2025scaling}          & $>$8 & Continuous, $>$50 FPS & Custom SPI PCB \\
+Johnson et al.~\cite{johnson2025scaling}          & More than 8,000 taxels across a one-square-meter prototype; relative pressure signal at $>$50 FPS. & Fabric assembly, custom SPI PCB \\
 \hline
-CySkin~\cite{Cyskin}                              & 4 & Continuous snapshots & CySkin/IHB stack \\
+CySkin~\cite{Cyskin}                              & 11 pressure sensors per module; pressure readings at up to 20 Hz. & CySkin modules and IHBs \\
 \hline
-GenTact~\cite{kohlbrenner2025gentact}             & $\leq$0.28 & Binary contact & Multi-material 3D print \\
+GenTact~\cite{kohlbrenner2025gentact}             & 30 nodules across six skins; binary contact localization. & Multi-material 3D printer \\
 \hline
-Kohlbrenner et al.~\cite{kohlbrenner2024machine} & 2.7 proj. & Contact localization & Muca board, molding \\
+Kohlbrenner et al.~\cite{kohlbrenner2024machine} & 64 capacitance intersections; contact localization with $5.7\pm3.0$ mm error. & 3D printing, silicone molding, Muca board \\
 \hline
-Cheng et al.~\cite{8812712}                       & N/R & Continuous multimodal & Custom taxel PCBA \\
+Cheng et al.~\cite{8812712}                       & 62--1,260 cells per deployment; force and proximity signals. & Custom cell PCBAs, silicone molding \\
 \hline
-\multicolumn{4}{|l|}{\textbf{Ours}} \\
+\multicolumn{3}{|l|}{\textbf{Ours}} \\
 \hline
-Textile sensor (ours)                             & 2.5 & Continuous force & Iron, Velostat, snap buttons \\
+Textile sensor (ours)                             & 20 mm taxel pitch; calibrated normal force. & Iron, Velostat, snap buttons \\
 \hline
-AM sensor (ours)                                  & 2.5 & Continuous force & 3D printer, Velostat, copper tape \\
+AM sensor (ours)                                  & 20 mm taxel pitch; calibrated normal force. & 3D printer, Velostat, copper tape \\
 \hline
 \end{tabular}
-\caption{Comparison of whole-arm tactile sensing systems across sensing performance and manufacturing requirements. \textit{Spatial Density} reports approximate independent sensing points in thousands per square meter when derivable from the cited work; otherwise, the closest public quantity is reported. \textit{Force Measurement} distinguishes contact localization or binary contact from calibrated force magnitude. Values are approximate because related works differ in covered area, robot geometry, and reporting conventions.}
+\caption{Comparison of whole-arm tactile sensing systems using quantities and capabilities explicitly reported by each source. \textit{Reported Sensing Layout and Measurement} preserves each work's native reporting convention while distinguishing calibrated force or pressure from relative magnitude signals, contact localization, and binary contact.}
 \label{tab:related_work_comparison}
 \end{table*}
 
 The contributions of this paper are as follows:
 \begin{itemize}[leftmargin=*]
-\item Two complementary sensor architectures for whole-arm force-sensing skins, instantiated as a textile-based and an additive-manufacturing-based design, each with 2.5 k taxels/m$^2$, material cost under \$10 per link, and removable mounting on a commercially available mobile manipulator.
+\item Two complementary sensor architectures for whole-arm force-sensing skins, instantiated as a textile-based and an additive-manufacturing-based design, each with taxels spaced 20~mm center-to-center, material cost under \$10 per link, and removable mounting on a commercially available mobile manipulator.
 \item Fabrication guidelines and sensor characterization that demonstrate the practical feasibility, force-sensing range, and repeatability of each design, along with the key design parameters that can be tuned to meet application-specific requirements.
 \item Experimental validation on a mobile manipulator platform demonstrating real-world sensing performance across contact avoidance and contact embracing scenarios.
 \end{itemize}
