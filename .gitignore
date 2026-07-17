@@ -8,6 +8,7 @@
 *.bbl
 root.pdf
 RelatedWorks/
+images/alternatives/
 
 *.sh
 !compile.sh
