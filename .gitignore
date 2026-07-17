@@ -11,6 +11,6 @@ RelatedWorks/
 images/alternatives/
 
 *.sh
-!compile.sh
+pdf_metadata.js
 
 *.md
