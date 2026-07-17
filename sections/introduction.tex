@@ -12,10 +12,9 @@ Humans naturally exploit whole-arm contact during manipulation, using surfaces t
 \centering
 \caption{Comparison of whole-arm tactile sensing systems using quantities and capabilities reported by each source.}
 \label{tab:related_work_comparison}
-\scriptsize
 \setlength{\tabcolsep}{3pt}
 \renewcommand{\arraystretch}{1.18}
-\begin{tabular}{|p{3.2cm}|p{7.0cm}|p{4.0cm}|}
+\begin{tabularx}{\textwidth}{|p{3.7cm}|X|p{4.8cm}|}
 \hline
 \textit{\textbf{Whole-Arm Tactile Sensor}} &\multicolumn{1}{c|}{\textit{\textbf{Sensing Performance}}} & \textit{\textbf{Manufacturing Requirements}} \\
 \hline
@@ -43,7 +42,7 @@ Textile sensor (ours)                             & 20 mm taxel pitch; calibrate
 \hline
 AM sensor (ours)                                  & 20 mm taxel pitch; calibrated normal force. & 3D printer, Velostat, copper tape \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table*}
 
 Several challenges continue to hinder the broader adoption of whole-arm or whole-body tactile sensing in robotics. Existing research prototypes that extend tactile sensing to the forearm or whole arm~\cite{6502183,Cyskin,kohlbrenner2024machine} often rely on custom PCBs, proprietary sensor modules, or specialized fabrication processes, creating a gap between demonstration systems and reproducible deployment.
@@ -52,9 +51,7 @@ Table~\ref{tab:related_work_comparison} compares the sensing layouts, reported m
 
 To bridge these gaps, a tactile skin must satisfy both sensing and deployment requirements: it must detect the contact forces relevant to manipulation, produce repeatable readings under repeated loading, and be manufacturable for existing robot links without permanent modification. We therefore pursued the research question of \textit{which measurable properties make tactile skins useful for mobile manipulators, and how can those skins be fabricated using textile and additive manufacturing (AM) methods?} Through iterative design, we evaluate three factors for whole-arm or body sensing: (1) \textbf{operating force range} - the range of forces a sensor can distinctly sense, (2) \textbf{sensing repeatability} - the consistency of sensor measurements across repeated loading and unloading cycles, (3) \textbf{deployability} - fabrication and installation requirements on commercially available robots without permanent link modification.
 
-We propose two complementary sensor architectures for manufacturing force-sensing skins with taxels arranged on a 20~mm grid, material cost under \$10 per link, and fabrication paths based on ironing fabric layers or printing flexible shells. Our design instances of these two architectures differ in force sensing range, flexibility, and repeatability, so we configure them for two mobile manipulation behaviors: contact avoidance and contact embracing. The first is a textile-based sensor constructed from conductive fabric layers with a piezoresistive material sandwiched between them. The second is an additive-manufacturing-based sensor composed of 3D-printed components shaped to match the robot arm’s geometry, forming a pressure-sensing matrix of conductive layers separated by a piezoresistive layer and generated directly from the arm’s 3D mesh.
-
-Figure~\ref{fig:teaser} shows both sensor implementations mounted on the Spot arm.
+We propose two complementary force-sensing skin architectures, shown mounted on the Spot arm in Fig.~\ref{fig:teaser}. Both use taxels arranged on a 20~mm grid, cost under \$10 per link in materials, and can be fabricated by ironing fabric layers or printing flexible shells. The resulting designs differ in force-sensing range, flexibility, and repeatability, so we configure them for two mobile manipulation behaviors: contact avoidance and contact embracing. The textile sensor sandwiches a piezoresistive material between conductive fabric layers, whereas the additive-manufacturing-based sensor uses 3D-printed components shaped from the arm's mesh to form a conformal pressure-sensing matrix of conductive layers separated by a piezoresistive layer.
 
 
 % We propose two complementary force-sensing skin designs that are low-cost, high-density, high-coverage, easy to fabricate, and compatible with commercially available robot platforms. They differ in their force-sensitive range and repeatability, covering a wide spectrum of forces and suitable for diverse mobile manipulation applications. The first is a textile-based sensor using conductive fabric layers with a piezoresistive material in between; the second is a AM-based sensor constructed using~\cite{FSR_WTL} with 3D-printed or textile inner and outer shells that define a high-coverage pressure-sensing matrix formed by conductive layers (copper tape) separated by a piezoresistive layer, generated directly from the arm's 3D mesh to conform to complex geometries.
